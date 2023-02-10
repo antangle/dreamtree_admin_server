@@ -1,4 +1,4 @@
 package com.dreamtree.api.domain.parent.mapper;
 
-public interface AttendenceMapper {
+public interface RequestMapper {
 }
