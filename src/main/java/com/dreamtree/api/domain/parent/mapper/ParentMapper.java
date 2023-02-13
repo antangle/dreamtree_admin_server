@@ -9,6 +9,8 @@ public interface ParentMapper {
 
     List<ParentInfoResDTO> getParentList(ParentInfoReqDTO reqDTO);
 
+    ParentInfoResDTO getOneParentInfo(Long id);
+
     int getCount(ParentInfoReqDTO reqDTO);
 
 }

@@ -33,4 +33,12 @@ public class ParentServiceImpl implements ParentService{
 
         return result;
     }
+
+    @Override
+    public ParentInfoResDTO getOneParentInfo(Long id) {
+
+        ParentInfoResDTO res = parentMapper.getOneParentInfo(id);
+
+        return res;
+    }
 }

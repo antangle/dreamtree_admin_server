@@ -8,4 +8,5 @@ public interface ParentService {
 
     PageResponseDTO<ParentInfoResDTO> getAllParentsList(ParentInfoReqDTO reqDTO);
 
+    ParentInfoResDTO getOneParentInfo(Long id);
 }

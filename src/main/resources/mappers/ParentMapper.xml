@@ -26,13 +26,13 @@
 
     <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
         select
-        email,
-        nickname,
-        birth,
-        profile_img_url
+            email,
+            nickname,
+            birth,
+            profile_img_url
 
         from
-        tbl_parent
+            tbl_parent
 
 <!--        <include refid="search"></include>-->
 
@@ -47,6 +47,22 @@
             count(*)
         from
             tbl_parent
+
+    </select>
+
+    <select id="getOneParentInfo" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
+
+        select
+            email,
+            nickname,
+            birth,
+            profile_img_url
+
+        from
+            tbl_parent
+
+        where
+            parent_id = #{id}
 
     </select>
 

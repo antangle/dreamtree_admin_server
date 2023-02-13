@@ -41,4 +41,16 @@ public class ParentMapperTest {
         log.info(count);
     }
 
+    @Test
+    public void testGetOneParentInfo() {
+
+        log.info("============Get Parent Count==========");
+
+        Long id = 38L;
+
+        ParentInfoResDTO res = parentMapper.getOneParentInfo(id);
+
+        log.info(res);
+    }
+
 }

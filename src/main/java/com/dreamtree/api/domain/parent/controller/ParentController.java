@@ -6,9 +6,7 @@ import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.service.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,15 @@ public class ParentController {
         log.info("================GET ALL PARENTS LIST=====================");
 
         PageResponseDTO<ParentInfoResDTO> result = parentService.getAllParentsList(reqDTO);
+        return result;
+    }
+
+    @GetMapping("{id}")
+    public ParentInfoResDTO getOneParentInfo(@PathVariable Long id) {
+
+        log.info("================GET ONE PARENT INFO=====================");
+
+        ParentInfoResDTO result = parentService.getOneParentInfo(id);
         return result;
     }
 
