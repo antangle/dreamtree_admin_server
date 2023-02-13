@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.parent.mapper.ProgressMapper">
+
+    <select id="getProgressList" resultType="com.dreamtree.api.domain.parent.dto.ProgressResDTO">
+        select
+            ps.child_name,
+            ps.state,
+            s.name,
+            pm.title,
+            l.start_date,
+            l.end_date,
+            l.expiration_date,
+            l.place,
+            l.fee,
+            l.lesson_length,
+            l.lesson_time
+
+        from
+            tbl_progress as ps
+
+        left join tbl_lesson as l
+            on ps.lesson_id = l.lesson_id
+
+        left join tbl_program as pm
+            on l.program_id = pm.program_id
+
+        left join tbl_sub_category as s
+            on pm.sub_category_id = pm.sub_category_id
+
+        where ps.parent_id = #{id}
+
+        group by ps.parent_id
+
+        limit 0, 10
+
+    </select>
+
+</mapper>
