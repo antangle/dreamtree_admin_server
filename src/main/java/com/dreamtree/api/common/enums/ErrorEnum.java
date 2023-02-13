@@ -7,7 +7,8 @@ import lombok.Getter;
 public enum ErrorEnum {
 
     //
-    NO_CATEGORY(401,"no category", 1011);
+    NO_CATEGORY(401,"no category", 1011),
+    NO_PROGRAM_DETAIL(401, "no program details", 2021);
 
     int code;
 

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.program.mapper.ProgramMapper">
+<!--                       p.program_id,
+            p.title,
+            p.content,
+            p.curriculum_json,
+            s.profile_img_url,
+            s.nickname,
+            s.email,
+
+            l.day,
+            l.lesson_time,
+            l.lesson_length,
+            l.start_date,
+            l.end_date,
+            l.personnel,
+
+            c.name as certificate_name
+            f.url as file_url,
+
+-->
+
+    <resultMap id="programDetails" type="programDetailsDTO">
+        <id column="program_id" />
+        <result property="curriculumJson" column="curriculum_json"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="profileImgUrl" column="profile_img_url"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+
+        <collection property="lessonLists" javaType="java.util.ArrayList" resultMap="lessonList">  </collection>
+        <collection property="fileUrls" javaType="java.util.ArrayList" resultMap="fileList" />
+        <collection property="certificateNames" javaType="java.util.ArrayList" resultMap="certificateList" />
+    </resultMap>
+
+    <resultMap id="fileList" type="string">
+        <result column="file_url" />
+    </resultMap>
+
+    <resultMap id="certificateList" type="string">
+        <result column="certificate_name" />
+    </resultMap>
+
+    <resultMap id="lessonList" type="lessonListDTO">
+        <result property="day" column="day"/>
+        <result property="lessonTime" column="lesson_time"/>
+        <result property="lessonLength" column="lesson_length"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="personnel" column="personnel"/>
+    </resultMap>
+
+
+    <sql id="search">
+
+        <where>
+            p.sub_category_id = #{subCategoryId}
+            and where p.deletedAt is null
+
+            and (
+
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+
+                    <if test="item == 'title'">
+                        title like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'college'">
+                        college like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'major'">
+                        major like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'fee'">
+                        fee &lt;= CAST(#{keyword} AS INTEGER)
+                    </if>
+
+                    <if test="item == 'times'">
+                        times &lt;= CAST(#{keyword} AS INTEGER)
+                    </if>
+
+                </foreach>
+            </if>
+            )
+        </where>
+
+    </sql>
+
+    <select id="getProgramLists" resultType="programListDTO" parameterType="programSearchDTO">
+        select p.*,
+            s.nickname,
+            s.college,
+            s.major,
+            c.name as certificate_name
+        from tbl_program p
+        left join tbl_student s
+            on p.student_id = s.student_id
+        left join tbl_certificate c
+            on c.student_id = s.student_id
+            and c.auth_state = 'success'
+        <include refid="search"></include>
+    </select>
+
+    <select id="getProgramDetails" resultMap="programDetails" parameterType="long">
+        select
+            p.program_id,
+            p.title,
+            p.content,
+            p.curriculum_json,
+            f.url as file_url,
+            s.profile_img_url,
+            s.nickname,
+            s.email,
+            l.day,
+            l.lesson_time,
+            l.lesson_length,
+            l.start_date,
+            l.end_date,
+            l.personnel,
+            c.name as certificate_name
+        from tbl_program p
+        left join tbl_student s
+            on p.student_id = s.student_id
+        left join tbl_certificate c
+            on c.student_id = s.student_id
+            and c.auth_state = 'yes'
+        left join tbl_lesson l
+            on l.program_id = p.program_id
+        left join tbl_file f
+            on f.program_id = p.program_id
+        where
+            p.program_id = #{id}
+            and p.deletedAt is null
+            and l.deletedAt is null
+            and s.deletedAt is null
+    </select>
+
+</mapper>
