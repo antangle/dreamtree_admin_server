@@ -13,4 +13,6 @@ public interface ParentMapper {
 
     int getCount(ParentInfoReqDTO reqDTO);
 
+//    void updateParentInfo(Long id, ParentModDTO);
+
 }
