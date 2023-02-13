@@ -24,6 +24,7 @@
 
     </sql>
 
+    <!--전체 학부모 조회-->
     <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
         select
             email,
@@ -40,7 +41,7 @@
 
     </select>
 
-
+    <!--전체 학부모 회원 수 반환-->
     <select id="getCount" resultType="int">
 
         select
@@ -50,6 +51,7 @@
 
     </select>
 
+    <!--특정 학부모 회원 정보 조회-->
     <select id="getOneParentInfo" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
 
         select
@@ -65,5 +67,19 @@
             parent_id = #{id}
 
     </select>
+
+    <!--특정 학부모 회원 정보 수정-->
+    <update id="updateParentInfo">
+
+        update
+            tbl_parent
+        set
+            nickname = #{nickname},
+            password = #{password},
+            profile_img_url = #{profile_img_url}
+        where
+            parent_id=#{id}
+
+    </update>
 
 </mapper>

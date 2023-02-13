@@ -3,6 +3,7 @@ package com.dreamtree.api.domain.parent.controller;
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
+import com.dreamtree.api.domain.parent.dto.ParentModDTO;
 import com.dreamtree.api.domain.parent.service.ParentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,6 +35,15 @@ public class ParentController {
 
         ParentInfoResDTO result = parentService.getOneParentInfo(id);
         return result;
+    }
+
+    @PutMapping("")
+    public ParentModDTO updateParentInfo(@RequestBody ParentModDTO modDTO) {
+
+        log.info("================UPDATE PARENT INFO=====================");
+        parentService.updateParentInfo(modDTO);
+        log.info(modDTO);
+        return modDTO;
     }
 
 }
