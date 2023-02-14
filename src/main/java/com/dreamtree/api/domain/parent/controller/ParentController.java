@@ -38,12 +38,12 @@ public class ParentController {
     }
 
     @PutMapping("")
-    public ParentModDTO updateParentInfo(@RequestBody ParentModDTO modDTO) {
+    public int updateParentInfo(@RequestBody ParentModDTO modDTO) {
 
         log.info("================UPDATE PARENT INFO=====================");
-        parentService.updateParentInfo(modDTO);
+        int result = parentService.updateParentInfo(modDTO);
         log.info(modDTO);
-        return modDTO;
+        return result;
     }
 
 }

@@ -11,14 +11,14 @@ import java.util.List;
 /** 최서연 ver.0.1 **/
 public interface RequestService {
 
-    void addRequest(RequestAddDTO addDTO);
+    int addRequest(RequestAddDTO addDTO);
 
     PageResponseDTO<RequestResDTO> getAllRequests(RequestReqDTO reqDTO);
 
     RequestResDTO getOneRequest(Long id);
 
-    void updateRequest(RequestModDTO modDTO);
+    int updateRequest(RequestModDTO modDTO);
 
-    void softDeleteRequest(Long id);
+    int softDeleteRequest(Long id);
 
 }

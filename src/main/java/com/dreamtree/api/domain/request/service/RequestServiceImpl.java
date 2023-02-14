@@ -23,9 +23,9 @@ public class RequestServiceImpl implements RequestService {
     private final RequestMapper requestMapper;
 
     @Override
-    public void addRequest(RequestAddDTO addDTO) {
+    public int addRequest(RequestAddDTO addDTO) {
 
-        requestMapper.addRequest(addDTO);
+        return requestMapper.addRequest(addDTO);
 
     }
 
@@ -55,16 +55,16 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public void updateRequest(RequestModDTO modDTO) {
+    public int updateRequest(RequestModDTO modDTO) {
 
-        requestMapper.updateRequest(modDTO);
+        return requestMapper.updateRequest(modDTO);
 
     }
 
     @Override
-    public void softDeleteRequest(Long id) {
+    public int softDeleteRequest(Long id) {
 
-        requestMapper.softDeleteRequest(id);
+        return requestMapper.softDeleteRequest(id);
 
     }
 }

@@ -15,8 +15,8 @@ public interface ParentMapper {
 
     int getCount(ParentInfoReqDTO reqDTO);
 
-    void updateParentInfo(ParentModDTO modDTO);
+    int updateParentInfo(ParentModDTO modDTO);
 
-    void softDeleteOneParent(Long id);
+    int softDeleteOneParent(Long id);
 
 }

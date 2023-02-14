@@ -10,7 +10,7 @@ import java.util.List;
 /** 최서연 ver.0.1 **/
 public interface RequestMapper {
 
-    void addRequest(RequestAddDTO addDTO);
+    int addRequest(RequestAddDTO addDTO);
 
     List<RequestResDTO> getAllRequests(RequestReqDTO reqDTO);
 
@@ -18,8 +18,8 @@ public interface RequestMapper {
 
     int getAllRequestsCount();
 
-    void updateRequest(RequestModDTO modDTO);
+    int updateRequest(RequestModDTO modDTO);
 
-    void softDeleteRequest(Long id);
+    int softDeleteRequest(Long id);
 
 }
