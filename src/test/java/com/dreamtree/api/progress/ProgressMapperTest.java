@@ -29,4 +29,17 @@ public class ProgressMapperTest {
 
     }
 
+    @Test
+    public void testGetProgressListCount() {
+
+        log.info("===============TEST GET PROGRESS LIST COUNT=============");
+
+        Long parent_id = 13L;
+
+        int count = progressMapper.getProgressListCount(parent_id);
+
+        log.info(count);
+
+    }
+
 }

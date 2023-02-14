@@ -34,8 +34,24 @@
 
         where ps.parent_id = #{id}
 
-        group by ps.parent_id
+        group by ps.progress_id
 
     </select>
 
+
+    <!--학부모 수강 중인 레슨 정보 조회-->
+    <select id="getProgressListCount" resultType="int">
+
+        select
+            count(ps.progress_id)
+
+        from
+            tbl_progress as ps
+
+        left join tbl_parent as p
+            on ps.parent_id = p.parent_id
+
+        where ps.parent_id = #{id}
+
+    </select>
 </mapper>

@@ -31,8 +31,8 @@ public class ProgressResDTO {
 
     private int fee;
 
-    private int length;
+    private int lesson_length;
 
-    private int time;
+    private int lesson_time;
 
 }
