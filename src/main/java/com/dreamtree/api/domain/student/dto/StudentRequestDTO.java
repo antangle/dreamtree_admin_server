@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/*** 임성현 ver.0.1 ***/
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,4 +17,10 @@ public class StudentRequestDTO extends PageRequestDTO {
     String keyword;
 
     String condition;
+
+    public String[] getCondition() {
+
+        return condition.trim().length() == 0 ? null : condition.split(",");
+
+    }
 }

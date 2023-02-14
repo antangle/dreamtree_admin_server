@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.student.mapper.CertificateMapper">
+
+    <!-- 자격증 추가 -->
+    <insert id="addCertificate">
+        insert into
+            tbl_certificate(student_id, url, name, aquire_date, auth_state, createdAt, updatedAt)
+        values
+            (#{studentId}, #{url}, #{name}, #{aquireDate}, 'no', now(), now())
+    </insert>
+
+    <!-- 자격증 조회 -->
+    <select id="getCertificate" resultType="CertificateDetailDTO">
+        select
+            name, aquire_date, url
+        from
+            tbl_certificate
+        where
+            certificate_id = #{certificateId} and
+            student_id = #{studentId} and
+            deletedAt is null
+    </select>
+
+    <!-- 자격증 리스트 -->
+    <select id="getCertificateList" resultType="certificateListDTO">
+        select
+            certificate_id, name, auth_state
+        from
+            tbl_certificate
+        where
+            student_id = #{id} and
+            deletedAt is null
+    </select>
+
+    <!-- 학생 자격증 인증 상태 업데이트 -->
+    <update id="modifyCertificateAuthState">
+        update
+            tbl_certificate
+        set
+            auth_state = #{authState}
+        where
+            student_id = #{studentId} and
+            certificate_id = #{certificateId} and
+    </update>
+
+    <!-- 자격증 삭제 -->
+    <update id="removeCertificate">
+        update
+            tbl_certificate
+        set
+            deletedAt = now()
+        where
+            certificate_id = #{id}
+    </update>
+
+</mapper>

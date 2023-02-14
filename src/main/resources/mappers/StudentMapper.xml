@@ -7,35 +7,113 @@
     <!-- 학생 추가 -->
     <insert id="addStudent">
         insert into tbl_student (
-            profile_img_url, role, auth_state, email, password, nickname, birth, gender, createdAt, updatedAt)
+            profile_img_url,
+            role,
+            auth_state,
+            email,
+            password,
+            nickname,
+            birth,
+            gender,
+            createdAt,
+            updatedAt
+        )
         values (
-            #{profile_img_url}, 'student', 'no', #{email}, #{password}, #{nickname}, #{birth}, #{gender}, now(), now()
+            #{profileImgUrl},
+            'student',
+            'no',
+            #{email},
+            #{password},
+            #{nickname},
+            #{birth},
+            #{gender},
+            now(),
+            now()
         )
     </insert>
 
-    <!-- 학생 파일 추가 -->
+    <!-- 학생 학교 정보 추가 -->
     <update id="addStudentFile">
         update
             tbl_student
         set
-            auth_url = #{auth_url},
+            auth_url = #{authUrl},
             college = #{college},
             major = #{major},
             url = #{url},
-            updatedAt = now()
+            updatedAt = now(),
+            auth_state = 'pending',
+            requestedAt = now()
         where
-            student_id = #{student_id}
+            student_id = #{studentId}
     </update>
 
-    <!-- 학생 1명 조회 -->
-    <select id="getStudent" resultType="studentDTO">
+    <!-- 학생 학교 정보 조회 -->
+    <select id="getStudentCollege" resultType="studentCollegeDTO">
         select
-            profile_img_url, role, auth_state, email, nickname, birth, gender, auth_url, college, major, url, createdAt, updatedAt
+            auth_url,
+            college,
+            major,
+            url
         from
             tbl_student
         where
             student_id = #{id}
     </select>
+
+    <!-- 학생 1명 with 자격증 조회 -->
+    <select id="getStudent" resultMap="studentDetail" parameterType="long">
+        select
+            c.name,
+            c.aquire_date,
+            c.url as certificateUrl,
+            c.auth_state as certificateAuthState,
+            s.profile_img_url,
+            s.role,
+            s.auth_state,
+            s.email,
+            s.nickname,
+            s.birth,
+            s.gender,
+            s.auth_url,
+            s.college,
+            s.major,
+            s.url,
+            s.createdAt,
+            s.updatedAt
+        from
+            tbl_student s left join tbl_certificate c on s.student_id = c.student_id
+        where
+            s.student_id = #{id} and
+            s.deletedAt is null and
+            c.deletedAt is null
+    </select>
+
+    <resultMap id="studentDetail" type="studentDetailDTO">
+        <id column="student_id" />
+        <result property="url" column="url"/>
+        <result property="major" column="major"/>
+        <result property="college" column="college"/>
+        <result property="authUrl" column="authUrl"/>
+        <result property="gender" column="gender"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+        <result property="authState" column="auth_state"/>
+        <result property="role" column="role"/>
+        <result property="profileImgUrl" column="profile_img_url"/>
+        <result property="birth" column="birth"/>
+        <result property="updatedAt" column="updatedAt"/>
+        <result property="authUrl" column="auth_url"/>
+
+        <collection property="certificateList" javaType="java.util.ArrayList" resultMap="certificateList">  </collection>
+    </resultMap>
+
+    <resultMap id="certificateList" type="studentCertificateListDTO">
+        <result property="name" column="name"/>
+        <result property="aquireDate" column="aquire_date"/>
+        <result property="url" column="url"/>
+        <result property="authState" column="auth_state"/>
+    </resultMap>
 
     <!-- 학생 전체 검색 -->
     <select id="getStudentList" resultType="studentDTO">
@@ -50,33 +128,33 @@
     </select>
 
     <!-- 학생 키워드 검색(전체, 이메일, 닉네임, 인증상태 -->
-    <select id="getSearchStudentList" resultType="studentDTO">
-        select *
+    <select id="getSearchStudentList" parameterType="studentRequestDTO" resultType="studentListDTO">
+        select nickname, email, auth_state
         from
             tbl_student
 
         <where>
-            <if test="condition == 'total'">
-                nickname like concat('%', #{keyword}, '%')
-                or
-                email like concat('%', #{keyword}, '%')
-                or
-                auth_state like concat('%', #{keyword}, '%')
-            </if>
+            deletedAt is null
 
-            <if test="condition == 'nickname'">
-                and nickname like concat('%', #{keyword}, '%')
-            </if>
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
 
-            <if test="condition == 'email'">
-                and email like concat('%', #{keyword}, '%')
-            </if>
+                    <if test="item == 'email'">
+                        email like concat('%', #{keyword}, '%')
+                    </if>
 
-            <if test="condition == 'auth_state'">
-                and auth_state like concat('%', #{keyword}, '%')
+                    <if test="item == 'authState'">
+                        auth_state like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
             </if>
+            )
         </where>
-
         order by student_id desc
         limit #{skip}, #{size}
     </select>
@@ -96,29 +174,88 @@
         update
             tbl_student
         set
-            profile_img_url = #{profile_img_url},
+            profile_img_url = #{profileImgUrl},
             password = #{password},
             nickname = #{nickname},
             birth = #{birth},
             gender = #{gender},
             updatedAt = now()
         where
-            student_id = #{student_id}
+            student_id = #{studentId} and
     </update>
+
+    <!-- 학교인증 요청 리스트 -->
+    <select id="getSearchCollegeAuthRequestList" parameterType="studentRequestDTO" resultType="studentAuthRequestDTO">
+        select
+            nickname, email, auth_state
+        from
+            tbl_student
+        <where>
+            deletedAt is null
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%') and
+                        auth_state = 'pending'
+                    </if>
+
+                    <if test="item == 'email'">
+                        email like concat('%', #{keyword}, '%') and
+                        auth_state = 'pending'
+                    </if>
+                </foreach>
+            </if>
+            )
+        </where>
+
+        order by requestedAt desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 자격/수상 인증 요청 리스트 -->
+    <select id="getSearchCertificateAuthRequestList" parameterType="studentRequestDTO" resultType="studentAuthRequestDTO">
+        select
+            s.nickname, s.email, c.auth_state
+        from
+            tbl_student s left join tbl_certificate c on s.student_id = c.student_id
+        <where>
+            s.deletedAt is null
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        s.nickname like concat('%', #{keyword}, '%') and
+                        c.auth_state = 'pending'
+                    </if>
+
+                    <if test="item == 'email'">
+                        s.email like concat('%', #{keyword}, '%') and
+                        c.auth_state = 'pending'
+                    </if>
+                </foreach>
+            </if>
+            )
+        </where>
+
+        order by c.updatedAt desc
+        limit #{skip}, #{size}
+    </select>
 
     <!-- 학생 학교인증 상태 업데이트 -->
     <update id="modifyStudentAuthState">
         update
             tbl_student
         set
-            auth_state = #{state}
+            auth_state = #{authState},
+            updatedAt = now()
         where
             student_id = #{id}
     </update>
-
-<!--    <update id="modifyCertificate">-->
-<!--        -->
-<!--    </update>-->
 
 
 </mapper>

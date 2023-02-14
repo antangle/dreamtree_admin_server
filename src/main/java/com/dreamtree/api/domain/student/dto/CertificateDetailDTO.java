@@ -4,23 +4,17 @@ import lombok.*;
 
 /*** 임성현 ver.0.1 ***/
 
-@Builder
 @Getter
 @Setter
 @ToString
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentAddFileDTO {
+public class CertificateDetailDTO {
 
-    Long studentId;
+    String name;
 
-    // 인증 파일 url
-    String authUrl;
+    String aquireDate;
 
-    String college;
-
-    String major;
-
-    // 인증 이미지 url;
     String url;
 }

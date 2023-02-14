@@ -32,7 +32,7 @@ public class StudentMapperTests {
                 .password("t pwd")
                 .nickname("t nick")
                 .gender("man")
-                .profile_img_url("t img")
+                .profileImgUrl("t img")
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
@@ -47,8 +47,8 @@ public class StudentMapperTests {
         log.info("student add file...");
 
         StudentAddFileDTO studentAddFileDTO = StudentAddFileDTO.builder()
-                .student_id(105L)
-                .auth_url("t auth_url")
+                .studentId(105L)
+                .authUrl("t auth_url")
                 .college("t collage")
                 .url("t url")
                 .major("t major")
@@ -63,7 +63,7 @@ public class StudentMapperTests {
 
         log.info("stu get one....");
 
-        log.info(studentMapper.getStudent(105l));
+        log.info(studentMapper.getStudent(104l));
     }
 
     // 학생 10명 검색
@@ -85,7 +85,7 @@ public class StudentMapperTests {
         StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
 
         // 전체 ok
-        studentRequestDTO.setCondition("total");
+        studentRequestDTO.setCondition("nickname");
         studentRequestDTO.setKeyword("nick");
 
         // 닉네임 ok
@@ -100,7 +100,7 @@ public class StudentMapperTests {
 //        studentRequestDTO.setCondition("email");
 //        studentRequestDTO.setKeyword("test");
 
-        List<StudentDTO> stuList = studentMapper.getSearchStudentList(studentRequestDTO);
+        List<StudentListDTO> stuList = studentMapper.getSearchStudentList(studentRequestDTO);
 
         log.info("search result: " + stuList);
         log.info("search size: " + stuList.size());
@@ -123,12 +123,12 @@ public class StudentMapperTests {
         log.info("modify student....");
 
         StudentModifyDTO studentModifyDTO = StudentModifyDTO.builder()
-                .student_id(105L)
+                .studentId(105L)
                 .gender("tman")
                 .birth(LocalDate.now())
                 .nickname("test nick...")
                 .password("test pwd...")
-                .profile_img_url("test profile img,,,")
+                .profileImgUrl("test profile img,,,")
                 .build();
 
         studentMapper.modifyStudent(studentModifyDTO);
@@ -141,6 +141,47 @@ public class StudentMapperTests {
         log.info("modify auth state....");
 
         studentMapper.modifyStudentAuthState(105L, "student");
+    }
+
+    // 대학 인증 요청 리스트
+    @Test
+    public void getStudentCollegeAuthRequestList() {
+
+        log.info("college auth req list....");
+
+        StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
+
+        studentRequestDTO.setKeyword("");
+        studentRequestDTO.setCondition("nickname");
+
+        List<StudentAuthRequestDTO> list = studentMapper.getSearchCollegeAuthRequestList(studentRequestDTO);
+
+        log.info(list);
+    }
+
+    @Test
+    public void getStudentCertificateAuthRequestList() {
+
+        log.info("certificate auth req list....");
+
+        StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
+
+        studentRequestDTO.setKeyword("");
+        studentRequestDTO.setCondition("nickname");
+
+        List<StudentAuthRequestDTO> list = studentMapper.getSearchCertificateAuthRequestList(studentRequestDTO);
+
+        log.info(list);
+
+    }
+
+    // 대학 인증 정보 조회
+    @Test
+    public void getStudentCollegeTest() {
+
+        log.info("get stu college...");
+
+        log.info(studentMapper.getStudentCollege(105L));
     }
 
 }
