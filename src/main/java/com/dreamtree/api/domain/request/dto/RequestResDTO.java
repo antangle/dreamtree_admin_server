@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,5 +29,7 @@ public class RequestResDTO {
     private String studentGrade;
 
     private String studentGender;
+
+    private LocalDateTime createdAt;
 
 }

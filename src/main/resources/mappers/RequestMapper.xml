@@ -61,7 +61,8 @@
             r.description,
             r.content,
             r.student_grade,
-            r.student_gender
+            r.student_gender,
+            r.createdAt
 
         from
             tbl_request as r
@@ -99,7 +100,8 @@
             r.description,
             r.content,
             r.student_grade,
-            r.student_gender
+            r.student_gender,
+            r.createdAt
 
         from
             tbl_request as r
