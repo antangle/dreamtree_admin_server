@@ -20,6 +20,6 @@ public class ParentInfoResDTO {
 
     private Date birth;
 
-    private String profile_img_url;
+    private String profileImgUrl;
 
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.request.mapper.RequestMapper">
+
+    <sql id="search">
+
+        <where>
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+
+                    <if test="item == 'email'">
+                        title like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+        </where>
+
+    </sql>
+
+    <insert id="addRequest" parameterType="requestAddDTO" useGeneratedKeys="true" keyProperty="request_id">
+
+        insert into
+            tbl_request (
+                title,
+                parent_id,
+                sub_category_id,
+                description,
+                content,
+                student_grade,
+                student_gender,
+                createdAt
+            )
+        values (
+            #{title},
+            #{parent_id},
+            #{sub_category_id},
+            #{description},
+            #{content},
+            #{student_grade},
+            #{student_gender},
+            now()
+        )
+
+    </insert>
+
+    <!--학부모 요청글 전체 조회-->
+    <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
+
+        select
+            r.title,
+            p.nickname,
+            c.name as category_name,
+            s.name as sub_category_name,
+            r.description,
+            r.content,
+            r.student_grade,
+            r.student_gender
+
+        from
+            tbl_request as r
+
+        left join tbl_parent as p
+            on r.parent_id = p.parent_id
+
+        left join tbl_sub_category as s
+            on r.sub_category_id = s.sub_category_id
+
+        left join tbl_category as c
+            on s.category_id = c.category_id
+
+        group by r.request_id
+
+    </select>
+
+    <select id="getAllRequestsCount" resultType="int">
+
+        select
+            count(request_id)
+        from
+            tbl_request
+
+    </select>
+
+    <!--특정 요청 게시글 정보 조회-->
+    <select id="getOneRequest" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
+
+        select
+            r.title,
+            p.nickname,
+            c.name as category_name,
+            s.name as sub_category_name,
+            r.description,
+            r.content,
+            r.student_grade,
+            r.student_gender
+
+        from
+            tbl_request as r
+
+        left join tbl_parent as p
+            on r.parent_id = p.parent_id
+
+        left join tbl_sub_category as s
+            on r.sub_category_id = s.sub_category_id
+
+        left join tbl_category as c
+            on s.category_id = c.category_id
+
+        where
+            r.request_id = #{id}
+
+        group by r.request_id
+
+    </select>
+
+
+</mapper>

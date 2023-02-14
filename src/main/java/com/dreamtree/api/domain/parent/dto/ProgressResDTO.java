@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProgressResDTO {
 
-    private String child_name;
+    private String childName;
 
     private String state;
 
@@ -21,11 +21,11 @@ public class ProgressResDTO {
 
     private String title;
 
-    private Date start_date;
+    private Date startDate;
 
-    private Date end_date;
+    private Date endDate;
 
-    private Date expiration_date;
+    private Date expirationDate;
 
     private String place;
 
