@@ -49,6 +49,38 @@
         limit #{skip}, #{size}
     </select>
 
+    <!-- 학생 키워드 검색(전체, 이메일, 닉네임, 인증상태 -->
+    <select id="getSearchStudentList" resultType="studentDTO">
+        select *
+        from
+            tbl_student
+
+        <where>
+            <if test="condition == 'total'">
+                nickname like concat('%', #{keyword}, '%')
+                or
+                email like concat('%', #{keyword}, '%')
+                or
+                auth_state like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'nickname'">
+                and nickname like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'email'">
+                and email like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'auth_state'">
+                and auth_state like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+
+        order by student_id desc
+        limit #{skip}, #{size}
+    </select>
+
     <!-- 학생 1명 삭제 -->
     <update id="removeStudent">
         update
@@ -74,7 +106,7 @@
             student_id = #{student_id}
     </update>
 
-    <!-- 학생 인증 상태 업데이트 -->
+    <!-- 학생 학교인증 상태 업데이트 -->
     <update id="modifyStudentAuthState">
         update
             tbl_student
@@ -83,6 +115,10 @@
         where
             student_id = #{id}
     </update>
+
+<!--    <update id="modifyCertificate">-->
+<!--        -->
+<!--    </update>-->
 
 
 </mapper>

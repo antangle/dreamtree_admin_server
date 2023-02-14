@@ -1,10 +1,7 @@
 package com.dreamtree.api.domain.student.mapper;
 
 import com.dreamtree.api.common.dto.PageRequestDTO;
-import com.dreamtree.api.domain.student.dto.StudentAddDTO;
-import com.dreamtree.api.domain.student.dto.StudentAddFileDTO;
-import com.dreamtree.api.domain.student.dto.StudentDTO;
-import com.dreamtree.api.domain.student.dto.StudentModifyDTO;
+import com.dreamtree.api.domain.student.dto.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public interface StudentMapper {
     List<StudentDTO> getStudentList(PageRequestDTO pageRequestDTO);
 
     // 학생 검색 (nickname, email, auth_state)
-
+    List<StudentDTO> getSearchStudentList(StudentRequestDTO studentRequestDTO);
 
     // 학생 1명 삭제 (UPDATE deletedAt)
     void removeStudent(Long id);

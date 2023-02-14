@@ -2,10 +2,7 @@ package com.dreamtree.api.student.mapper;
 
 
 import com.dreamtree.api.common.dto.PageRequestDTO;
-import com.dreamtree.api.domain.student.dto.StudentAddDTO;
-import com.dreamtree.api.domain.student.dto.StudentAddFileDTO;
-import com.dreamtree.api.domain.student.dto.StudentDTO;
-import com.dreamtree.api.domain.student.dto.StudentModifyDTO;
+import com.dreamtree.api.domain.student.dto.*;
 import com.dreamtree.api.domain.student.mapper.StudentMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -14,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 @Log4j2
@@ -75,6 +73,37 @@ public class StudentMapperTests {
         log.info("stu get list.....");
 
         log.info(studentMapper.getStudentList(new PageRequestDTO()));
+    }
+
+    // 학생 키워드(전체, 이메일, 닉네임, 인증상태) 검색
+    @Test
+    public void searchStudentGetListTest() {
+
+        log.info("search stu list....");
+
+
+        StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
+
+        // 전체 ok
+        studentRequestDTO.setCondition("total");
+        studentRequestDTO.setKeyword("nick");
+
+        // 닉네임 ok
+//        studentRequestDTO.setCondition("nickname");
+//        studentRequestDTO.setKeyword("nick");
+
+        // 인증 상태 ok
+//        studentRequestDTO.setCondition("auth_state");
+//        studentRequestDTO.setKeyword("stu");
+
+        // 이메일 ok
+//        studentRequestDTO.setCondition("email");
+//        studentRequestDTO.setKeyword("test");
+
+        List<StudentDTO> stuList = studentMapper.getSearchStudentList(studentRequestDTO);
+
+        log.info("search result: " + stuList);
+        log.info("search size: " + stuList.size());
     }
 
 
