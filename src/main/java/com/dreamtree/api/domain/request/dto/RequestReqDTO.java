@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 /** 최서연 ver.0.1 **/
 @Data
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder

@@ -30,6 +30,7 @@ public class ProgramDetailsDTO {
     String email;
 
     List<LessonListDTO> lessonLists;
+
     List<String> certificateNames;
 
 
