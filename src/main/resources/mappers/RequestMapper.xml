@@ -122,5 +122,35 @@
 
     </select>
 
+    <!--특정 요청 게시글 정보 수정-->
+    <update id="updateRequest">
+
+        update
+            tbl_request
+        set
+            title = #{title},
+            sub_category_id = #{subCategoryId},
+            description = #{description},
+            content = #{content},
+            student_grade = #{studentGrade},
+            student_gender = #{studentGender},
+            updatedAt = now()
+
+        where
+            request_id = #{id}
+
+    </update>
+
+    <!--특정 요청 게시글 정보 삭제-->
+    <update id="softDeleteRequest">
+
+        update
+            tbl_request
+        set
+            deletedAt = now()
+        where
+            request_id=#{id}
+
+    </update>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.request.mapper;
 
 import com.dreamtree.api.domain.request.dto.RequestAddDTO;
+import com.dreamtree.api.domain.request.dto.RequestModDTO;
 import com.dreamtree.api.domain.request.dto.RequestReqDTO;
 import com.dreamtree.api.domain.request.dto.RequestResDTO;
 
@@ -15,5 +16,9 @@ public interface RequestMapper {
     RequestResDTO getOneRequest(Long id);
 
     int getAllRequestsCount();
+
+    void updateRequest(RequestModDTO modDTO);
+
+    void softDeleteRequest(Long id);
 
 }

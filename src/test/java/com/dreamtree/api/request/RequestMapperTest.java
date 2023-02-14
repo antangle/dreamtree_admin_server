@@ -1,6 +1,7 @@
 package com.dreamtree.api.request;
 
 import com.dreamtree.api.domain.request.dto.RequestAddDTO;
+import com.dreamtree.api.domain.request.dto.RequestModDTO;
 import com.dreamtree.api.domain.request.dto.RequestReqDTO;
 import com.dreamtree.api.domain.request.dto.RequestResDTO;
 import com.dreamtree.api.domain.request.mapper.RequestMapper;
@@ -66,6 +67,35 @@ public class RequestMapperTest {
         Long id = 103L;
 
         log.info(requestMapper.getOneRequest(id));
+    }
+
+    @Test
+    public void testUpdateRequest() {
+
+        log.info("=================TEST UPDATE REQUEST===============");
+
+        RequestModDTO modDTO = RequestModDTO.builder()
+                .id(100L)
+                .title("Update Title Test...")
+                .subCategoryId(2L)
+                .description("ABC......")
+                .content("ABC is the test")
+                .studentGrade("저학년")
+                .studentGender("female")
+                .build();
+
+        requestMapper.updateRequest(modDTO);
+        log.info(requestMapper.getOneRequest(100L));
+    }
+
+    @Test
+    public void testDeleteRequest() {
+
+        log.info("=================TEST DELETE REQUEST===============");
+
+        Long id = 104L;
+
+        requestMapper.softDeleteRequest(id);
     }
 
 }

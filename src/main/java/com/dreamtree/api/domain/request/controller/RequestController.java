@@ -2,6 +2,7 @@ package com.dreamtree.api.domain.request.controller;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.domain.request.dto.RequestAddDTO;
+import com.dreamtree.api.domain.request.dto.RequestModDTO;
 import com.dreamtree.api.domain.request.dto.RequestReqDTO;
 import com.dreamtree.api.domain.request.dto.RequestResDTO;
 import com.dreamtree.api.domain.request.service.RequestService;
@@ -44,6 +45,25 @@ public class RequestController {
         RequestResDTO result = requestService.getOneRequest(id);
 
         return result;
+    }
+
+    @PutMapping("")
+    public RequestModDTO updateRequest(@RequestBody RequestModDTO modDTO) {
+
+        log.info("=================UPDATE REQUEST==================");
+
+        requestService.updateRequest(modDTO);
+        return modDTO;
+    }
+
+    @DeleteMapping("delete/{id}")
+    public Long softDeleteRequest(@PathVariable Long id) {
+
+        log.info("==============DELETE REQUEST=====================");
+
+        requestService.softDeleteRequest(id);
+        return id;
+
     }
 
 }
