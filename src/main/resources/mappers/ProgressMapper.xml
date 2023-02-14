@@ -9,7 +9,7 @@
     <select id="getProgressList" resultType="com.dreamtree.api.domain.parent.dto.ProgressResDTO">
         select
             ps.child_name,
-            ps.state,
+            l.state,
             s.name,
             pm.title,
             l.start_date,
