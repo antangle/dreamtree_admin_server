@@ -8,4 +8,6 @@ public interface ProgressMapper {
 
     List<ProgressResDTO> getProgressList(Long id);
 
+    int getProgressListCount(Long id);
+
 }

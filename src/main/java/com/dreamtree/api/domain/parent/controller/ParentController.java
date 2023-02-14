@@ -45,12 +45,4 @@ public class ParentController {
         return modDTO;
     }
 
-    @PutMapping("/delete/{id}")
-    public Long softDeleteOneParent(@PathVariable Long id) {
-
-        parentService.softDeleteOneParent(id);
-        return id;
-
-    }
-
 }
