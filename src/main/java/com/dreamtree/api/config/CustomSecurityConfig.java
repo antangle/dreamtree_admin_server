@@ -22,9 +22,9 @@ public class CustomSecurityConfig {
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
 
         log.info("-----------------------");
-        http.authorizeRequests().antMatchers("api/time/*").permitAll();
-        http.authorizeRequests().antMatchers("api/todos/*").permitAll();
-        http.authorizeRequests().antMatchers("api/files/*").permitAll();
+        http.authorizeRequests().antMatchers("api/parent/*").permitAll();
+//        http.authorizeRequests().antMatchers("api/todos/*").permitAll();
+//        http.authorizeRequests().antMatchers("api/files/*").permitAll();
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
