@@ -1,4 +1,4 @@
-package com.dreamtree.api.domain.parent.dto;
+package com.dreamtree.api.domain.progress.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

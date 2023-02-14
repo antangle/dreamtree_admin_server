@@ -1,6 +1,6 @@
-package com.dreamtree.api.domain.parent.mapper;
+package com.dreamtree.api.domain.progress.mapper;
 
-import com.dreamtree.api.domain.parent.dto.ProgressResDTO;
+import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 
 import java.util.List;
 
