@@ -10,6 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+//이승윤 ver0.1
 public interface MinioService {
 
 /*

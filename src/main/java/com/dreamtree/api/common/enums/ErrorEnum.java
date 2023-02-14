@@ -3,6 +3,7 @@ package com.dreamtree.api.common.enums;
 import lombok.Getter;
 
 
+//이승윤 ver0.1
 @Getter
 public enum ErrorEnum {
 

@@ -18,6 +18,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+//이승윤 ver0.1
 @RestController
 @Log4j2
 @RequestMapping("api/minio")
