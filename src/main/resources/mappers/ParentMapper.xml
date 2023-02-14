@@ -82,4 +82,15 @@
 
     </update>
 
+    <update id="softDeleteOneParent">
+
+        update
+            tbl_parent
+        set
+            deletedAt = now()
+        where
+            parent_id=#{id}
+
+    </update>
+
 </mapper>

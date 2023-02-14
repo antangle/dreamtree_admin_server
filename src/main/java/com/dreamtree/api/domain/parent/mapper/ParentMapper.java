@@ -16,4 +16,6 @@ public interface ParentMapper {
 
     void updateParentInfo(ParentModDTO modDTO);
 
+    void softDeleteOneParent(Long id);
+
 }

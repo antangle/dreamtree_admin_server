@@ -49,4 +49,11 @@ public class ParentServiceImpl implements ParentService{
         parentMapper.updateParentInfo(modDTO);
 
     }
+
+    @Override
+    public void softDeleteOneParent(Long id) {
+
+        parentMapper.softDeleteOneParent(id);
+
+    }
 }

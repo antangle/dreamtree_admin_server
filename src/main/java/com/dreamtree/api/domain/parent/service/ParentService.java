@@ -12,4 +12,6 @@ public interface ParentService {
     ParentInfoResDTO getOneParentInfo(Long id);
 
     void updateParentInfo(ParentModDTO modDTO);
+
+    void softDeleteOneParent(Long id);
 }
