@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
 
+//이승윤 ver0.1
 @RestControllerAdvice
 @Log4j2
 public class GlobalControllerAdvisor {

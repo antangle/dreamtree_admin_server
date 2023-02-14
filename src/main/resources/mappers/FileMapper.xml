@@ -3,4 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.program.mapper.FileMapper">
+
+    <insert id="postFileForm" parameterType="programFormDTO">
+        insert into tbl_file(
+            program_id,
+            url,
+            name,
+            size,
+            content_type
+        ) values
+        <foreach collection="fileForms" item="fileForm" separator="," open="(" close=")">
+            #{programId},
+            #{fileForm.url},
+            #{fileForm.name},
+            #{fileForm.size},
+            #{fileForm.contentType}
+        </foreach>
+    </insert>
+
 </mapper>

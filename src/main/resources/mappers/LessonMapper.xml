@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.lesson.mapper.LessonMapper">
+
+    <insert id="addLesson" parameterType="lessonAddDTO">
+        insert into tbl_lesson(
+            program_id,
+            sub_category_id,
+            start_date,
+            end_date,
+            day,
+            personnel,
+            lesson_length,
+            lesson_time,
+            fee,
+            place,
+            expire_start_date,
+            expire_end_date,
+            createdAt,
+            updatedAt
+        )
+        values(
+            #{programId},
+            #{subCategoryId},
+            #{startDate},
+            #{endDate},
+            #{day},
+            #{personnel},
+            #{lessonLength},
+            #{lessonTime},
+            #{fee},
+            #{place},
+            #{expireStartDate},
+            #{expireEndDate},
+            now(),
+            now()
+        )
+    </insert>
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--최서연 ver.0.1-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.progress.mapper.ProgressMapper">
+
+
+    <!--학부모 수강 중인 레슨 정보 조회-->
+    <select id="getProgressList" resultType="com.dreamtree.api.domain.progress.dto.ProgressResDTO">
+        select
+            ps.child_name,
+            l.state,
+            s.name,
+            pm.title,
+            l.start_date,
+            l.end_date,
+            l.expiration_date,
+            l.place,
+            l.fee,
+            l.lesson_length,
+            l.lesson_time
+
+        from
+            tbl_progress as ps
+
+        left join tbl_lesson as l
+            on ps.lesson_id = l.lesson_id
+
+        left join tbl_program as pm
+            on l.program_id = pm.program_id
+
+        left join tbl_sub_category as s
+            on pm.sub_category_id = pm.sub_category_id
+
+        where ps.parent_id = #{id}
+
+        group by ps.progress_id
+
+    </select>
+
+
+    <!--학부모 수강 중인 레슨 정보 조회-->
+    <select id="getProgressListCount" resultType="int">
+
+        select
+            count(ps.progress_id)
+
+        from
+            tbl_progress as ps
+
+        left join tbl_parent as p
+            on ps.parent_id = p.parent_id
+
+        where ps.parent_id = #{id}
+
+    </select>
+</mapper>

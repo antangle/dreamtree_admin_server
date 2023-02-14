@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--//이승윤 ver0.1-->
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -59,8 +60,7 @@
 
         <where>
             p.sub_category_id = #{subCategoryId}
-            and where p.deletedAt is null
-
+            and p.deletedAt is null
             and (
 
             <if test="keyword != null and condition != null">
@@ -109,6 +109,26 @@
         left join tbl_certificate c
             on c.student_id = s.student_id
             and c.auth_state = 'success'
+
+        <include refid="search"></include>
+
+        order by
+        <choose>
+            <when test="order == 'newest'"> p.createdAt desc</when>
+            <when test="order == 'times'"> p.times desc</when>
+        </choose>
+        limit #{skip}, #{size}
+    </select>
+
+    <select id="getProgramListsCount" resultType="integer">
+        select count(*)
+        from tbl_program p
+        left join tbl_student s
+            on p.student_id = s.student_id
+        left join tbl_certificate c
+            on c.student_id = s.student_id
+            and c.auth_state = 'success'
+
         <include refid="search"></include>
     </select>
 
@@ -146,4 +166,19 @@
             and s.deletedAt is null
     </select>
 
+    <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">
+        insert into tbl_program(
+            title,
+            content,
+            curriculum_json,
+            times,
+            fee
+        ) values (
+            #{title},
+            #{content},
+            #{curriculumJson},
+            #{times},
+            #{fee}
+        )
+    </insert>
 </mapper>

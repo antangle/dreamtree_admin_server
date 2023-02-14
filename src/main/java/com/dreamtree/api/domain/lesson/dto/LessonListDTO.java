@@ -12,11 +12,12 @@ import java.time.LocalDate;
 @Builder
 public class LessonListDTO {
 
-    int day;
 
     LocalDate startDate;
 
     LocalDate endDate;
+
+    String day;
 
     int personnel;
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--최서연 ver.0.1-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.parent.mapper.ParentMapper">
+
+    <sql id="search">
+
+        <where>
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+
+                    <if test="item == 'email'">
+                        title like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+        </where>
+
+    </sql>
+
+    <!--전체 학부모 조회-->
+    <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
+        select
+            email,
+            nickname,
+            birth,
+            profile_img_url
+
+        from
+            tbl_parent
+
+<!--        <include refid="search"></include>-->
+
+        limit #{skip}, #{size}
+
+    </select>
+
+    <!--전체 학부모 회원 수 반환-->
+    <select id="getCount" resultType="int">
+
+        select
+            count(*)
+        from
+            tbl_parent
+
+    </select>
+
+    <!--특정 학부모 회원 정보 조회-->
+    <select id="getOneParentInfo" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
+
+        select
+            email,
+            nickname,
+            birth,
+            profile_img_url
+
+        from
+            tbl_parent
+
+        where
+            parent_id = #{id}
+
+    </select>
+
+    <!--특정 학부모 회원 정보 수정-->
+    <update id="updateParentInfo">
+
+        update
+            tbl_parent
+        set
+            nickname = #{nickname},
+            password = #{password},
+            profile_img_url = #{profile_img_url}
+        where
+            parent_id=#{id}
+
+    </update>
+
+    <update id="softDeleteOneParent">
+
+        update
+            tbl_parent
+        set
+            deletedAt = now()
+        where
+            parent_id=#{id}
+
+    </update>
+
+</mapper>
