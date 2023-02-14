@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ParentInfoReqDTO  extends PageRequestDTO {
+public class ParentInfoReqDTO extends PageRequestDTO {
 
     String keyword;
 

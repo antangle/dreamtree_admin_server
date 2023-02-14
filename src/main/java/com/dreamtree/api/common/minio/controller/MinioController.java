@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping("api/file")
+@RequestMapping("api/minio")
 @RequiredArgsConstructor
 public class MinioController {
     private final MinioService minioService;
@@ -32,7 +32,6 @@ public class MinioController {
         List<String> fileNames = new ArrayList<>();
 
         for (MultipartFile multipartFile : files) {
-
             String fileName = minioService.uploadFile(multipartFile);
             minioService.saveThumbnail(multipartFile, fileName);
             fileNames.add(fileName);
@@ -51,7 +50,6 @@ public class MinioController {
         headers.setContentType(MediaType.valueOf(getObjectResponse.headers().get("Content-Type")));
 
         byte[] fileByteArray = minioService.getByteArray(getObjectResponse);
-
         return new ResponseEntity<>(fileByteArray, headers, HttpStatus.OK);
 
     }

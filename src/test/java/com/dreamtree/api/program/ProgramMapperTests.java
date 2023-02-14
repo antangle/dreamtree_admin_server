@@ -28,11 +28,22 @@ public class ProgramMapperTests {
     public void getProgramListsTests(){
         ProgramSearchDTO programSearchDTO = ProgramSearchDTO.builder()
                 .keyword("100000")
-                .condition(List.of("fee"))
-                .order("")
+                .condition("fee")
+                .order("times")
                 .subCategoryId(1L)
                 .build();
         log.info(programMapper.getProgramLists(programSearchDTO));
+    }
+
+    @Test
+    public void getProgramListsCountTests(){
+        ProgramSearchDTO programSearchDTO = ProgramSearchDTO.builder()
+                .keyword("100000")
+                .condition("fee")
+                .order("times")
+                .subCategoryId(1L)
+                .build();
+        log.info(programMapper.getProgramListsCount(programSearchDTO));
     }
 
     @Test

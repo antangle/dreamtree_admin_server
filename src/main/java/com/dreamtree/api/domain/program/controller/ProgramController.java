@@ -1,5 +1,6 @@
 package com.dreamtree.api.domain.program.controller;
 
+import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.common.minio.service.MinioService;
 import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.service.ProgramService;
@@ -23,8 +24,7 @@ public class ProgramController {
 
     private final ProgramService programService;
     @GetMapping("/")
-    public List<ProgramListDTO> getProgramLists(
-            @RequestParam("searchDTO") ProgramSearchDTO programSearchDTO){
+    public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO){
         return programService.getProgramLists(programSearchDTO);
     }
 

@@ -1,5 +1,6 @@
 package com.dreamtree.api.domain.program.service;
 
+import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.common.enums.ErrorEnum;
 import com.dreamtree.api.domain.program.dto.ProgramDetailsDTO;
 import com.dreamtree.api.domain.program.dto.ProgramFormDTO;
@@ -35,6 +36,7 @@ public class ProgramServiceImpl implements ProgramService{
     @Override
     public boolean postProgramForm(ProgramFormDTO programFormDTO) {
         int postProgramCount = programMapper.postProgramForm(programFormDTO);
+
         if(programFormDTO.getProgramId() == 0 || postProgramCount != 1) throw new CustomException(ErrorEnum.POST_PROGRAM_FORM_FAIL);
 
         if(programFormDTO.getFileForms().size() > 0){
@@ -46,8 +48,16 @@ public class ProgramServiceImpl implements ProgramService{
     }
 
     @Override
-    public List<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO) {
+    public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO) {
         List<ProgramListDTO> list = programMapper.getProgramLists(programSearchDTO);
-        return list;
+        int count = programMapper.getProgramListsCount(programSearchDTO);
+
+        PageResponseDTO<ProgramListDTO> pagedProgramListDTO = PageResponseDTO.<ProgramListDTO>withAll()
+                .pageRequestDTO(programSearchDTO)
+                .dtoList(list)
+                .total(count)
+                .build();
+
+        return pagedProgramListDTO;
     }
 }

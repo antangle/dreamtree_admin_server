@@ -94,12 +94,14 @@ public class MinioServiceImpl implements MinioService {
             log.info("File Uploaded...." + multipartFile.getName() + ", " + multipartFile.getContentType());
 
             String fileName = setUUID(multipartFile.getOriginalFilename());
+            InputStream inputStream = multipartFile.getInputStream();
             minioClient.putObject(PutObjectArgs.builder()
                     .bucket(bucketName)
                     .contentType(multipartFile.getContentType())
                     .object(fileName)
-                    .stream(multipartFile.getInputStream(), multipartFile.getSize(), -1)
+                    .stream(inputStream, multipartFile.getSize(), -1)
                     .build());
+            inputStream.close();
             return fileName;
 
         } catch (Exception e) {
@@ -119,6 +121,7 @@ public class MinioServiceImpl implements MinioService {
                     .contentType(file.getContentType())
                     .stream(thumbNailInputStream, thumbNailInputStream.available(), -1)
                     .build());
+            thumbNailInputStream.close();
         } catch (Exception e) {
             throw e;
         }
@@ -127,8 +130,11 @@ public class MinioServiceImpl implements MinioService {
     private InputStream getThumbNailInputStream(MultipartFile file) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try{
-            Thumbnailator.createThumbnail(file.getInputStream(),bos,200,200);
+            InputStream inputStream = file.getInputStream();
+            Thumbnailator.createThumbnail(inputStream,bos,200,200);
+
             InputStream is = new ByteArrayInputStream(bos.toByteArray());
+            inputStream.close();
             return is;
         } catch (Exception e){
             throw e;
