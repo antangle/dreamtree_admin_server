@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 @Service
 @RequiredArgsConstructor
 @Transactional

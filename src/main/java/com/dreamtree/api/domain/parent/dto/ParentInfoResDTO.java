@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-
+/** 최서연 ver.0.1 **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

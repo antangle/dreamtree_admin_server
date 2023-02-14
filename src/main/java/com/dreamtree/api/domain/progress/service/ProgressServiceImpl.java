@@ -1,6 +1,5 @@
 package com.dreamtree.api.domain.progress.service;
 
-
 import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 import com.dreamtree.api.domain.progress.mapper.ProgressMapper;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 @Service
 @RequiredArgsConstructor
 @Transactional

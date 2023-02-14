@@ -7,6 +7,7 @@ import com.dreamtree.api.domain.request.dto.RequestResDTO;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 public interface RequestMapper {
 
     void addRequest(RequestAddDTO addDTO);

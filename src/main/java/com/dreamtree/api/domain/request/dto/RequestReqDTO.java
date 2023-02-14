@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/** 최서연 ver.0.1 **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
