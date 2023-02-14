@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.student.mapper.StudentMapper">
+
+    <!-- 학생 추가 -->
+    <insert id="addStudent">
+        insert into tbl_student (
+            profile_img_url, role, auth_state, email, password, nickname, birth, gender, createdAt, updatedAt)
+        values (
+            #{profile_img_url}, 'student', 'no', #{email}, #{password}, #{nickname}, #{birth}, #{gender}, now(), now()
+        )
+    </insert>
+
+    <!-- 학생 파일 추가 -->
+    <update id="addStudentFile">
+        update
+            tbl_student
+        set
+            auth_url = #{auth_url},
+            college = #{college},
+            major = #{major},
+            url = #{url},
+            updatedAt = now()
+        where
+            student_id = #{student_id}
+    </update>
+
+    <!-- 학생 1명 조회 -->
+    <select id="getStudent" resultType="studentDTO">
+        select
+            profile_img_url, role, auth_state, email, nickname, birth, gender, auth_url, college, major, url, createdAt, updatedAt
+        from
+            tbl_student
+        where
+            student_id = #{id}
+    </select>
+
+    <!-- 학생 전체 검색 -->
+    <select id="getStudentList" resultType="studentDTO">
+        select *
+        from
+            tbl_student
+        where
+            deletedAt is null
+
+        order by student_id desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 학생 키워드 검색(전체, 이메일, 닉네임, 인증상태 -->
+    <select id="getSearchStudentList" resultType="studentDTO">
+        select *
+        from
+            tbl_student
+
+        <where>
+            <if test="condition == 'total'">
+                nickname like concat('%', #{keyword}, '%')
+                or
+                email like concat('%', #{keyword}, '%')
+                or
+                auth_state like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'nickname'">
+                and nickname like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'email'">
+                and email like concat('%', #{keyword}, '%')
+            </if>
+
+            <if test="condition == 'auth_state'">
+                and auth_state like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+
+        order by student_id desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 학생 1명 삭제 -->
+    <update id="removeStudent">
+        update
+            tbl_student
+        set
+            deletedAt = now()
+        where
+            student_id = #{id}
+    </update>
+
+    <!-- 학생 1명 수정 -->
+    <update id="modifyStudent">
+        update
+            tbl_student
+        set
+            profile_img_url = #{profile_img_url},
+            password = #{password},
+            nickname = #{nickname},
+            birth = #{birth},
+            gender = #{gender},
+            updatedAt = now()
+        where
+            student_id = #{student_id}
+    </update>
+
+    <!-- 학생 학교인증 상태 업데이트 -->
+    <update id="modifyStudentAuthState">
+        update
+            tbl_student
+        set
+            auth_state = #{state}
+        where
+            student_id = #{id}
+    </update>
+
+<!--    <update id="modifyCertificate">-->
+<!--        -->
+<!--    </update>-->
+
+
+</mapper>
