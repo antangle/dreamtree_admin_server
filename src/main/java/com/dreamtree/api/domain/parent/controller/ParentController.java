@@ -46,4 +46,13 @@ public class ParentController {
         return result;
     }
 
+    @DeleteMapping("delete/{id}")
+    public int softDeleteParent(@PathVariable Long id) {
+
+        log.info("================DELETE PARENT=====================");
+        int result = parentService.softDeleteOneParent(id);
+        return result;
+
+    }
+
 }
