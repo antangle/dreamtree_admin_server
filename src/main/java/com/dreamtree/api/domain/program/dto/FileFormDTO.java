@@ -2,16 +2,23 @@ package com.dreamtree.api.domain.program.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProgramListDTO {
-    String title;
+public class FileFormDTO {
 
-    int times;
+    String url;
 
-    String profile_url;
+    String name;
+
+    long size;
+
+    String contentType;
+
+
 }

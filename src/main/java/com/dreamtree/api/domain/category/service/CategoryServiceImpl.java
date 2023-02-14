@@ -20,14 +20,10 @@ public class CategoryServiceImpl implements CategoryService{
     private final CategoryMapper categoryMapper;
     @Override
     public List<CategoryListDTO> getCategoryList() {
-        try {
-            List<CategoryListDTO> list = categoryMapper.getCategories();
+        List<CategoryListDTO> list = categoryMapper.getCategories();
 
-            if(list.size() == 0) throw new CustomException(ErrorEnum.NO_CATEGORY);
+        if(list.size() == 0) throw new CustomException(ErrorEnum.NO_CATEGORY);
 
-            return list;
-        } catch (Exception e){
-            throw e;
-        }
+        return list;
     }
 }

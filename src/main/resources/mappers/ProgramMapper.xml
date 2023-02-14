@@ -146,4 +146,19 @@
             and s.deletedAt is null
     </select>
 
+    <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">
+        insert into tbl_program(
+            title,
+            content,
+            curriculum_json,
+            times,
+            fee
+        ) values (
+            #{title},
+            #{content},
+            #{curriculumJson},
+            #{times},
+            #{fee}
+        )
+    </insert>
 </mapper>
