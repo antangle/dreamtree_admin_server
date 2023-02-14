@@ -1,4 +1,4 @@
-package com.dreamtree.api.domain.parent.dto;
+package com.dreamtree.api.domain.request.dto;
 
 import com.dreamtree.api.common.dto.PageRequestDTO;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
-public class ParentInfoReqDTO extends PageRequestDTO {
+@EqualsAndHashCode(callSuper = false)
+public class RequestReqDTO extends PageRequestDTO {
 
     String keyword;
 
@@ -25,4 +25,5 @@ public class ParentInfoReqDTO extends PageRequestDTO {
     public String getCondition() {
         return keyword.trim().length() == 0 ? null : keyword;
     }
+
 }

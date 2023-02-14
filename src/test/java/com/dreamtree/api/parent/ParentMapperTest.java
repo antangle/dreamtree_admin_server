@@ -69,4 +69,14 @@ public class ParentMapperTest {
         parentMapper.updateParentInfo(modDTO);
 
     }
+
+    @Test
+    public void testSoftDeleteParent() {
+
+        log.info("============Soft Delete Parent Info==========");
+
+        Long id = 1L;
+
+        parentMapper.softDeleteOneParent(id);
+    }
 }

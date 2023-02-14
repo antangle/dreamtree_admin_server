@@ -1,17 +1,16 @@
 package com.dreamtree.api.domain.parent.dto;
 
-import com.dreamtree.api.common.dto.PageRequestDTO;
-import com.dreamtree.api.common.dto.PageResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
+/** 최서연 ver.0.1 **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class ParentInfoResDTO {
 
     private String email;
@@ -20,6 +19,6 @@ public class ParentInfoResDTO {
 
     private Date birth;
 
-    private String profile_img_url;
+    private String profileImgUrl;
 
 }

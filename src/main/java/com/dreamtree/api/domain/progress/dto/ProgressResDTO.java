@@ -1,4 +1,4 @@
-package com.dreamtree.api.domain.parent.dto;
+package com.dreamtree.api.domain.progress.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/** 최서연 ver.0.1 **/
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProgressResDTO {
 
-    private String child_name;
+    private String childName;
 
     private String state;
 
@@ -21,18 +22,18 @@ public class ProgressResDTO {
 
     private String title;
 
-    private Date start_date;
+    private Date startDate;
 
-    private Date end_date;
+    private Date endDate;
 
-    private Date expiration_date;
+    private Date expirationDate;
 
     private String place;
 
     private int fee;
 
-    private int length;
+    private int lesson_length;
 
-    private int time;
+    private int lesson_time;
 
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -44,9 +45,16 @@ public class ParentServiceImpl implements ParentService{
     }
 
     @Override
-    public void updateParentInfo(ParentModDTO modDTO) {
+    public int updateParentInfo(ParentModDTO modDTO) {
 
-        parentMapper.updateParentInfo(modDTO);
+        return parentMapper.updateParentInfo(modDTO);
+
+    }
+
+    @Override
+    public int softDeleteOneParent(Long id) {
+
+        return parentMapper.softDeleteOneParent(id);
 
     }
 }

@@ -5,11 +5,14 @@ import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
 
+/** 최서연 ver.0.1 **/
 public interface ParentService {
 
     PageResponseDTO<ParentInfoResDTO> getAllParentsList(ParentInfoReqDTO reqDTO);
 
     ParentInfoResDTO getOneParentInfo(Long id);
 
-    void updateParentInfo(ParentModDTO modDTO);
+    int updateParentInfo(ParentModDTO modDTO);
+
+    int softDeleteOneParent(Long id);
 }

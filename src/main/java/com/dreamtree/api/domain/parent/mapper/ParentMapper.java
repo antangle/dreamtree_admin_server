@@ -6,6 +6,7 @@ import com.dreamtree.api.domain.parent.dto.ParentModDTO;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 public interface ParentMapper {
 
     List<ParentInfoResDTO> getParentList(ParentInfoReqDTO reqDTO);
@@ -14,6 +15,8 @@ public interface ParentMapper {
 
     int getCount(ParentInfoReqDTO reqDTO);
 
-    void updateParentInfo(ParentModDTO modDTO);
+    int updateParentInfo(ParentModDTO modDTO);
+
+    int softDeleteOneParent(Long id);
 
 }

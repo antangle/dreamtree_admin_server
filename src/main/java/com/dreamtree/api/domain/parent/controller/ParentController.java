@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+/** 최서연 ver.0.1 **/
 @RestController
 @Log4j2
 @RequestMapping("api/parent/")
@@ -38,12 +38,12 @@ public class ParentController {
     }
 
     @PutMapping("")
-    public ParentModDTO updateParentInfo(@RequestBody ParentModDTO modDTO) {
+    public int updateParentInfo(@RequestBody ParentModDTO modDTO) {
 
         log.info("================UPDATE PARENT INFO=====================");
-        parentService.updateParentInfo(modDTO);
+        int result = parentService.updateParentInfo(modDTO);
         log.info(modDTO);
-        return modDTO;
+        return result;
     }
 
 }

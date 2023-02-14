@@ -1,7 +1,7 @@
 package com.dreamtree.api.progress;
 
-import com.dreamtree.api.domain.parent.dto.ProgressResDTO;
-import com.dreamtree.api.domain.parent.mapper.ProgressMapper;
+import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
+import com.dreamtree.api.domain.progress.mapper.ProgressMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,19 @@ public class ProgressMapperTest {
         List<ProgressResDTO> res = progressMapper.getProgressList(parent_id);
 
         log.info(res);
+
+    }
+
+    @Test
+    public void testGetProgressListCount() {
+
+        log.info("===============TEST GET PROGRESS LIST COUNT=============");
+
+        Long parent_id = 13L;
+
+        int count = progressMapper.getProgressListCount(parent_id);
+
+        log.info(count);
 
     }
 

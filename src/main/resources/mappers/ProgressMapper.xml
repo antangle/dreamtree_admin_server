@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--최서연 ver.0.1-->
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dreamtree.api.domain.parent.mapper.ProgressMapper">
+<mapper namespace="com.dreamtree.api.domain.progress.mapper.ProgressMapper">
 
 
     <!--학부모 수강 중인 레슨 정보 조회-->
-    <select id="getProgressList" resultType="com.dreamtree.api.domain.parent.dto.ProgressResDTO">
+    <select id="getProgressList" resultType="com.dreamtree.api.domain.progress.dto.ProgressResDTO">
         select
             ps.child_name,
-            ps.state,
+            l.state,
             s.name,
             pm.title,
             l.start_date,
@@ -34,8 +35,24 @@
 
         where ps.parent_id = #{id}
 
-        group by ps.parent_id
+        group by ps.progress_id
 
     </select>
 
+
+    <!--학부모 수강 중인 레슨 정보 조회-->
+    <select id="getProgressListCount" resultType="int">
+
+        select
+            count(ps.progress_id)
+
+        from
+            tbl_progress as ps
+
+        left join tbl_parent as p
+            on ps.parent_id = p.parent_id
+
+        where ps.parent_id = #{id}
+
+    </select>
 </mapper>
