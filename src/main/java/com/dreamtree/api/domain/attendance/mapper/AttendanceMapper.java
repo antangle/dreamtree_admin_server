@@ -5,6 +5,7 @@ import com.dreamtree.api.domain.attendance.dto.AttendParentResDTO;
 
 import java.util.List;
 
+/** 최서연 ver.0.1 **/
 public interface AttendanceMapper {
 
     int addAttendance(AttendAddDTO addDTO);
