@@ -5,7 +5,7 @@ import lombok.Getter;
 
 //이승윤 ver0.1
 @Getter
-public enum ErrorEnum {
+public enum ErrorEnum implements CustomExceptionEnum{
 
     //
     NO_CATEGORY(401,"no category", 1011),

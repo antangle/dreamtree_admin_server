@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//이승윤 ver0.1
+//이승윤 ver0.2
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -29,6 +29,7 @@ public class ProgramServiceImpl implements ProgramService{
     public ProgramDetailsDTO getProgramDetailsById(Long id) {
 
         ProgramDetailsDTO programDetailsDTO = programMapper.getProgramDetails(id);
+
         if(programDetailsDTO.getTitle() == null) throw new CustomException(ErrorEnum.NO_PROGRAM_DETAIL);
 
         return programDetailsDTO;
@@ -36,13 +37,19 @@ public class ProgramServiceImpl implements ProgramService{
 
     @Override
     public boolean postProgramForm(ProgramFormDTO programFormDTO) {
+
+        //프로그램 insert
         int postProgramCount = programMapper.postProgramForm(programFormDTO);
 
+        //insert된 프로그램 개수에 문제가 있을시
         if(programFormDTO.getProgramId() == 0 || postProgramCount != 1) throw new CustomException(ErrorEnum.POST_PROGRAM_FORM_FAIL);
 
+        //첨부한 파일이 있을시
         if(programFormDTO.getFileForms().size() > 0){
             int postFileCount = fileMapper.postFileForm(programFormDTO);
-            if(postFileCount == 0) throw new CustomException(ErrorEnum.NO_CATEGORY);
+
+            //첨부한 파일 개수가 안맞을때
+            if(postFileCount != programFormDTO.getFileForms().size()) throw new CustomException(ErrorEnum.NO_CATEGORY);
         }
 
         return true;
@@ -50,9 +57,12 @@ public class ProgramServiceImpl implements ProgramService{
 
     @Override
     public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO) {
+
         List<ProgramListDTO> list = programMapper.getProgramLists(programSearchDTO);
+
         int count = programMapper.getProgramListsCount(programSearchDTO);
 
+        //페이징 DTO 생성
         PageResponseDTO<ProgramListDTO> pagedProgramListDTO = PageResponseDTO.<ProgramListDTO>withAll()
                 .pageRequestDTO(programSearchDTO)
                 .dtoList(list)
