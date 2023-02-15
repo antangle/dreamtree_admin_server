@@ -1,10 +1,12 @@
 package com.dreamtree.api.domain.student.service;
 
+import com.dreamtree.api.common.enums.StudentErrorEnum;
 import com.dreamtree.api.domain.student.dto.CertificateAddDTO;
 import com.dreamtree.api.domain.student.dto.CertificateDetailDTO;
 import com.dreamtree.api.domain.student.dto.CertificateListDTO;
 import com.dreamtree.api.domain.student.dto.CertificateModifyDTO;
 import com.dreamtree.api.domain.student.mapper.CertificateMapper;
+import com.dreamtree.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class CertificateServiceImpl implements CertificateService {
         log.info("Add Certificate");
         log.info("CertificateDTO: " + certificateAddDTO);
 
-        certificateMapper.addCertificate(certificateAddDTO);
+        if(certificateMapper.addCertificate(certificateAddDTO) < 1) throw new CustomException(StudentErrorEnum.POST_CERTIFICATE_FORM_FAIL);
     }
 
     @Override
@@ -36,23 +38,42 @@ public class CertificateServiceImpl implements CertificateService {
 
         log.info("Get Certificate");
         log.info("Certificate Id: " + certificateId);
-        log.info("Student Id");
+        log.info("Student Id: " + studentId);
 
-        return null;
+        CertificateDetailDTO certificateDetailDTO = certificateMapper.getCertificate(certificateId, studentId);
+
+        if(certificateDetailDTO.getName() == null) throw new CustomException(StudentErrorEnum.NO_CERTIFICATE_DETAIL);
+
+        return certificateDetailDTO;
+
     }
 
     @Override
     public List<CertificateListDTO> getCertificateList(Long id) {
-        return null;
+
+        log.info("Get Certificate List");
+        log.info("Student Id: " + id);
+
+        List<CertificateListDTO> list = certificateMapper.getCertificateList(id);
+
+        return list;
     }
 
     @Override
     public void modifyCertificateAuthState(CertificateModifyDTO certificateModifyDTO) {
 
+        log.info("Modify CertificateAuth State");
+        log.info("certificateModifyDTO: " + certificateModifyDTO);
+
+        if(certificateMapper.modifyCertificateAuthState(certificateModifyDTO) < 1) throw new CustomException(StudentErrorEnum.MODIFY_CERTIFICATE_FAIL);
     }
 
     @Override
     public void removeCertificate(Long id) {
 
+        log.info("Remove Certificate");
+        log.info("Id: " + id);
+
+        if(certificateMapper.removeCertificate(id) < 1) throw new CustomException(StudentErrorEnum.DELETE_CERTIFICATE_FAIL);
     }
 }

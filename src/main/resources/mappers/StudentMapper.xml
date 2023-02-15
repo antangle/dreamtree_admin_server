@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.student.mapper.StudentMapper">
 
-    <!-- 임성현 ver.0.2 -->
+    <!-- 임성현 ver.0.3 -->
 
     <sql id="searchStudent">
         <where>
@@ -160,6 +160,7 @@
             s.student_id = #{id} and
             s.deletedAt is null and
             c.deletedAt is null
+        group by s.student_id
     </select>
 
     <resultMap id="studentDetail" type="studentDetailDTO">

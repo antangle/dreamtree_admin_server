@@ -34,7 +34,7 @@ public interface StudentMapper {
     int modifyStudent(StudentModifyDTO studentModifyDTO);
 
     // 학생 인증 상태 업데이트
-    int modifyStudentAuthState(Long id, String autState);
+    int modifyStudentAuthState(Long id, String authState);
 
     // 대학인증 요청 리스트
     List<StudentAuthRequestDTO> getSearchCollegeAuthRequestList(StudentRequestDTO studentRequestDTO);
