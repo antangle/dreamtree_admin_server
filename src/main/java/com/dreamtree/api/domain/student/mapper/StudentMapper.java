@@ -5,7 +5,7 @@ import com.dreamtree.api.domain.student.dto.*;
 
 import java.util.List;
 
-/*** 임성현 ver.0.1 ***/
+/*** 임성현 ver.0.2 ***/
 
 public interface StudentMapper {
 
@@ -42,4 +42,9 @@ public interface StudentMapper {
     // 자격/수상 인증 요청 리스트
     List<StudentAuthRequestDTO> getSearchCertificateAuthRequestList(StudentRequestDTO studentRequestDTO);
 
+    int getStudentListCount(StudentRequestDTO studentRequestDTO);
+
+    int getCollegeListCount(StudentRequestDTO studentRequestDTO);
+
+    int getCertificateListCount(StudentRequestDTO studentRequestDTO);
 }

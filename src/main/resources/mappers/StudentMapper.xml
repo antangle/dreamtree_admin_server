@@ -4,6 +4,79 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.student.mapper.StudentMapper">
 
+    <!-- 임성현 ver.0.2 -->
+
+    <sql id="searchStudent">
+        <where>
+            deletedAt is null
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'email'">
+                        email like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'authState'">
+                        auth_state like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+            )
+        </where>
+    </sql>
+
+    <sql id="searchCollege">
+        <where>
+            deletedAt is null
+            and
+            auth_state = 'pending'
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'email'">
+                        email like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+            )
+        </where>
+    </sql>
+
+    <sql id="searchCertificate">
+        <where>
+            s.deletedAt is null
+            and
+            c.auth_state = 'pending'
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
+                    <if test="item == 'nickname'">
+                        s.nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'email'">
+                        s.email like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+            )
+        </where>
+    </sql>
+
     <!-- 학생 추가 -->
     <insert id="addStudent">
         insert into tbl_student (
@@ -133,28 +206,8 @@
         from
             tbl_student
 
-        <where>
-            deletedAt is null
-
-            and
-            (
-            <if test="keyword != null and condition != null">
-                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
-                    <if test="item == 'nickname'">
-                        nickname like concat('%', #{keyword}, '%')
-                    </if>
-
-                    <if test="item == 'email'">
-                        email like concat('%', #{keyword}, '%')
-                    </if>
-
-                    <if test="item == 'authState'">
-                        auth_state like concat('%', #{keyword}, '%')
-                    </if>
-                </foreach>
-            </if>
-            )
-        </where>
+        <include refid="searchStudent"></include>
+        
         order by student_id desc
         limit #{skip}, #{size}
     </select>
@@ -190,26 +243,8 @@
             nickname, email, auth_state
         from
             tbl_student
-        <where>
-            deletedAt is null
 
-            and
-            (
-            <if test="keyword != null and condition != null">
-                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
-                    <if test="item == 'nickname'">
-                        nickname like concat('%', #{keyword}, '%') and
-                        auth_state = 'pending'
-                    </if>
-
-                    <if test="item == 'email'">
-                        email like concat('%', #{keyword}, '%') and
-                        auth_state = 'pending'
-                    </if>
-                </foreach>
-            </if>
-            )
-        </where>
+        <include refid="searchCollege"></include>
 
         order by requestedAt desc
         limit #{skip}, #{size}
@@ -221,26 +256,8 @@
             s.nickname, s.email, c.auth_state
         from
             tbl_student s left join tbl_certificate c on s.student_id = c.student_id
-        <where>
-            s.deletedAt is null
 
-            and
-            (
-            <if test="keyword != null and condition != null">
-                <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
-                    <if test="item == 'nickname'">
-                        s.nickname like concat('%', #{keyword}, '%') and
-                        c.auth_state = 'pending'
-                    </if>
-
-                    <if test="item == 'email'">
-                        s.email like concat('%', #{keyword}, '%') and
-                        c.auth_state = 'pending'
-                    </if>
-                </foreach>
-            </if>
-            )
-        </where>
+        <include refid="searchCertificate"></include>
 
         order by c.updatedAt desc
         limit #{skip}, #{size}
@@ -257,5 +274,31 @@
             student_id = #{id}
     </update>
 
+    <select id="getStudentListCount" resultType="integer">
+        select
+            count(*)
+        from
+            tbl_student
+
+        <include refid="searchStudent"></include>
+    </select>
+
+    <select id="getCollegeListCount" resultType="integer">
+        select
+            count(*)
+        from
+            tbl_student
+
+        <include refid="searchCollege"></include>
+    </select>
+
+    <select id="getCertificateListCount" resultType="integer">
+        select
+            count(*)
+        from
+            tbl_student s left join tbl_certificate c on s.student_id = c.student_id
+
+        <include refid="searchCertificate"></include>
+    </select>
 
 </mapper>

@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/*** 임성현 ver.0.1 ***/
+
 @SpringBootTest
 @Log4j2
 public class StudentMapperTests {
@@ -166,7 +168,7 @@ public class StudentMapperTests {
 
         StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
 
-        studentRequestDTO.setKeyword("");
+        studentRequestDTO.setKeyword("nick");
         studentRequestDTO.setCondition("nickname");
 
         List<StudentAuthRequestDTO> list = studentMapper.getSearchCertificateAuthRequestList(studentRequestDTO);
@@ -182,6 +184,19 @@ public class StudentMapperTests {
         log.info("get stu college...");
 
         log.info(studentMapper.getStudentCollege(105L));
+    }
+
+    @Test
+    public void getTotal() {;
+
+        log.info("get total ...");
+
+        StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
+
+        studentRequestDTO.setCondition("nickname");
+        studentRequestDTO.setKeyword("nick");
+
+        log.info("total: " + studentMapper.getStudentListCount(studentRequestDTO));
     }
 
 }
