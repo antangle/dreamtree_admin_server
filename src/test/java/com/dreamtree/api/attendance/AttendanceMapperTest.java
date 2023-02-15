@@ -1,6 +1,7 @@
 package com.dreamtree.api.attendance;
 
 import com.dreamtree.api.domain.attendance.dto.AttendAddDTO;
+import com.dreamtree.api.domain.attendance.dto.AttendModReqDTO;
 import com.dreamtree.api.domain.attendance.dto.AttendParentResDTO;
 import com.dreamtree.api.domain.attendance.mapper.AttendanceMapper;
 import lombok.extern.log4j.Log4j2;
@@ -59,6 +60,24 @@ public class AttendanceMapperTest {
 
         log.info(list);
 
+    }
+
+    @Test
+    public void testUpdateAttendance() {
+
+        log.info("==============TEST GET ATTENDANCE LIST FOR PARENT==================");
+
+        AttendModReqDTO reqDTO = new AttendModReqDTO(2L, "100");
+        attendanceMapper.updateAttendance(reqDTO);
+
+    }
+
+    @Test
+    public void testSoftDeleteAttendance() {
+
+        log.info("==============TEST SOFT DELETE ATTENDANCES==================");
+
+        attendanceMapper.softDeleteAttendances(2L);
     }
 
 }

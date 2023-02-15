@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.attendance.mapper;
 
 import com.dreamtree.api.domain.attendance.dto.AttendAddDTO;
+import com.dreamtree.api.domain.attendance.dto.AttendModReqDTO;
 import com.dreamtree.api.domain.attendance.dto.AttendParentResDTO;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface AttendanceMapper {
 
     List<AttendParentResDTO> getAttendanceListForStudent(Long student_id);
 
+    int updateAttendance(AttendModReqDTO reqDTO);
+
+    int softDeleteAttendances(Long lesson_id);
 }
