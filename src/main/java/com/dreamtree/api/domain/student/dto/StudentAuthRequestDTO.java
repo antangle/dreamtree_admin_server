@@ -11,9 +11,11 @@ import lombok.*;
 @NoArgsConstructor
 public class StudentAuthRequestDTO {
 
+    Long id;
+
     String nickname;
 
     String email;
 
-    String authRequest;
+    String authState;
 }

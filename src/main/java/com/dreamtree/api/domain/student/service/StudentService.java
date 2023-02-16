@@ -31,8 +31,11 @@ public interface StudentService {
     // 학생 1명 삭제 (UPDATE deletedAt)
     void removeStudent(Long id);
 
-    // 학생 인증 상태 업데이트
+    // 학생 정보 수정
     void modifyStudent(StudentModifyDTO studentModifyDTO);
+
+    // 학생 인증 상태 업데이트
+    void modifyStudentAuthState(Long id, String authState);
 
     // 대학인증 요청 리스트
     PageResponseDTO<StudentAuthRequestDTO> getSearchCollegeAuthRequestList(StudentRequestDTO studentRequestDTO);

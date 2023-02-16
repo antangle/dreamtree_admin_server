@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService  {
         log.info("Add Student");
         log.info("StudentAddDTO: " + studentAddDTO);
 
-        studentMapper.addStudent(studentAddDTO);
+        if(studentMapper.addStudent(studentAddDTO) < 1) throw new CustomException(StudentErrorEnum.POST_STUDENT_FORM_FAIL);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService  {
         log.info("Add StudentFile");
         log.info("StudentFile: " + studentAddFileDTO);
 
-        studentMapper.addStudentFile(studentAddFileDTO);
+        if(studentMapper.addStudentFile(studentAddFileDTO) < 1) throw new CustomException(StudentErrorEnum.POST_STUDENT_FILE_FORM_FAIL);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class StudentServiceImpl implements StudentService  {
 
         StudentDetailDTO studentDetailDTO = studentMapper.getStudent(id);
 
-        //if(studentDetailDTO.getNickname() == null) throw new CustomException(StudentErrorEnum.NO_STUDENT);
+        if(studentDetailDTO.getNickname() == null) throw new CustomException(StudentErrorEnum.NO_STUDENT_DETAIL);
 
 
         return studentDetailDTO;
@@ -105,7 +105,7 @@ public class StudentServiceImpl implements StudentService  {
         log.info("Remove Student");
         log.info("Id: " + id);
 
-        studentMapper.removeStudent(id);
+        if(studentMapper.removeStudent(id) < 1) throw new CustomException(StudentErrorEnum.DELETE_STUDENT_FAIL);
     }
 
     @Override
@@ -114,13 +114,25 @@ public class StudentServiceImpl implements StudentService  {
         log.info("Modify Student");
         log.info("StudentModifyDTO: " + studentModifyDTO);
 
-        studentMapper.modifyStudent(studentModifyDTO);
+        if(studentMapper.modifyStudent(studentModifyDTO) < 1) throw new CustomException(StudentErrorEnum.MODIFY_STUDENT_FAIL);
+    }
+
+    @Override
+    public void modifyStudentAuthState(Long id, String authState) {
+
+        log.info("Modify Auth State");
+        log.info("Id: " + id);
+        log.info("Auth State: " + authState);
+
+        if(studentMapper.modifyStudentAuthState(id, authState) < 1) throw new CustomException(StudentErrorEnum.MODIFY_STUDENT_AUTH_FAIL);
     }
 
     @Override
     public PageResponseDTO<StudentAuthRequestDTO> getSearchCollegeAuthRequestList(StudentRequestDTO studentRequestDTO) {
 
         log.info("Get Search College Auth Request List");
+
+        log.info(studentRequestDTO);
 
         List<StudentAuthRequestDTO> list = studentMapper.getSearchCollegeAuthRequestList(studentRequestDTO);
 

@@ -21,8 +21,7 @@
         from
             tbl_certificate
         where
-            certificate_id = #{certificateId} and
-            student_id = #{studentId} and
+            certificate_id = #{id} and
             deletedAt is null
     </select>
 
@@ -44,8 +43,7 @@
         set
             auth_state = #{authState}
         where
-            student_id = #{studentId} and
-            certificate_id = #{certificateId} and
+            certificate_id = #{id}
     </update>
 
     <!-- 자격증 삭제 -->

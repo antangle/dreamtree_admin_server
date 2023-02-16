@@ -9,16 +9,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class StudentCertificateListDTO {
+public class StudentModifyAuthStateDTO {
 
-    Long certificateId;
-
-    String name;
-
-    String url;
-
-    String aquireDate;
+    Long id;
 
     String authState;
 }

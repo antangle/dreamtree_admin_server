@@ -12,9 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 public class CertificateModifyDTO {
 
-    Long certificateId;
-
-    Long studentId;
+    Long id;
 
     String authState;
 }
