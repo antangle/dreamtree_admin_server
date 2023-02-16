@@ -1,5 +1,6 @@
 package com.dreamtree.api.domain.parent.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,13 @@ import java.util.Date;
 @SuperBuilder
 public class ParentInfoResDTO {
 
+    private Long id;
+
     private String email;
 
     private String nickname;
+
+    private String password;
 
     private Date birth;
 

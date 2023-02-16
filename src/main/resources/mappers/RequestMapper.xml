@@ -55,6 +55,7 @@
     <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
 
         select
+            r.request_id,
             r.title,
             p.nickname,
             c.name as category_name,
@@ -79,6 +80,8 @@
 
         group by r.request_id
 
+        limit #{skip}, #{size}
+
     </select>
 
     <select id="getAllRequestsCount" resultType="int">
@@ -94,6 +97,7 @@
     <select id="getOneRequest" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
 
         select
+            r.request_id,
             r.title,
             p.nickname,
             c.name as category_name,

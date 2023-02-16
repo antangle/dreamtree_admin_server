@@ -15,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class RequestResDTO {
 
+    private Long requestId;
+
     private String title;
 
     private String nickname;
