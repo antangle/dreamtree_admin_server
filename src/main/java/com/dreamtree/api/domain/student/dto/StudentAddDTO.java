@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/*** 임성현 ver.0.1 ***/
 
 @Getter
 @Setter
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @ToString
 public class StudentAddDTO {
 
-    String profile_img_url;
+    String profileImgUrl;
 
     String email;
 

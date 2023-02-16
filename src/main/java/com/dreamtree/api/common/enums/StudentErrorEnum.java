@@ -1,13 +1,18 @@
 package com.dreamtree.api.common.enums;
 
+
 import lombok.Getter;
 
+/*** 임성현 ver.0.1 ***/
 
-//이승윤 ver0.1
 @Getter
-public enum ErrorEnum implements CustomExceptionEnum {
+public enum StudentErrorEnum implements CustomExceptionEnum {
 
     //
+
+    NO_COLLEGE(401, "no_college", 4121),
+    NO_STUDENT(401, "no_student", 4122),
+
     NO_CATEGORY(401,"no category", 1011),
     NO_PROGRAM_DETAIL(401, "no program details", 2021),
     POST_PROGRAM_FORM_FAIL(401, "post failed", 2031),
@@ -21,7 +26,7 @@ public enum ErrorEnum implements CustomExceptionEnum {
 
     String msg;
 
-    ErrorEnum(int status, String msg, int code){
+    StudentErrorEnum(int status, String msg, int code){
         this.status = status;
         this.msg = msg;
         this.code = code;

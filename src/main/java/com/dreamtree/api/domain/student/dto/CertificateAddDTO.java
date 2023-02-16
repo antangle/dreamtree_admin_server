@@ -3,7 +3,6 @@ package com.dreamtree.api.domain.student.dto;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /*** 임성현 ver.0.1 ***/
 
@@ -13,9 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CertificateDTO {
-
-    Long certificateId;
+public class CertificateAddDTO {
 
     Long studentId;
 
@@ -24,12 +21,4 @@ public class CertificateDTO {
     String name;
 
     LocalDate aquireDate;
-
-    String authState;
-
-    LocalDateTime createAt;
-
-    LocalDateTime updateAt;
-
-    LocalDateTime deleteAt;
 }
