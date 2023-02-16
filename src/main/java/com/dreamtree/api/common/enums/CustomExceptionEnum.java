@@ -1,9 +1,9 @@
 package com.dreamtree.api.common.enums;
 
 public interface CustomExceptionEnum {
-    String getMsg();
+    public int getCode();
 
-    int getStatus();
+    public int getStatus();
 
-    int getCode();
+    public String getMsg();
 }

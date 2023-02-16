@@ -18,7 +18,7 @@ public class LessonController {
     private final LessonService lessonService;
 
 
-    @PostMapping
+    @PostMapping("/")
     public void addLesson(LessonAddDTO lessonAddDTO){
         lessonService.addLesson(lessonAddDTO);
     }

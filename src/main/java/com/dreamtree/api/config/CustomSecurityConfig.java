@@ -23,8 +23,8 @@ public class CustomSecurityConfig {
 
         log.info("-----------------------");
         http.authorizeRequests().antMatchers("api/parent/*").permitAll();
-//        http.authorizeRequests().antMatchers("api/todos/*").permitAll();
-//        http.authorizeRequests().antMatchers("api/files/*").permitAll();
+        http.authorizeRequests().antMatchers("api/lesson/*").permitAll();
+        http.authorizeRequests().antMatchers("api/program/*").permitAll();
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -32,8 +32,6 @@ public class CustomSecurityConfig {
         http.cors(httpSecurityCorsConfigurer -> {
             httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
         });
-
-
 
         return http.build();
     }
