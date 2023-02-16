@@ -49,7 +49,7 @@ public class StudentController {
         return studentService.getStudentCollege(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/remove/{id}")
     public void removeStudent(@PathVariable("id") Long id) {
 
         studentService.removeStudent(id);
@@ -62,10 +62,11 @@ public class StudentController {
     }
 
     @PutMapping("/state")
-    public void modifyStudentAuthState(@RequestParam("id") Long id,
-                                       @RequestParam("authState") String authState) {
+    public void modifyStudentAuthState(@RequestBody StudentModifyAuthStateDTO studentModifyAuthStateDTO) {
 
-        studentService.modifyStudentAuthState(id, authState);
+        log.info("Modify Student Auth State");
+
+        studentService.modifyStudentAuthState(studentModifyAuthStateDTO.getId(), studentModifyAuthStateDTO.getAuthState());
     }
 
     @GetMapping("/college")

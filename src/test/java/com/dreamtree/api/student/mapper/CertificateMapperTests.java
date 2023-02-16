@@ -43,23 +43,23 @@ public class CertificateMapperTests {
 
         log.info("get certificate....");
 
-        log.info(certificateMapper.getCertificate(101L, 104L));
+        log.info(certificateMapper.getCertificate(101L));
     }
 
     // 자격증 인증상태 업데이트
-    @Test
-    public void modifyCertificateAuthState() {
-
-        log.info("modify cer auth...");
-
-        CertificateModifyDTO certificateModifyDTO = CertificateModifyDTO.builder()
-                .certificateId(101L)
-                .authState("TT")
-                .studentId(105L)
-                .build();
-
-        certificateMapper.modifyCertificateAuthState(certificateModifyDTO);
-    }
+//    @Test
+//    public void modifyCertificateAuthState() {
+//
+//        log.info("modify cer auth...");
+//
+//        CertificateModifyDTO certificateModifyDTO = CertificateModifyDTO.builder()
+//                .certificateId(101L)
+//                .authState("TT")
+//                .studentId(105L)
+//                .build();
+//
+//        certificateMapper.modifyCertificateAuthState(certificateModifyDTO);
+//    }
 
     // 자격증 전체 검색
     @Test

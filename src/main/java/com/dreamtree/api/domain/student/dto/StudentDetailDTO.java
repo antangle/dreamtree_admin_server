@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class StudentDetailDTO {
 
     String profileImgUrl;
@@ -24,6 +25,8 @@ public class StudentDetailDTO {
     String email;
 
     String nickname;
+
+    String password;
 
     LocalDate birth;
 

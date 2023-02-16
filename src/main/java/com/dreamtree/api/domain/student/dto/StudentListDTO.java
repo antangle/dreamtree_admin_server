@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder
 public class StudentListDTO {
 
+    Long studentId;
+
     String nickname;
 
     String email;

@@ -152,7 +152,7 @@ public class StudentMapperTests {
         StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
 
         studentRequestDTO.setKeyword("");
-        studentRequestDTO.setCondition("nickname");
+        studentRequestDTO.setCondition("nickname,email,authState");
 
         List<StudentAuthRequestDTO> list = studentMapper.getSearchCollegeAuthRequestList(studentRequestDTO);
 

@@ -7,6 +7,7 @@ import com.dreamtree.api.domain.student.dto.CertificateModifyDTO;
 import com.dreamtree.api.domain.student.service.CertificateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.simpleframework.xml.Path;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,15 +34,16 @@ public class CertificateController {
         certificateService.addCertificate(certificateAddDTO);
     }
 
-    @GetMapping("/details")
-    public CertificateDetailDTO getCertificate(@RequestParam("certificateId") Long certificateId,
-                                               @RequestParam("studentId") Long studentId) {
+    @GetMapping("/details/{id}")
+    public CertificateDetailDTO getCertificate(@PathVariable Long id) {
 
-        return certificateService.getCertificate(certificateId, studentId);
+        log.info("Get Certificate");
+
+        return certificateService.getCertificate(id);
     }
 
-    @PutMapping("/modiftCerAuth")
-    public void modifyCertificateAuthState(CertificateModifyDTO certificateModifyDTO) {
+    @PutMapping("/state")
+    public void modifyCertificateAuthState(@RequestBody CertificateModifyDTO certificateModifyDTO) {
 
         certificateService.modifyCertificateAuthState(certificateModifyDTO);
     }

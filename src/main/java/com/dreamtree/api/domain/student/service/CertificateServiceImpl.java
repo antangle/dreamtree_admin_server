@@ -34,13 +34,12 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
     @Override
-    public CertificateDetailDTO getCertificate(Long certificateId, Long studentId) {
+    public CertificateDetailDTO getCertificate(Long id) {
 
         log.info("Get Certificate");
-        log.info("Certificate Id: " + certificateId);
-        log.info("Student Id: " + studentId);
+        log.info("id: " + id);
 
-        CertificateDetailDTO certificateDetailDTO = certificateMapper.getCertificate(certificateId, studentId);
+        CertificateDetailDTO certificateDetailDTO = certificateMapper.getCertificate(id);
 
         if(certificateDetailDTO.getName() == null) throw new CustomException(StudentErrorEnum.NO_CERTIFICATE_DETAIL);
 

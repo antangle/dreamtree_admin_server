@@ -132,6 +132,8 @@ public class StudentServiceImpl implements StudentService  {
 
         log.info("Get Search College Auth Request List");
 
+        log.info(studentRequestDTO);
+
         List<StudentAuthRequestDTO> list = studentMapper.getSearchCollegeAuthRequestList(studentRequestDTO);
 
         int count = studentMapper.getCollegeListCount(studentRequestDTO);
