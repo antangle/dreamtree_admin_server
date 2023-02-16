@@ -8,13 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProgramListDTO {
+public class WordCloudDTO {
+    long subCategoryId;
 
-    long programId;
+    String subCategoryName;
 
-    String title;
-
-    int times;
-
-    String profileImgUrl;
+    int count;
 }

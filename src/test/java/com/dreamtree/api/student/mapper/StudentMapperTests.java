@@ -35,8 +35,6 @@ public class StudentMapperTests {
                 .nickname("t nick")
                 .gender("man")
                 .profileImgUrl("t img")
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         studentMapper.addStudent(studentAddDTO);
@@ -154,7 +152,7 @@ public class StudentMapperTests {
         StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
 
         studentRequestDTO.setKeyword("");
-        studentRequestDTO.setCondition("nickname");
+        studentRequestDTO.setCondition("nickname,email,authState");
 
         List<StudentAuthRequestDTO> list = studentMapper.getSearchCollegeAuthRequestList(studentRequestDTO);
 
@@ -183,7 +181,7 @@ public class StudentMapperTests {
 
         log.info("get stu college...");
 
-        log.info(studentMapper.getStudentCollege(105L));
+        log.info(studentMapper.getStudentCollege(101L));
     }
 
     @Test

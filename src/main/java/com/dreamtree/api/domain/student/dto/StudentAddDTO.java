@@ -27,7 +27,4 @@ public class StudentAddDTO {
 
     String gender;
 
-    LocalDateTime createdAt;
-
-    LocalDateTime updatedAt;
 }

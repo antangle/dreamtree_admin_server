@@ -15,7 +15,7 @@ public interface CertificateService {
     void addCertificate(CertificateAddDTO certificateAddDTO);
 
     // 자격증 조회
-    CertificateDetailDTO getCertificate(Long certificateId, Long studentId);
+    CertificateDetailDTO getCertificate(Long id);
 
     // 자격증 리스트
     List<CertificateListDTO> getCertificateList(Long id);

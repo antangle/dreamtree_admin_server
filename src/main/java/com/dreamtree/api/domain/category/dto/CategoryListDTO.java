@@ -11,7 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class CategoryListDTO {
+
+    long categoryId;
     String categoryName;
 
-    List<String> subCategoryNames;
+    List<SubCategoryListDTO> subCategoryLists;
 }

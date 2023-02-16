@@ -3,19 +3,15 @@ package com.dreamtree.api.domain.attendance.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 
-/** 최서연 ver.0.1 **/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendParentResDTO {
+public class AttendModReqDTO {
 
-    private String title;
-
-    private String childName;
+    private Long attendanceId;
 
     private String status;
-
-    private int times;
 
 }

@@ -5,19 +5,21 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.category.mapper.CategoryMapper">
     <resultMap id="categoryList" type="categoryListDTO">
-        <id column="category_id" />
+        <id property="categoryId" column="category_id" />
         <result property="categoryName" column="category_name"/>
-        <collection property="subCategoryNames" javaType="java.util.ArrayList" resultMap="subCategoryList" />
+        <collection property="subCategoryLists" javaType="java.util.ArrayList" resultMap="subCategoryList" />
     </resultMap>
 
-    <resultMap id="subCategoryList" type="string">
-        <result column="sub_category_name" />
+    <resultMap id="subCategoryList" type="subCategoryListDTO">
+        <id property="subCategoryId" column="sub_category_id"/>
+        <result property="subCategoryName" column="sub_category_name" />
     </resultMap>
 
     <select id="getCategories" resultMap="categoryList">
         select
-            cat.category_id as category_id,
+            cat.category_id,
             cat.name as category_name,
+            sub.sub_category_id,
             sub.name as sub_category_name
         from tbl_category cat
         left join tbl_sub_category sub

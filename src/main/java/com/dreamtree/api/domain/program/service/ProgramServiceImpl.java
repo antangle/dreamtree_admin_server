@@ -2,10 +2,7 @@ package com.dreamtree.api.domain.program.service;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.common.enums.ErrorEnum;
-import com.dreamtree.api.domain.program.dto.ProgramDetailsDTO;
-import com.dreamtree.api.domain.program.dto.ProgramFormDTO;
-import com.dreamtree.api.domain.program.dto.ProgramListDTO;
-import com.dreamtree.api.domain.program.dto.ProgramSearchDTO;
+import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramMapper;
 import com.dreamtree.api.exception.CustomException;
@@ -16,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//이승윤 ver0.1
+//이승윤 ver0.2
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,33 +23,22 @@ public class ProgramServiceImpl implements ProgramService{
     private final FileMapper fileMapper;
 
     @Override
-    public ProgramDetailsDTO getProgramDetailsById(Long id) {
+    public List<WordCloudDTO> getWordCloudInfo() {
+        List<WordCloudDTO> list = programMapper.getWordCloudInfo();
 
-        ProgramDetailsDTO programDetailsDTO = programMapper.getProgramDetails(id);
-        if(programDetailsDTO.getTitle() == null) throw new CustomException(ErrorEnum.NO_PROGRAM_DETAIL);
+        if(list.size() == 0) throw new CustomException(ErrorEnum.NO_PROGRAM);
 
-        return programDetailsDTO;
-    }
-
-    @Override
-    public boolean postProgramForm(ProgramFormDTO programFormDTO) {
-        int postProgramCount = programMapper.postProgramForm(programFormDTO);
-
-        if(programFormDTO.getProgramId() == 0 || postProgramCount != 1) throw new CustomException(ErrorEnum.POST_PROGRAM_FORM_FAIL);
-
-        if(programFormDTO.getFileForms().size() > 0){
-            int postFileCount = fileMapper.postFileForm(programFormDTO);
-            if(postFileCount == 0) throw new CustomException(ErrorEnum.NO_CATEGORY);
-        }
-
-        return true;
+        return list;
     }
 
     @Override
     public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO) {
+
         List<ProgramListDTO> list = programMapper.getProgramLists(programSearchDTO);
+
         int count = programMapper.getProgramListsCount(programSearchDTO);
 
+        //페이징 DTO 생성
         PageResponseDTO<ProgramListDTO> pagedProgramListDTO = PageResponseDTO.<ProgramListDTO>withAll()
                 .pageRequestDTO(programSearchDTO)
                 .dtoList(list)
@@ -61,4 +47,35 @@ public class ProgramServiceImpl implements ProgramService{
 
         return pagedProgramListDTO;
     }
+
+    @Override
+    public ProgramDetailsDTO getProgramDetailsById(Long id) {
+
+        ProgramDetailsDTO programDetailsDTO = programMapper.getProgramDetails(id);
+
+        if(programDetailsDTO.getTitle() == null) throw new CustomException(ErrorEnum.NO_PROGRAM_DETAIL);
+
+        return programDetailsDTO;
+    }
+
+    @Override
+    public boolean postProgramForm(ProgramFormDTO programFormDTO) {
+
+        //프로그램 insert
+        int postProgramCount = programMapper.postProgramForm(programFormDTO);
+
+        //insert된 프로그램 개수에 문제가 있을시
+        if(programFormDTO.getProgramId() == 0 || postProgramCount != 1) throw new CustomException(ErrorEnum.POST_PROGRAM_FORM_FAIL);
+
+        //첨부한 파일이 있을시
+        if(programFormDTO.getFileForms().size() > 0){
+            int postFileCount = fileMapper.postFileForm(programFormDTO);
+
+            //첨부한 파일 개수가 안맞을때
+            if(postFileCount != programFormDTO.getFileForms().size()) throw new CustomException(ErrorEnum.NO_CATEGORY);
+        }
+
+        return true;
+    }
+
 }

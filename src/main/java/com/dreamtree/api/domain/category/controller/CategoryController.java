@@ -19,7 +19,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/layout")
+    @GetMapping("layout")
     public List<CategoryListDTO> getCategoryLists(){
         return categoryService.getCategoryList();
     }

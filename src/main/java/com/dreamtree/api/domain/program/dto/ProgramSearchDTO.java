@@ -1,8 +1,10 @@
 package com.dreamtree.api.domain.program.dto;
 
 import com.dreamtree.api.common.dto.PageRequestDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

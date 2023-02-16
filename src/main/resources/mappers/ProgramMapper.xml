@@ -61,9 +61,9 @@
         <where>
             p.sub_category_id = #{subCategoryId}
             and p.deletedAt is null
-            and (
 
             <if test="keyword != null and condition != null">
+                and (
                 <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
 
                     <if test="item == 'title'">
@@ -91,8 +91,9 @@
                     </if>
 
                 </foreach>
+                )
             </if>
-            )
+
         </where>
 
     </sql>
@@ -102,6 +103,7 @@
             s.nickname,
             s.college,
             s.major,
+            s.profile_img_url,
             c.name as certificate_name
         from tbl_program p
         left join tbl_student s
@@ -164,6 +166,18 @@
             and p.deletedAt is null
             and l.deletedAt is null
             and s.deletedAt is null
+    </select>
+
+    <select id="getWordCloudInfo" resultType="wordCloudDTO">
+        select
+            p.sub_category_id,
+            sub.name as sub_category_name,
+            count(*) as count
+        from tbl_program p
+        left join tbl_sub_category sub
+            on sub.sub_category_id = p.sub_category_id
+        group by p.sub_category_id
+
     </select>
 
     <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">

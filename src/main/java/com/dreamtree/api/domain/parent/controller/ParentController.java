@@ -37,7 +37,7 @@ public class ParentController {
         return result;
     }
 
-    @PutMapping("")
+    @PutMapping("modify")
     public int updateParentInfo(@RequestBody ParentModDTO modDTO) {
 
         log.info("================UPDATE PARENT INFO=====================");
