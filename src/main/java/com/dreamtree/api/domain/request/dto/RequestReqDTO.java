@@ -17,7 +17,6 @@ public class RequestReqDTO extends PageRequestDTO {
 
     String keyword;
 
-    // 학부모 회원 조회 검색 조건 ex) nickname, email...
     String condition;
 
     public String[] getKeyword() {

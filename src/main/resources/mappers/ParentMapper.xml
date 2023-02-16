@@ -28,8 +28,10 @@
     <!--전체 학부모 조회-->
     <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
         select
+            parent_id as id,
             email,
             nickname,
+            password,
             birth,
             profile_img_url
 
@@ -58,6 +60,7 @@
         select
             email,
             nickname,
+            password,
             birth,
             profile_img_url
 

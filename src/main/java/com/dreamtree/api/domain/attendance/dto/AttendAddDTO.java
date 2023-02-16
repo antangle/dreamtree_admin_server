@@ -1,13 +1,22 @@
 package com.dreamtree.api.domain.attendance.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
+/** 최서연 ver.0.1 **/
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AttendAddDTO {
 
-    Long attendance_id;
+    @JsonProperty("id")
+    Long attendanceId;
 
-    Long progress_id;
+    Long progressId;
     
     String status;
 
-    Long times;
+    int times;
 
 }

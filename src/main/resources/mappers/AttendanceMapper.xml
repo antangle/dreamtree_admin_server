@@ -5,6 +5,78 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.attendance.mapper.AttendanceMapper">
 
+    <!-- 출석 레코드 DB 삽입 -->
+    <insert id="addAttendance">
 
+        insert into
+            tbl_attendance (
+                progress_id,
+                status,
+                times,
+                createAt
+            )
+
+        values (
+            #{progressId},
+            #{status},
+            #{times},
+            now()
+        )
+
+    </insert>
+
+    <!-- 학부모와 관련한 출석 현황 조회 리스트 조회 -->
+    <select id="getAttendanceListForParent" resultType="com.dreamtree.api.domain.attendance.dto.AttendParentResDTO">
+
+        select
+            pr.title,
+            ps.child_name,
+            a.status,
+            a.times
+
+        from
+            tbl_attendance as a
+
+        left join tbl_progress as ps
+            on a.progress_id = ps.progress_id
+        left join tbl_lesson as l
+            on ps.lesson_id = l.lesson_id
+        left join tbl_program as pr
+            on l.program_id = pr.program_id
+
+        where ps.parent_id = #{parent_id}
+
+        group by attendance_id
+
+    </select>
+
+    <!-- 출석 기록 추가시 출석 DB 출석 상태값 변경 -->
+    <update id="updateAttendance" parameterType="com.dreamtree.api.domain.attendance.dto.AttendModReqDTO">
+
+        update
+            tbl_attendance
+        set
+            status = #{status},
+            updateAt = now()
+        where
+            attendance_id = #{attendanceId}
+
+    </update>
+
+    <update id="softDeleteAttendances">
+
+        update
+            tbl_attendance as a
+
+        inner join
+            tbl_progress p on a.progress_id = p.progress_id
+
+        set
+            deleteAt = now()
+
+        where p.lesson_id = #{lessonId}
+
+
+    </update>
 
 </mapper>

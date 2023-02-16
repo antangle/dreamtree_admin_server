@@ -45,6 +45,8 @@ public class RequestController {
 
         RequestResDTO result = requestService.getOneRequest(id);
 
+        log.info(result);
+
         return result;
     }
 
