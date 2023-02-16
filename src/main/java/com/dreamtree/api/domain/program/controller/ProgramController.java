@@ -19,14 +19,20 @@ import java.util.List;
 //이승윤 ver0.1
 @RestController
 @Log4j2
-@RequestMapping("api/programs")
+@RequestMapping("api/program")
 @RequiredArgsConstructor
 public class ProgramController {
 
     private final ProgramService programService;
     @GetMapping("/")
     public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO){
+        log.info(programSearchDTO);
         return programService.getProgramLists(programSearchDTO);
+    }
+
+    @GetMapping("/wordcloud")
+    public List<WordCloudDTO> getWordCloudInfo(){
+        return programService.getWordCloudInfo();
     }
 
     @GetMapping("/details/{id}")

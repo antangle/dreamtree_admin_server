@@ -13,5 +13,4 @@ public class CustomException extends RuntimeException{
         super(error.getMsg());
         this.errorEnum = error;
     }
-
 }

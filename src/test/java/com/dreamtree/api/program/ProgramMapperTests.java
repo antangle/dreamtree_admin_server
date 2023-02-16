@@ -36,6 +36,11 @@ public class ProgramMapperTests {
     }
 
     @Test
+    public void getWordCloudInfoTests(){
+        log.info(programMapper.getWordCloudInfo());
+    }
+
+    @Test
     public void getProgramListsCountTests(){
         ProgramSearchDTO programSearchDTO = ProgramSearchDTO.builder()
                 .keyword("100000")

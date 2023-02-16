@@ -7,7 +7,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-@EnableWebMvc
 public class CustomServletConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
