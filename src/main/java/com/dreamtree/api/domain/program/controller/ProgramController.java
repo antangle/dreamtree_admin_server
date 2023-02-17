@@ -41,7 +41,8 @@ public class ProgramController {
     }
 
     @PostMapping("/form")
-    public void postProgramForm(@RequestBody ProgramFormDTO programFormDTO){
-        programService.postProgramForm(programFormDTO);
+    public long postProgramForm(@RequestBody ProgramFormDTO programFormDTO){
+        log.info(programFormDTO);
+        return programService.postProgramForm(programFormDTO);
     }
 }

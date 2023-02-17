@@ -25,6 +25,7 @@ public class CustomSecurityConfig {
         http.authorizeRequests().antMatchers("api/parent/*").permitAll();
         http.authorizeRequests().antMatchers("api/lesson/*").permitAll();
         http.authorizeRequests().antMatchers("api/program/*").permitAll();
+        http.authorizeRequests().antMatchers("api/minio/*").permitAll();
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

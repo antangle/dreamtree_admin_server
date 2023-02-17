@@ -13,6 +13,6 @@ public interface ProgramService {
 
     public ProgramDetailsDTO getProgramDetailsById(Long id);
 
-    public boolean postProgramForm(ProgramFormDTO programFormDTO);
+    public long postProgramForm(ProgramFormDTO programFormDTO);
 
 }
