@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestAddDTO {
 
-    @JsonProperty("id")
     private Long request_id;
 
     private String title;

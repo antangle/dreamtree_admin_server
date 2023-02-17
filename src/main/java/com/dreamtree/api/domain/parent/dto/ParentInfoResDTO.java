@@ -27,4 +27,5 @@ public class ParentInfoResDTO {
 
     private String profileImgUrl;
 
+
 }

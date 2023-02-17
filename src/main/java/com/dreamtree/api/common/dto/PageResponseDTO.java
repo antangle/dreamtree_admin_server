@@ -22,9 +22,9 @@ public class PageResponseDTO<E> {
     private int end;
 
     //이전 페이지의 존재 여부
-    private boolean prev;
+    private int prev;
     //다음 페이지의 존재 여부
-    private boolean next;
+    private int next;
 
     private List<E> dtoList;
 
@@ -52,9 +52,9 @@ public class PageResponseDTO<E> {
 
         this.end =  end > last ? last: end;
 
-        this.prev = this.start > 1;
+        this.prev = this.page > 1 ? this.page - 1 : 0;
 
-        this.next =  total > this.end * this.size;
+        this.next =  this.page < (Math.ceil((double)this.total / (double)this.size)) ? this.page + 1 : 0;
 
         this.pageNumList = LongStream.rangeClosed(start,end).boxed().collect(Collectors.toList());
 

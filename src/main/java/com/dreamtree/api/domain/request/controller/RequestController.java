@@ -50,7 +50,7 @@ public class RequestController {
         return result;
     }
 
-    @PutMapping("")
+    @PutMapping("modify")
     public RequestModDTO updateRequest(@RequestBody RequestModDTO modDTO) {
 
         log.info("=================UPDATE REQUEST==================");
