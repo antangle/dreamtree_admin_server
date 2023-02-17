@@ -29,7 +29,7 @@ public class StudentMapperTests {
         log.info("stu Add....");
 
         StudentAddDTO studentAddDTO = StudentAddDTO.builder()
-                .email("t email")
+                .email("asdfzmail")
                 .birth(LocalDate.now())
                 .password("t pwd")
                 .nickname("t nick")
