@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.student.mapper.StudentMapper">
 
-    <!-- 임성현 ver.0.4 -->
+    <!-- 임성현 ver.0.5 -->
 
     <resultMap id="studentDetail" type="studentDetailDTO">
         <id column="student_id" />
@@ -319,5 +319,6 @@
 
         <include refid="searchCertificate"></include>
     </select>
+
 
 </mapper>

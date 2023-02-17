@@ -28,7 +28,7 @@
     <!-- 자격증 리스트 -->
     <select id="getCertificateList" resultType="certificateListDTO">
         select
-            certificate_id, name, auth_state
+            certificate_id, name, auth_state, aquire_date, url
         from
             tbl_certificate
         where
