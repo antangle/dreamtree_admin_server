@@ -59,7 +59,7 @@ public class ProgramServiceImpl implements ProgramService{
     }
 
     @Override
-    public boolean postProgramForm(ProgramFormDTO programFormDTO) {
+    public long postProgramForm(ProgramFormDTO programFormDTO) {
 
         //프로그램 insert
         int postProgramCount = programMapper.postProgramForm(programFormDTO);
@@ -75,7 +75,7 @@ public class ProgramServiceImpl implements ProgramService{
             if(postFileCount != programFormDTO.getFileForms().size()) throw new CustomException(ErrorEnum.NO_CATEGORY);
         }
 
-        return true;
+        return programFormDTO.getProgramId();
     }
 
 }

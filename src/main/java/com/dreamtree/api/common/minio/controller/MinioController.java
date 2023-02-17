@@ -20,7 +20,7 @@ import java.util.List;
 
 
 
-//이승윤 ver0.1
+//이승윤 ver0.2
 @RestController
 @Log4j2
 @RequestMapping("api/minio")
@@ -55,5 +55,10 @@ public class MinioController {
         byte[] fileByteArray = minioService.getByteArray(getObjectResponse);
         return new ResponseEntity<>(fileByteArray, headers, HttpStatus.OK);
 
+    }
+
+    @DeleteMapping("")
+    public void deleteMinioImage(@RequestBody List<String> fileNameList) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        minioService.deleteFile(fileNameList);
     }
 }

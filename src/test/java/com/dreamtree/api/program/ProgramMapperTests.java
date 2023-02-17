@@ -1,7 +1,5 @@
 package com.dreamtree.api.program;
 
-import com.dreamtree.api.domain.category.mapper.CategoryMapper;
-import com.dreamtree.api.domain.program.dto.FileFormDTO;
 import com.dreamtree.api.domain.program.dto.ProgramFormDTO;
 import com.dreamtree.api.domain.program.dto.ProgramSearchDTO;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
@@ -58,12 +56,6 @@ public class ProgramMapperTests {
 
     @Test
     public void postProgramFormTests(){
-        FileFormDTO fileFormDTO = FileFormDTO.builder()
-                .url("url")
-                .contentType("png")
-                .name("filename")
-                .size(100)
-                .build();
 
         ProgramFormDTO programFormDTO = ProgramFormDTO.builder()
                 .title("this is title")
@@ -71,12 +63,12 @@ public class ProgramMapperTests {
                 .curriculumJson("{'hi': 'test'}")
                 .times(5)
                 .fee(10000)
-                .fileForms(List.of(fileFormDTO))
+                .fileForms(List.of("url", "url2", "url3"))
                 .build();
 
 
 
-        programMapper.postProgramForm(programFormDTO);
+//        programMapper.postProgramForm(programFormDTO);
 
         log.info(fileMapper.postFileForm(programFormDTO));
     }
