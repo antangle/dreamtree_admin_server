@@ -12,6 +12,8 @@ public class ProgramListDTO {
 
     long programId;
 
+    long subCategoryId;
+
     String title;
 
     int times;

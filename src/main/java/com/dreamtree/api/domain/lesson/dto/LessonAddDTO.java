@@ -35,5 +35,7 @@ public class LessonAddDTO {
 
     int fee;
 
+    String state;
+
     String place;
 }

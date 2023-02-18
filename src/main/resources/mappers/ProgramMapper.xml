@@ -137,6 +137,7 @@
     <select id="getProgramListsByStudentId" resultType="programListDTO" parameterType="long">
         select
             program_id,
+            sub_category_id,
             title
         from tbl_program p
         where student_id = #{id}
