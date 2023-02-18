@@ -9,6 +9,8 @@ import java.util.List;
 public interface ProgramService {
     public PageResponseDTO<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO);
 
+    public List<ProgramListDTO> getProgramListsByStudentId(Long studentId);
+
     public List<WordCloudDTO> getWordCloudInfo();
 
     public ProgramDetailsDTO getProgramDetailsById(Long id);

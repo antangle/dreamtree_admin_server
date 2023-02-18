@@ -134,6 +134,14 @@
         <include refid="search"></include>
     </select>
 
+    <select id="getProgramListsByStudentId" resultType="programListDTO" parameterType="long">
+        select
+            program_id,
+            title
+        from tbl_program p
+        where student_id = #{id}
+    </select>
+
     <select id="getProgramDetails" resultMap="programDetails" parameterType="long">
         select
             p.program_id,
@@ -182,12 +190,16 @@
 
     <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">
         insert into tbl_program(
+            student_id,
+            sub_category_id,
             title,
             content,
             curriculum_json,
             times,
             fee
         ) values (
+            #{studentId},
+            #{subCategoryId},
             #{title},
             #{content},
             #{curriculumJson},

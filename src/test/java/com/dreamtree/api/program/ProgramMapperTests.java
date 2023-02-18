@@ -32,6 +32,10 @@ public class ProgramMapperTests {
                 .build();
         log.info(programMapper.getProgramLists(programSearchDTO));
     }
+    @Test
+    public void getStudentProgramListsTests(){
+        log.info(programMapper.getProgramListsByStudentId(1L));
+    }
 
     @Test
     public void getWordCloudInfoTests(){
