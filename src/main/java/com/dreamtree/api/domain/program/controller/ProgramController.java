@@ -34,8 +34,8 @@ public class ProgramController {
     }
 
     @GetMapping("/details/{id}")
-    public ProgramDetailsDTO getProgramDetails(@PathVariable("id") Long id){
-        return programService.getProgramDetailsById(id);
+    public ProgramDetailsDTO getProgramDetails(@PathVariable("id") Long programId){
+        return programService.getProgramDetailsById(programId);
     }
 
     @PostMapping("/form")
@@ -43,4 +43,6 @@ public class ProgramController {
         log.info(programFormDTO);
         return programService.postProgramForm(programFormDTO);
     }
+
+
 }

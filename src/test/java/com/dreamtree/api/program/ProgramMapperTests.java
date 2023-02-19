@@ -55,7 +55,7 @@ public class ProgramMapperTests {
 
     @Test
     public void getProgramDetailsTests(){
-        log.info(programMapper.getProgramDetails(1L));
+        log.info(programMapper.getProgramDetails(145L));
     }
 
     @Test
