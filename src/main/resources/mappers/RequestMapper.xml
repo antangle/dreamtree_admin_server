@@ -5,7 +5,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.request.mapper.RequestMapper">
 
-    <sql id="search">
+    <sql id="searchRequest">
 
         <where>
             <if test="keyword != null and condition != null">
@@ -27,12 +27,12 @@
 
 
                     <if test="item == 'sub_category_name'">
-                        sub_category_name like concat('%', #{keyword}, '%')
+                        s.name like concat('%', #{keyword}, '%')
                     </if>
 
 
                     <if test="item == 'category_name'">
-                        category_name like concat('%', #{keyword}, '%')
+                        c.name like concat('%', #{keyword}, '%')
                     </if>
 
                 </foreach>
@@ -71,19 +71,20 @@
     <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
 
         select
-        r.request_id,
-        r.title,
-        p.nickname,
-        c.name as category_name,
-        s.name as sub_category_name,
-        r.description,
-        r.content,
-        r.student_grade,
-        r.student_gender,
-        r.createdAt
+            r.request_id,
+            r.title,
+            p.nickname,
+            p.parent_id,
+            c.name as category_name,
+            s.name as sub_category_name,
+            r.description,
+            r.content,
+            r.student_grade,
+            r.student_gender,
+            r.createdAt
 
         from
-        tbl_request as r
+            tbl_request as r
 
         left join tbl_parent as p
         on r.parent_id = p.parent_id
@@ -94,20 +95,38 @@
         left join tbl_category as c
         on s.category_id = c.category_id
 
-        <include refid="search"></include>
+        <include refid="searchRequest"></include>
 
         group by r.request_id
+
+<!--        order by-->
+<!--        <choose>-->
+<!--            <when test="order == 'newest'"> p.createdAt desc</when>-->
+<!--            <when test="order == 'times'"> p.times desc</when>-->
+<!--        </choose>-->
 
         limit #{skip}, #{size}
 
     </select>
 
-    <select id="getAllRequestsCount" resultType="int">
+    <select id="getAllRequestsCount" resultType="integer">
 
         select
-            count(request_id)
+            count(*)
+
         from
-            tbl_request
+            tbl_request as r
+
+        left join tbl_parent as p
+        on r.parent_id = p.parent_id
+
+        left join tbl_sub_category as s
+        on r.sub_category_id = s.sub_category_id
+
+        left join tbl_category as c
+        on s.category_id = c.category_id
+
+        <include refid="searchRequest"></include>
 
     </select>
 
@@ -118,6 +137,7 @@
             r.request_id,
             r.title,
             p.nickname,
+            p.parent_id,
             c.name as category_name,
             s.name as sub_category_name,
             r.description,

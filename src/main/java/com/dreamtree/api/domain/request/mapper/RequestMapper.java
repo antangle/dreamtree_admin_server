@@ -16,7 +16,7 @@ public interface RequestMapper {
 
     RequestResDTO getOneRequest(Long id);
 
-    int getAllRequestsCount();
+    int getAllRequestsCount(RequestReqDTO reqDTO);
 
     int updateRequest(RequestModDTO modDTO);
 

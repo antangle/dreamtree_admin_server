@@ -34,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 
         List<RequestResDTO> list = requestMapper.getAllRequests(reqDTO);
 
-        int count = requestMapper.getAllRequestsCount();
+        int count = requestMapper.getAllRequestsCount(reqDTO);
 
         PageResponseDTO<RequestResDTO> result = PageResponseDTO.<RequestResDTO>withAll()
                 .pageRequestDTO(reqDTO)

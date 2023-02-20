@@ -21,6 +21,8 @@ public class RequestResDTO {
 
     private String nickname;
 
+    private Long parentId;
+
     private String categoryName;
 
     private String subCategoryName;
