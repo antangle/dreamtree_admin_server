@@ -52,6 +52,19 @@ public class RequestMapperTest {
     }
 
     @Test
+    public void testGetAllRequestsListWithSearchCondition() {
+
+        log.info("=================TEST GET ALL REQUESTS WITH SEARCH CONDITIONS===============");
+
+        RequestReqDTO reqDTO = new RequestReqDTO("태권도", "title");
+
+        List<RequestResDTO> res = requestMapper.getAllRequests(reqDTO);
+        log.info(res.size());
+        log.info(res);
+
+    }
+
+    @Test
     public void testGetAllRequestsCount() {
 
         log.info("=================TEST GET REQUESTS COUNT===============");
@@ -75,13 +88,13 @@ public class RequestMapperTest {
         log.info("=================TEST UPDATE REQUEST===============");
 
         RequestModDTO modDTO = RequestModDTO.builder()
-                .id(100L)
+                .requestId(100L)
                 .title("Update Title Test...")
-                .subCategoryId(2L)
+                .sub_category_id(2L)
                 .description("ABC......")
                 .content("ABC is the test")
-                .studentGrade("저학년")
-                .studentGender("female")
+                .student_grade("저학년")
+                .student_gender("female")
                 .build();
 
         requestMapper.updateRequest(modDTO);

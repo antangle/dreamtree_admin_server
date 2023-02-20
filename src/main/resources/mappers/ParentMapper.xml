@@ -38,8 +38,6 @@
         from
             tbl_parent
 
-<!--        <include refid="search"></include>-->
-
         limit #{skip}, #{size}
 
     </select>

@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestModDTO {
 
-    private Long id;
+    private Long requestId;
     private String title;
 
-    private Long subCategoryId;
+    private Long sub_category_id;
 
     private String description;
 
     private String content;
 
-    private String studentGrade;
+    private String student_grade;
 
-    private String studentGender;
+    private String student_gender;
 
 }

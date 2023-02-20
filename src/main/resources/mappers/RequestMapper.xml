@@ -11,12 +11,28 @@
             <if test="keyword != null and condition != null">
                 <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
 
-                    <if test="item == 'email'">
+                    <if test="item == 'title'">
                         title like concat('%', #{keyword}, '%')
                     </if>
 
+
+                    <if test="item == 'description'">
+                        description like concat('%', #{keyword}, '%')
+                    </if>
+
+
                     <if test="item == 'nickname'">
                         nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+
+                    <if test="item == 'sub_category_name'">
+                        sub_category_name like concat('%', #{keyword}, '%')
+                    </if>
+
+
+                    <if test="item == 'category_name'">
+                        category_name like concat('%', #{keyword}, '%')
                     </if>
 
                 </foreach>
@@ -55,28 +71,30 @@
     <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
 
         select
-            r.request_id,
-            r.title,
-            p.nickname,
-            c.name as category_name,
-            s.name as sub_category_name,
-            r.description,
-            r.content,
-            r.student_grade,
-            r.student_gender,
-            r.createdAt
+        r.request_id,
+        r.title,
+        p.nickname,
+        c.name as category_name,
+        s.name as sub_category_name,
+        r.description,
+        r.content,
+        r.student_grade,
+        r.student_gender,
+        r.createdAt
 
         from
-            tbl_request as r
+        tbl_request as r
 
         left join tbl_parent as p
-            on r.parent_id = p.parent_id
+        on r.parent_id = p.parent_id
 
         left join tbl_sub_category as s
-            on r.sub_category_id = s.sub_category_id
+        on r.sub_category_id = s.sub_category_id
 
         left join tbl_category as c
-            on s.category_id = c.category_id
+        on s.category_id = c.category_id
+
+        <include refid="search"></include>
 
         group by r.request_id
 
@@ -134,15 +152,15 @@
             tbl_request
         set
             title = #{title},
-            sub_category_id = #{subCategoryId},
+            sub_category_id = #{sub_category_id},
             description = #{description},
             content = #{content},
-            student_grade = #{studentGrade},
-            student_gender = #{studentGender},
+            student_grade = #{student_grade},
+            student_gender = #{student_gender},
             updatedAt = now()
 
         where
-            request_id = #{id}
+            request_id = #{requestId}
 
     </update>
 

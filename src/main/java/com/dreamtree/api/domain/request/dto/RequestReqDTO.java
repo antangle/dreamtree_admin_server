@@ -19,11 +19,11 @@ public class RequestReqDTO extends PageRequestDTO {
 
     String condition;
 
-    public String[] getKeyword() {
+    public String[] getCondition() {
         return condition.trim().length() == 0 ? null : condition.split(",");
     }
 
-    public String getCondition() {
+    public String getKeyword() {
         return keyword.trim().length() == 0 ? null : keyword;
     }
 
