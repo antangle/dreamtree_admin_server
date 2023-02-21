@@ -26,5 +26,6 @@
             on sub.category_id = cat.category_id
         where cat.deletedAt is null
             and sub.deletedAt is null
+        order by cat.category_id
     </select>
 </mapper>
