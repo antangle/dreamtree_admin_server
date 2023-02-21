@@ -32,6 +32,8 @@
         <result property="profileImgUrl" column="profile_img_url"/>
         <result property="nickname" column="nickname"/>
         <result property="email" column="email"/>
+        <result property="college" column="college"/>
+        <result property="major" column="major"/>
 
         <collection property="lessonLists" javaType="java.util.ArrayList" resultMap="lessonList">  </collection>
         <collection property="fileUrls" javaType="java.util.ArrayList" resultMap="fileList" />
@@ -47,12 +49,22 @@
     </resultMap>
 
     <resultMap id="lessonList" type="lessonListDTO">
+        <id column="lesson_id"></id>
         <result property="day" column="day"/>
         <result property="lessonTime" column="lesson_time"/>
         <result property="lessonLength" column="lesson_length"/>
         <result property="startDate" column="start_date"/>
         <result property="endDate" column="end_date"/>
+        <result property="expireStartDate" column="expire_start_date"/>
+        <result property="expireEndDate" column="expire_end_date"/>
+        <result property="fee" column="fee"/>
+        <result property="place" column="place"/>
         <result property="personnel" column="personnel"/>
+        <collection property="progressList" javaType="java.util.ArrayList" resultMap="progressCount"/>
+    </resultMap>
+
+    <resultMap id="progressCount" type="long">
+        <result column="progress_id"></result>
     </resultMap>
 
 
@@ -134,6 +146,15 @@
         <include refid="search"></include>
     </select>
 
+    <select id="getProgramListsByStudentId" resultType="programListDTO" parameterType="long">
+        select
+            program_id,
+            sub_category_id,
+            title
+        from tbl_program p
+        where student_id = #{id}
+    </select>
+
     <select id="getProgramDetails" resultMap="programDetails" parameterType="long">
         select
             p.program_id,
@@ -144,13 +165,21 @@
             s.profile_img_url,
             s.nickname,
             s.email,
+            s.college,
+            s.major,
+            l.lesson_id,
             l.day,
             l.lesson_time,
             l.lesson_length,
             l.start_date,
             l.end_date,
+            l.expire_start_date,
+            l.expire_end_date,
+            l.fee,
+            l.place,
             l.personnel,
-            c.name as certificate_name
+            c.name as certificate_name,
+            progress.progress_id
         from tbl_program p
         left join tbl_student s
             on p.student_id = s.student_id
@@ -159,8 +188,11 @@
             and c.auth_state = 'yes'
         left join tbl_lesson l
             on l.program_id = p.program_id
+            and l.state = 'open'
         left join tbl_file f
             on f.program_id = p.program_id
+        left join tbl_progress progress
+            on progress.lesson_id = l.lesson_id
         where
             p.program_id = #{id}
             and p.deletedAt is null
@@ -182,12 +214,16 @@
 
     <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">
         insert into tbl_program(
+            student_id,
+            sub_category_id,
             title,
             content,
             curriculum_json,
             times,
             fee
         ) values (
+            #{studentId},
+            #{subCategoryId},
             #{title},
             #{content},
             #{curriculumJson},

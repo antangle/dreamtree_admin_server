@@ -19,7 +19,8 @@
             expire_start_date,
             expire_end_date,
             createdAt,
-            updatedAt
+            updatedAt,
+            state
         )
         values(
             #{programId},
@@ -35,8 +36,8 @@
             #{expireStartDate},
             #{expireEndDate},
             now(),
-            now()
+            now(),
+            'open'
         )
     </insert>
-
 </mapper>

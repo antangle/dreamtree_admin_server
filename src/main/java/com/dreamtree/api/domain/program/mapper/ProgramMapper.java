@@ -8,6 +8,8 @@ import java.util.List;
 public interface ProgramMapper {
     List<ProgramListDTO> getProgramLists(ProgramSearchDTO programSearchDTO);
 
+    List<ProgramListDTO> getProgramListsByStudentId(Long studentId);
+
     int getProgramListsCount(ProgramSearchDTO programSearchDTO);
 
     List<WordCloudDTO> getWordCloudInfo();

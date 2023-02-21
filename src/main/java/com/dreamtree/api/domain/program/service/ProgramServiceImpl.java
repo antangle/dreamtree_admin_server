@@ -49,6 +49,16 @@ public class ProgramServiceImpl implements ProgramService{
     }
 
     @Override
+    public List<ProgramListDTO> getProgramListsByStudentId(Long studentId) {
+
+        List<ProgramListDTO> list = programMapper.getProgramListsByStudentId(studentId);
+
+        if(list.size() == 0) throw new CustomException(ErrorEnum.STUDENT_NO_PROGRAM);
+
+        return list;
+    }
+
+    @Override
     public ProgramDetailsDTO getProgramDetailsById(Long id) {
 
         ProgramDetailsDTO programDetailsDTO = programMapper.getProgramDetails(id);

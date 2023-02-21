@@ -2,21 +2,16 @@ package com.dreamtree.api.domain.program.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProgramListDTO {
-
+public class StudentProgramListDTO {
     long programId;
 
-    long subCategoryId;
-
     String title;
-
-    int times;
-
-    String profileImgUrl;
 }

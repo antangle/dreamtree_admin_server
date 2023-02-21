@@ -37,6 +37,7 @@ public class MinioServiceImpl implements MinioService {
 
     @Value("${minio.bucket}")
     String bucketName;
+
     private final MinioClient minioClient;
 
     private String setUUID(String name) {
@@ -133,7 +134,7 @@ public class MinioServiceImpl implements MinioService {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try{
             InputStream inputStream = file.getInputStream();
-            Thumbnailator.createThumbnail(inputStream,bos,200,200);
+            Thumbnailator.createThumbnail(inputStream, bos, 200,200);
 
             InputStream is = new ByteArrayInputStream(bos.toByteArray());
             inputStream.close();

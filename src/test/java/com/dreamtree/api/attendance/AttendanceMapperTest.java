@@ -9,11 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 
 
 /** 최서연 ver.0.1 **/
@@ -23,7 +20,6 @@ public class AttendanceMapperTest {
 
     @Autowired(required = false)
     AttendanceMapper attendanceMapper;
-
 
     String setStatus(int cnt) {
         String status = "";
@@ -38,18 +34,7 @@ public class AttendanceMapperTest {
 
     @Test
     public void testAddAttendance() {
-
-
-        IntStream.rangeClosed(1, 100).forEach((i) -> {
-            AttendAddDTO addDTO = AttendAddDTO.builder()
-                    .progressId(Long.valueOf(i))
-                    .status(setStatus(i%20 + 1))
-                    .times(i%20 + 1)
-                    .build();
-
-            attendanceMapper.addAttendance(addDTO);
-        });
-
+        attendanceMapper.addAttendance(111L);
     }
 
     @Test
@@ -62,6 +47,11 @@ public class AttendanceMapperTest {
 
         log.info(list);
 
+    }
+
+    @Test
+    public void testGetAttendanceListForStudent() {
+        log.info(attendanceMapper.getAttendanceListForStudent(1L));
     }
 
     @Test

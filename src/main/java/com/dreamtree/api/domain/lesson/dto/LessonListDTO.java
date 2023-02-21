@@ -3,6 +3,7 @@ package com.dreamtree.api.domain.lesson.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +18,10 @@ public class LessonListDTO {
 
     LocalDate endDate;
 
+    LocalDate expireStartDate;
+
+    LocalDate expireEndDate;
+
     String day;
 
     int personnel;
@@ -25,4 +30,9 @@ public class LessonListDTO {
 
     int lessonTime;
 
+    int fee;
+
+    String place;
+
+    List<Long> progressList;
 }

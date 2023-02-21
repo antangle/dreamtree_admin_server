@@ -1,7 +1,6 @@
 package com.dreamtree.api.domain.attendance.dto;
 
 import lombok.*;
-import org.checkerframework.checker.units.qual.A;
 
 @Getter
 @Setter
@@ -9,10 +8,11 @@ import org.checkerframework.checker.units.qual.A;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AttendModReqDTO {
+public class ProgressAttendanceDTO {
 
-    private Long attendanceId;
+    long attendanceId;
 
-    private String status;
+    String childName;
 
+    String attendanceStatus;
 }
