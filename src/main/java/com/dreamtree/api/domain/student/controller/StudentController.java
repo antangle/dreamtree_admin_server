@@ -3,6 +3,7 @@ package com.dreamtree.api.domain.student.controller;
 import com.dreamtree.api.common.dto.PageRequestDTO;
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.domain.student.dto.*;
+import com.dreamtree.api.domain.student.service.CertificateService;
 import com.dreamtree.api.domain.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,10 +20,21 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    private final CertificateService certificateService;
+
     @GetMapping("")
     public PageResponseDTO<StudentListDTO> getStudentList(StudentRequestDTO studentRequestDTO) {
 
         return studentService.getSearchStudentList(studentRequestDTO);
+    }
+
+    @GetMapping("/authCount")
+    public int getAuthCount() {
+
+        int count = studentService.getCollegeAuthCount() +
+                certificateService.getCertificateAuthCount();
+
+        return count;
     }
 
     @GetMapping("/{id}")

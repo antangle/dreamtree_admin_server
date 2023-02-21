@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.mail.mapper.MailMapper">
+
+    <!-- 임성현 ver.0.1 -->
+
+    <!-- 메일 조회 -->
+    <select id="getMail" resultType="mailDTO">
+        select
+            *
+        from
+            tbl_mail
+        where
+            mail_id = #{id}
+    </select>
+
+    <!-- 내가 쓴 메일 조회 -->
+    <select id="getToEmailList" resultType="mailDTO">
+        select
+            *
+        from
+            tbl_mail
+        where
+            to_email = #{mail} and
+            deletedAt is null
+        order by
+            createdAt desc
+        limit
+            #{skip}, #{size}
+    </select>
+
+    <!-- 내가 받은 메일 조회 -->
+    <select id="getFromEmailList" resultType="mailDTO">
+        select
+            *
+        from
+            tbl_mail
+        where
+            from_email = #{mail} and
+            deletedAt is null
+        order by
+            createdAt desc
+        limit
+            #{skip}, #{size}
+    </select>
+
+    <!-- 메일 쓰기 -->
+    <insert id="writeMail">
+        insert into tbl_mail (
+            from_email, to_email, title, content, createdAt, updatedAt, `check`
+        )
+        values (
+            #{fromEmail}, #{toEmail}, #{title}, #{content}, now(), now(), 0
+        )
+    </insert>
+
+    <!-- 메일 삭제 -->
+    <update id="removeMail">
+        update
+            tbl_mail
+        set
+            deletedAt = now()
+        where
+            mail_id in
+        <if test="id != null and id.size > 0">
+            <foreach collection="id" item="item"  open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+    </update>
+
+    <!-- 읽은 메일 체크 -->
+    <update id="getCheck">
+        update
+            tbl_mail m
+        set
+            m.check = 1
+        where
+            m.mail_id = #{id}
+    </update>
+
+    <select id="getToEmailCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_mail
+        where
+            to_email = #{mail} and
+            deletedAt is null
+    </select>
+
+    <select id="getFromEmailCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_mail
+        where
+            from_email = #{mail} and
+            deletedAt is null
+    </select>
+
+</mapper>

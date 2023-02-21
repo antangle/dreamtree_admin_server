@@ -75,4 +75,10 @@ public class CertificateServiceImpl implements CertificateService {
 
         if(certificateMapper.removeCertificate(id) < 1) throw new CustomException(StudentErrorEnum.DELETE_CERTIFICATE_FAIL);
     }
+
+    @Override
+    public int getCertificateAuthCount() {
+
+        return certificateMapper.getCertificateAuthCount();
+    }
 }

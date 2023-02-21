@@ -47,4 +47,6 @@ public interface StudentMapper {
     int getCollegeListCount(StudentRequestDTO studentRequestDTO);
 
     int getCertificateListCount(StudentRequestDTO studentRequestDTO);
+
+    int getCollegeAuthCount();
 }

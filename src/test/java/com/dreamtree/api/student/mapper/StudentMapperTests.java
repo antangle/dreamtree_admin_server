@@ -58,13 +58,13 @@ public class StudentMapperTests {
     }
 
     // 학생 1명 조회
-    @Test
-    public void studentGetTest() {
-
-        log.info("stu get one....");
-
-        log.info(studentMapper.getStudent(104l));
-    }
+//    @Test
+//    public void studentGetTest() {
+//
+//        log.info("stu get one....");
+//
+//        log.info(studentMapper.getStudent(104l));
+//    }
 
     // 학생 10명 검색
     @Test

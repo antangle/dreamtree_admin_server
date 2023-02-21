@@ -140,7 +140,6 @@
         update
             tbl_student
         set
-            auth_url = #{authUrl},
             college = #{college},
             major = #{major},
             url = #{url},
@@ -212,6 +211,7 @@
     <select id="getSearchStudentList" parameterType="studentRequestDTO" resultType="studentListDTO">
         select
             student_id,
+            profile_img_url,
             nickname,
             email,
             auth_state
@@ -318,6 +318,16 @@
             tbl_student s left join tbl_certificate c on s.student_id = c.student_id
 
         <include refid="searchCertificate"></include>
+    </select>
+
+    <!-- 대학 인증 요청 카운트 -->
+    <select id="getCollegeAuthCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_student
+        where
+            auth_state = 'pending'
     </select>
 
 

@@ -14,9 +14,6 @@ public class StudentAddFileDTO {
 
     Long studentId;
 
-    // 인증 파일 url
-    String authUrl;
-
     String college;
 
     String major;
