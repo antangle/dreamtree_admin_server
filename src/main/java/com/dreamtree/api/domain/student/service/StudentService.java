@@ -43,4 +43,6 @@ public interface StudentService {
     // 자격/수상 인증 요청 리스트
     PageResponseDTO<StudentAuthRequestDTO> getSearchCertificateAuthRequestList(StudentRequestDTO studentRequestDTO);
 
+    // 대학 인증 요청 카운트
+    int getCollegeAuthCount();
 }

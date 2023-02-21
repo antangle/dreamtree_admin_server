@@ -56,4 +56,14 @@
             certificate_id = #{id}
     </update>
 
+    <!-- 자격 인증 요청 카운트 -->
+    <select id="getCertificateAuthCount" resultType="int">
+        select
+        count(*)
+        from
+        tbl_certificate
+        where
+        auth_state = 'pending'
+    </select>
+
 </mapper>

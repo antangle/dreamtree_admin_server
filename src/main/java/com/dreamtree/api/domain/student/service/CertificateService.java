@@ -26,4 +26,5 @@ public interface CertificateService {
     // 자격증 삭제
     void removeCertificate(Long id);
 
+    int getCertificateAuthCount();
 }

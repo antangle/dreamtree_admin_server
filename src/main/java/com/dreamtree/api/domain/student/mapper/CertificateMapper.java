@@ -23,4 +23,6 @@ public interface CertificateMapper {
     // 자격증 삭제
     int removeCertificate(Long id);
 
+    int getCertificateAuthCount();
+
 }

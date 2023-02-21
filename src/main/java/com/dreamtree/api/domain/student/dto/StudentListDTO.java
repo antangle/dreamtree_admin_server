@@ -11,6 +11,8 @@ public class StudentListDTO {
 
     Long studentId;
 
+    String profileImgUrl;
+
     String nickname;
 
     String email;

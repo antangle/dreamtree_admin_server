@@ -11,8 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 public class StudentCollegeDTO {
 
-    String authUrl;
-
     String college;
 
     String major;

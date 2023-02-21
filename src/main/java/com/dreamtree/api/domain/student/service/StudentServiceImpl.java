@@ -168,4 +168,10 @@ public class StudentServiceImpl implements StudentService  {
 
         return pageResponseDTO;
     }
+
+    @Override
+    public int getCollegeAuthCount() {
+
+        return studentMapper.getCollegeAuthCount();
+    }
 }
