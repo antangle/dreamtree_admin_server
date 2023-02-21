@@ -1,5 +1,6 @@
 package com.dreamtree.api.config;
 
+import com.dreamtree.api.common.auth.kakaologin.service.KakaoLoginService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,6 @@ import java.util.Arrays;
 @Log4j2
 @EnableWebSecurity
 public class CustomSecurityConfig {
-
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
 

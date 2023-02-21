@@ -46,6 +46,7 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     implementation group: 'io.minio', name: 'minio', version: '8.4.6'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
