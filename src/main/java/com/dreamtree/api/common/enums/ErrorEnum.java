@@ -16,7 +16,7 @@ public enum ErrorEnum implements CustomExceptionEnum {
     POST_LESSON_FORM_FAIL(401, "post failed", 2041),
     STUDENT_NO_PROGRAM(401, "no program data exists", 2051),
 
-
+    ATTENDANCE_UPDATE_FAIL(401, "attendance update fail", 4041)
 
     ;
 

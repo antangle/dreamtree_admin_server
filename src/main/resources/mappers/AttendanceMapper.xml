@@ -6,22 +6,24 @@
 <mapper namespace="com.dreamtree.api.domain.attendance.mapper.AttendanceMapper">
 
     <!-- 출석 레코드 DB 삽입 -->
-    <insert id="addAttendance">
+    <insert id="addAttendance" parameterType="long">
+        <selectKey >
+            select
+        </selectKey>
 
-        insert into
-            tbl_attendance (
-                progress_id,
-                status,
-                times,
-                createAt
-            )
-
-        values (
-            #{progressId},
-            #{status},
-            #{times},
-            now()
+        insert into tbl_attendance(
+            progress_id,
+            status,
+            times,
+            createdAt
         )
+        select g.progress_id, REPEAT('0',times) , p.times, now()
+        from tbl_lesson l
+        inner join tbl_progress g
+            on l.lesson_id = g.lesson_id
+        left join tbl_program p
+            on l.program_id = p.program_id
+        where l.lesson_id = #{lessonId};
 
     </insert>
 
@@ -30,10 +32,16 @@
 
         select
             pr.title,
+            pr.times,
             ps.child_name,
-            a.status,
-            a.times
-
+            l.lesson_id,
+            l.day,
+            l.lesson_time,
+            l.lesson_length,
+            l.start_date,
+            l.end_date,
+            a.status as attendance_status,
+            a.attendance_id
         from
             tbl_attendance as a
 
@@ -45,9 +53,51 @@
             on l.program_id = pr.program_id
 
         where ps.parent_id = #{parent_id}
+            and l.state = 'inProgress'
 
-        group by attendance_id
+    </select>
 
+    <resultMap id="studentAttendanceMap" type="attendStudentResDTO">
+        <id column="lesson_id"></id>
+        <result property="title" column="title"></result>
+        <result property="times" column="times"></result>
+        <result property="day" column="day"></result>
+        <result property="lessonTime" column="lesson_time"></result>
+        <result property="lessonLength" column="lesson_length"></result>
+        <result property="startDate" column="start_date"></result>
+        <result property="endDate" column="end_date"></result>
+        <collection property="progressList" javaType="java.util.ArrayList" resultMap="progressAttendanceMap"></collection>
+    </resultMap>
+
+    <resultMap id="progressAttendanceMap" type="progressAttendanceDTO">
+        <result property="attendanceId" column="attendance_id"></result>
+        <result property="childName" column="child_name"></result>
+        <result property="attendanceStatus" column="attendance_status"></result>
+    </resultMap>
+    <!--대학생 출석관리 info-->
+
+    <select id="getAttendanceListForStudent" parameterType="long" resultMap="studentAttendanceMap">
+        select
+            pr.title,
+            pr.times,
+            l.lesson_id,
+            l.day,
+            l.lesson_time,
+            l.lesson_length,
+            l.start_date,
+            l.end_date,
+            ps.child_name,
+            at.status as attendance_status,
+            at.attendance_id
+        from tbl_program pr
+        left join tbl_lesson l
+            on pr.program_id = l.program_id
+        left join tbl_progress ps
+            on l.lesson_id = ps.lesson_id
+        inner join tbl_attendance at
+            on at.progress_id = ps.progress_id
+        where pr.student_id = #{studentId}
+            and l.state = 'inProgress'
     </select>
 
     <!-- 출석 기록 추가시 출석 DB 출석 상태값 변경 -->
@@ -57,7 +107,7 @@
             tbl_attendance
         set
             status = #{status},
-            updateAt = now()
+            updatedAt = now()
         where
             attendance_id = #{attendanceId}
 

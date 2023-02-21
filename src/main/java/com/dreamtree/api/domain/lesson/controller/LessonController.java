@@ -1,13 +1,11 @@
 package com.dreamtree.api.domain.lesson.controller;
 
+import com.dreamtree.api.domain.attendance.service.AttendanceService;
 import com.dreamtree.api.domain.lesson.dto.LessonAddDTO;
 import com.dreamtree.api.domain.lesson.service.LessonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //이승윤 ver0.1
 @RestController
@@ -16,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LessonController {
 
-    private final LessonService lessonService;
+    private final AttendanceService attendanceService;
 
-    @PostMapping("/form")
+    @GetMapping("/student")
     public void addLesson(@RequestBody LessonAddDTO lessonAddDTO){
-        log.info(lessonAddDTO);
-        lessonService.addLesson(lessonAddDTO);
+        
     }
 }
