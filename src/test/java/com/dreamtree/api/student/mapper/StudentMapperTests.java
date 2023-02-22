@@ -1,6 +1,7 @@
 package com.dreamtree.api.student.mapper;
 
 
+import com.dreamtree.api.common.auth.kakaologin.dto.KakaoTokenResDTO;
 import com.dreamtree.api.common.dto.PageRequestDTO;
 import com.dreamtree.api.domain.student.dto.*;
 import com.dreamtree.api.domain.student.mapper.StudentMapper;
@@ -196,4 +197,26 @@ public class StudentMapperTests {
         log.info("total: " + studentMapper.getStudentListCount(studentRequestDTO));
     }
 
+    @Test
+    public void testGetStudentDetailWithEmail() {
+
+        String email = "shartzenberg0@4shared.com";
+
+        log.info("get student detail info with email....");
+
+        StudentDetailDTO dto = studentMapper.getStudentWithEmail(email);
+        log.info(dto);
+
+    }
+
+    @Test
+    public void testGetKakaoTokenInfo() {
+
+        String email = "shartzenberg0@4shared.com";
+
+        log.info("get student kakao token info with email....");
+
+        KakaoTokenResDTO resDTO = studentMapper.getStudentKakaoTokenInfo(email);
+        log.info(resDTO);
+    }
 }

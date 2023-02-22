@@ -70,6 +70,24 @@
 
     </select>
 
+    <!--특정 학부모 회원 정보 조회 with email-->
+    <select id="getOneParentInfoWithEmail" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
+
+        select
+            email,
+            nickname,
+            password,
+            birth,
+            profile_img_url
+
+        from
+            tbl_parent
+
+        where
+            email = #{email}
+
+    </select>
+
     <!--특정 학부모 회원 정보 수정-->
     <update id="updateParentInfo">
 
@@ -84,6 +102,7 @@
 
     </update>
 
+    <!--특정 학부모 회원 정보 삭제 설정값 지정-->
     <update id="softDeleteOneParent">
 
         update
@@ -94,5 +113,67 @@
             parent_id=#{id}
 
     </update>
+
+    <!-- 카카오 로그인 위한 토큰 정보 조회 -->
+    <select id="getParentKakaoTokenInfo" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoTokenResDTO">
+
+        select
+            access_token
+            refresh_token
+        from
+            tbl_parent
+        where
+            email = #{email}
+
+    </select>
+
+    <!-- 이메일 정보로 학부모 ID값 조회 -->
+    <select id="getParentIdWithEmail" resultType="long">
+
+        select
+            parent_id
+        from
+            tbl_parent
+        where
+            email = #{email}
+
+    </select>
+
+    <!-- 카카오 로그인 위한 토큰 정보 업데이트 -->
+    <update id="updateParentKakaoTokenInfo">
+
+        update
+            tbl_parent
+        set
+            access_token = #{kakao_access_token},
+            refresh_token = #{kakao_refresh_token}
+        where
+            email = #{email}
+
+    </update>
+
+    <!-- 카카오 로그인 정보로 학부모 회원가입 -->
+    <insert id="addParentWithKakao">
+
+        insert into tbl_parent (
+            email,
+            nickname,
+            profile_img_url,
+            thumbnail_img_url,
+            birthday,
+            createdAt,
+            updatedAt
+        )
+        values (
+            #{email},
+            #{nickname},
+            #{profileImgUrl},
+            #{thumbnailImgUrl},
+            #{birthday},
+            now(),
+            now()
+        )
+
+    </insert>
 
 </mapper>

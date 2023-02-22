@@ -1,5 +1,7 @@
 package com.dreamtree.api.domain.student.mapper;
 
+import com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO;
+import com.dreamtree.api.common.auth.kakaologin.dto.KakaoTokenResDTO;
 import com.dreamtree.api.common.dto.PageRequestDTO;
 import com.dreamtree.api.domain.student.dto.*;
 
@@ -20,6 +22,8 @@ public interface StudentMapper {
 
     // 학생 1명 조회
     StudentDetailDTO getStudent(Long id);
+
+    StudentDetailDTO getStudentWithEmail(String email);
 
     // 학생 10명 검색
     List<StudentDTO> getStudentList(PageRequestDTO pageRequestDTO);
@@ -49,4 +53,17 @@ public interface StudentMapper {
     int getCertificateListCount(StudentRequestDTO studentRequestDTO);
 
     int getCollegeAuthCount();
+
+    /** kakao login **/ /*** 최서연 ver.0.1 ***/
+    // 학생 회원 카카오 토큰 정보 조회
+    KakaoTokenResDTO getStudentKakaoTokenInfo(String email);
+
+    // 학생 회원 카카오 토큰 정보 업데이트
+    int updateStudentKakaoTokenInfo(KakaoTokenResDTO resDTO);
+
+    // 이메일로 회원 ID & 권한 정보 조회
+    KakaoResDTO getStudentIdAndRole(String email);
+
+    // 카카오 로그인 정보로 회원가입
+    int addStudentWithKakao(StudentKakaoAddDTO addDTO);
 }
