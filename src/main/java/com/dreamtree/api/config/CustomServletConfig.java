@@ -8,6 +8,11 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 public class CustomServletConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+    }
     @Override
     public void addFormatters(FormatterRegistry registry) {
 

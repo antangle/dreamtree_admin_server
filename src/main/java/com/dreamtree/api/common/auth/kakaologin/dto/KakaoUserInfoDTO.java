@@ -1,15 +1,19 @@
 package com.dreamtree.api.common.auth.kakaologin.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 @Data
 public class KakaoUserInfoDTO {
 
-    private Long id;
+    private String account_email;
 
     private String profile_nickname;
 
-    private KakaoPropertyDTO propertyDTO;
+    private String profile_image;
+
+    private String thumbnail_image;
+
+    private String birthday;
 
 }

@@ -135,6 +135,33 @@
         )
     </insert>
 
+    <!-- 카카오 로그인 정보로 학생 추가 -->
+    <insert id="addStudentWithKakao">
+        insert into tbl_student (
+            email,
+            nickname,
+            profile_img_url,
+            thumbnail_img_url,
+            birthday,
+            role,
+            auth_state,
+            createdAt,
+            updatedAt
+        )
+        values (
+            #{email},
+            #{nickname},
+            #{profileImgUrl},
+            #{thumbnailImgUrl},
+            #{birthday},
+            'student',
+            'no',
+            now(),
+            now()
+        )
+
+    </insert>
+
     <!-- 학생 학교 정보 추가 -->
     <update id="addStudentFile">
         update
@@ -191,6 +218,38 @@
         left join tbl_certificate c on s.student_id = c.student_id
         where
             s.student_id = #{id} and
+            s.deletedAt is null and
+            c.deletedAt is null
+    </select>
+
+    <!-- 학생 1명 with 자격증 조회 by email-->
+    <select id="getStudentWithEmail" resultMap="studentDetail" parameterType="string">
+        select
+            s.student_id,
+            s.profile_img_url,
+            s.role,
+            s.auth_state as student_auth_state,
+            s.email,
+            s.nickname,
+            s.password,
+            s.birth,
+            s.gender,
+            s.auth_url,
+            s.college,
+            s.major,
+            s.url,
+            s.createdAt,
+            s.updatedAt,
+            c.certificate_id,
+            c.name,
+            c.aquire_date,
+            c.url as certificate_url,
+            c.auth_state as certificate_auth_state
+        from
+            tbl_student s
+        left join tbl_certificate c on s.student_id = c.student_id
+        where
+            s.email = #{email} and
             s.deletedAt is null and
             c.deletedAt is null
     </select>
@@ -330,5 +389,42 @@
             auth_state = 'pending'
     </select>
 
+    <!-- 카카오 로그인 위한 토큰 정보 조회 -->
+    <select id="getStudentKakaoTokenInfo" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoTokenResDTO">
 
+        select
+            access_token,
+            refresh_token
+        from
+            tbl_student
+        where
+            email = #{email}
+
+    </select>
+
+    <!-- 카카오 로그인 위한 토큰 정보 업데이트 -->
+    <update id="updateStudentKakaoTokenInfo">
+
+        update
+            tbl_student
+        set
+            access_token = #{access_token},
+            refresh_token = #{refresh_token}
+        where
+            email = #{email}
+
+    </update>
+
+    <!-- 카카오 로그인 위한 학생 회원 ID & Role 조회 -->
+    <select id="getStudentIdAndRole" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO">
+
+        select
+            role as member_value,
+            student_id as id
+        from
+            tbl_student
+        where
+            email = #{email}
+
+    </select>
 </mapper>

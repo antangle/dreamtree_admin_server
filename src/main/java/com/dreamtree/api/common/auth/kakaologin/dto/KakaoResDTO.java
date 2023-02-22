@@ -1,19 +1,17 @@
 package com.dreamtree.api.common.auth.kakaologin.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class KakaoPropertyDTO {
+@NoArgsConstructor
+public class KakaoResDTO {
 
-    private String profile_image;
+    private String memberValue = "parents";
 
-    private String account_email;
+    private Long id = 0L;
 
-    private Date birthday;
 }
