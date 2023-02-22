@@ -26,6 +26,8 @@
 
     <resultMap id="programDetails" type="programDetailsDTO">
         <id column="program_id" />
+
+        <result property="studentId" column="student_id"/>
         <result property="curriculumJson" column="curriculum_json"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
@@ -172,6 +174,7 @@
             s.email,
             s.college,
             s.major,
+            s.student_id,
             l.lesson_id,
             l.day,
             l.lesson_time,
@@ -198,6 +201,7 @@
             on f.program_id = p.program_id
         left join tbl_progress progress
             on progress.lesson_id = l.lesson_id
+            and progress.deletedAt is null
         where
             p.program_id = #{id}
             and p.deletedAt is null
@@ -214,7 +218,6 @@
         left join tbl_sub_category sub
             on sub.sub_category_id = p.sub_category_id
         group by p.sub_category_id
-
     </select>
 
     <insert id="postProgramForm" parameterType="programFormDTO" useGeneratedKeys="true" keyProperty="programId">

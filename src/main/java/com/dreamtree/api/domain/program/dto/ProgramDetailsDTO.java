@@ -18,6 +18,7 @@ import java.util.List;
 public class ProgramDetailsDTO {
 
     //프로그램
+    long studentId;
 
     String title;
 
@@ -42,6 +43,5 @@ public class ProgramDetailsDTO {
 
     //레슨
     List<LessonListDTO> lessonLists;
-
 
 }

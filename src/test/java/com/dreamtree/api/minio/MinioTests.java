@@ -1,6 +1,8 @@
 package com.dreamtree.api.minio;
 
 import com.dreamtree.api.common.minio.service.MinioService;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import io.minio.errors.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +24,9 @@ public class MinioTests {
     @Autowired(required = false)
     MinioService minioService;
 
+    @Autowired(required = false)
+    MinioClient minioClient;
+
     @Test
     public void getBucketListsTests() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         log.info(minioService.getBucketLists());
@@ -28,10 +34,27 @@ public class MinioTests {
 
 
     @Test
+    public void temp() throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        MockMultipartFile mockMultipartFile = new MockMultipartFile(
+                "2023-02-22T11:02:25.845215900dog.jpg",
+                "2023-02-22T11:02:25.845215900dog.jpg",
+                "image/jpg",
+                new FileInputStream("/D:/dog.jpg")
+        );
+        minioClient.putObject(PutObjectArgs.builder()
+                .bucket("bucket-file")
+                .contentType(mockMultipartFile.getContentType())
+                .object("2023-02-22T11:02:25.845215900dog.jpg")
+                .stream(mockMultipartFile.getInputStream(), mockMultipartFile.getSize(), -1)
+                .build());
+
+    }
+
+    @Test
     public void updateImageTest() throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
         MockMultipartFile mockMultipartFile = new MockMultipartFile(
-                "test",
-                "dog.jpg",
+                "2023-02-22T11:02:25.845215900dog.jpg",
+                "2023-02-22T11:02:25.845215900dog.jpg",
                 "image/jpg",
                 new FileInputStream("/D:/dog.jpg")
         );
@@ -45,7 +68,6 @@ public class MinioTests {
         String bucketName = "bucket-file";
         String fileName = "fileName";
         log.info(minioService.uploadFile(mockMultipartFile, fileName));
-
         minioService.saveThumbnail(mockMultipartFile, "t_" + mockMultipartFile.getOriginalFilename());
     }
     @Test
