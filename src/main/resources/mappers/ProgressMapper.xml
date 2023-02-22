@@ -34,6 +34,7 @@
             on pm.sub_category_id = pm.sub_category_id
 
         where ps.parent_id = #{id}
+            and ps.deletedAt is null
 
         group by ps.progress_id
 

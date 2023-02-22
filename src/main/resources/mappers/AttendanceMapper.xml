@@ -24,6 +24,7 @@
         left join tbl_program p
             on l.program_id = p.program_id
         where l.lesson_id = #{lessonId};
+            and g.deletedAt is null
 
     </insert>
 
@@ -47,6 +48,7 @@
 
         left join tbl_progress as ps
             on a.progress_id = ps.progress_id
+            and ps.deletedAt is null
         left join tbl_lesson as l
             on ps.lesson_id = l.lesson_id
         left join tbl_program as pr
@@ -94,6 +96,7 @@
             on pr.program_id = l.program_id
         left join tbl_progress ps
             on l.lesson_id = ps.lesson_id
+            and ps.deletedAt is null
         inner join tbl_attendance at
             on at.progress_id = ps.progress_id
         where pr.student_id = #{studentId}

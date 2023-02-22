@@ -48,7 +48,6 @@ public class StudentMapperTests {
 
         StudentAddFileDTO studentAddFileDTO = StudentAddFileDTO.builder()
                 .studentId(105L)
-                .authUrl("t auth_url")
                 .college("t collage")
                 .url("t url")
                 .major("t major")
