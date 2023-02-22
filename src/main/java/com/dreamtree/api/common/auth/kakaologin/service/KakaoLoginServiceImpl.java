@@ -30,13 +30,13 @@ import java.util.Collections;
 public class KakaoLoginServiceImpl implements KakaoLoginService {
 
     // Kakao URI
-//    @Value("${kakao.auth-token-uri}")
+    @Value("${spring.security.oauth2.client.provider.kako.token-uri}")
     private String kokaoAuthTokenUri;
 
-//    @Value("${kakao.rest-api-key}")
+    @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String kakaoRestApiKey;
 
-//    @Value("${kakao.redirect-uri}")
+    @Value("${spring.security.oauth2.client.registration.kakao.redirect-uri}")
     private String kakaoRedirectUri;
 
 //    @Value("${kakao.user-me-uri}")

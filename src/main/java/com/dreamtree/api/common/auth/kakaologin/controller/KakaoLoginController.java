@@ -1,6 +1,7 @@
 package com.dreamtree.api.common.auth.kakaologin.controller;
 
 import com.dreamtree.api.common.auth.kakaologin.dto.KakaoReqDTO;
+import com.dreamtree.api.common.auth.kakaologin.dto.KakaoReqTokenDTO;
 import com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO;
 import com.dreamtree.api.common.auth.kakaologin.service.KakaoLoginService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,16 @@ public class KakaoLoginController {
     private final KakaoLoginService kakaoLoginService;
 
     @PostMapping("")
+    public void setToken(@RequestBody String code) {
+
+        log.info("==================KAKAO TOKEN INFO=================");
+        log.info(code);
+        KakaoReqTokenDTO tokenDTO = kakaoLoginService.generateToken(code);
+        log.info(tokenDTO);
+
+    }
+
+    @PostMapping("signIn")
     public KakaoResDTO kakaoLogin(@RequestBody KakaoReqDTO reqDTO) {
 
         log.info("==================GET KAKAO USER INFO=================");
