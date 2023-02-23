@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 /*** 임성현 ver.0.1 ***/
 
+@SuperBuilder
 @Getter
 @Setter
 @AllArgsConstructor

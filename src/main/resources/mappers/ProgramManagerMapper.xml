@@ -15,6 +15,18 @@
         <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
     </resultMap>
 
+    <!-- program(1) : lesson(N) -->
+    <resultMap id="adminLessonList" type="adminProgramLessonListDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id" />
+        <result property="title" column="title" />
+        <result property="studentId" column="student_id" />
+        <result property="nickname" column="nickname" />
+        <result property="email" column="email" />
+
+        <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
+    </resultMap>
+
     <!-- lesson(1) : progress(N) -->
     <resultMap id="myProgressList" type="lessonProgressDTO">
         <id column="program_id" />
@@ -53,12 +65,59 @@
         <collection property="fileList" javaType="java.util.ArrayList" resultMap="fileList">  </collection>
     </resultMap>
 
+    <!-- program(1) : File(N) -->
+    <resultMap id="adminProgramList" type="adminProgramListDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id"/>
+        <result property="subCategoryId" column="sub_category_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="curriculumJson" column="curriculum_json"/>
+        <result property="times" column="times"/>
+        <result property="studentId" column="student_id"/>
+        <result property="email" column="email"/>
+        <result property="nickname" column="nickname"/>
+        <result property="authState" column="auth_state"/>
+
+        <collection property="fileList" javaType="java.util.ArrayList" resultMap="fileList">  </collection>
+    </resultMap>
     <!-- file -->
     <resultMap id="fileList" type="fileDTO">
         <result property="fileId" column="file_id"/>
         <result property="programId" column="program_id"/>
         <result property="url" column="url"/>
     </resultMap>
+
+    <!-- 프로그램 검색 -->
+    <sql id="searchProgram">
+        <where>
+            pm.deletedAt is null
+
+            and
+            (
+            <if test="keyword != null and condition != null">
+                <foreach collection="condition" item="item" index="index" separator="or">
+                    <if test="item == 'nickname'">
+                        s.nickname like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'email'">
+                        s.email like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'authState'">
+                        s.auth_state like concat('%', #{keyword}, '%')
+                    </if>
+
+                    <if test="item == 'title'">
+                        pm.title like concat('%', #{keyword}, '%')
+                    </if>
+
+                </foreach>
+            </if>
+            )
+        </where>
+    </sql>
 
     <!-- 내가 쓴 프로그램 리스트 -->
     <select id="getMyProgramList" resultMap="myProgramList" resultType="programManagerListDTO">
@@ -78,6 +137,7 @@
             p.student_id = #{id}
     </select>
 
+    <!-- 내 레슨 리스트 -->
     <select id="getMyLessonList" resultMap="myLessonList" resultType="ProgramLessonDTO">
         select
             pm.program_id,
@@ -103,5 +163,125 @@
         where
             pm.student_id = #{id}
     </select>
+
+    <!-- Admin 프로그램 관리 리스트 -->
+    <select id="getAdminProgramList" resultMap="adminProgramList" resultType="adminProgramListDTO">
+        select
+            pm.program_id,
+            pm.sub_category_id,
+            pm.title,
+            pm.content,
+            pm.curriculum_json,
+            pm.times,
+            f.file_id,
+            f.url,
+            s.student_id,
+            s.nickname,
+            s.email,
+            s.auth_state
+        from
+            tbl_program pm
+        left join tbl_file f on pm.program_id = f.program_id
+        left join tbl_student s on pm.student_id = s.student_id
+
+        <include refid="searchProgram"></include>
+
+        order by
+            pm.updatedAt desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- Admin 레슨 리스트 -->
+    <select id="getAdminLessonList" resultMap="adminLessonList" resultType="adminProgramLessonListDTO">
+        select
+            pm.program_id,
+            pm.title,
+            l.lesson_id,
+            l.start_date,
+            l.end_date,
+            l.expire_start_date,
+            l.expire_end_date,
+            l.day,
+            l.personnel,
+            l.lesson_length,
+            l.lesson_time,
+            l.fee,
+            l.place,
+            ps.progress_id,
+            ps.state,
+            ps.child_name,
+            s.student_id,
+            s.nickname,
+            s.email
+        from
+            tbl_program pm
+        left join tbl_lesson l on pm.program_id = l.program_id
+        left join tbl_progress ps on l.lesson_id = ps.lesson_id
+        left join tbl_student s on pm.student_id = s.student_id
+
+        <include refid="searchProgram"></include>
+
+        order by
+            pm.updatedAt desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 관리자 프로그램 카운트 -->
+    <select id="getAdminProgramCount" resultType="integer">
+        select
+            count(*)
+        from
+            tbl_program pm
+        left join tbl_file f on pm.program_id = f.program_id
+        left join tbl_student s on pm.student_id = s.student_id
+
+        <include refid="searchProgram"></include>
+    </select>
+
+    <!-- 관리자 레슨 카운트 -->
+    <select id="getAdminLessonCount" resultType="integer">
+        select
+            count(*)
+        from
+            tbl_program pm
+        left join tbl_lesson l on pm.program_id = l.program_id
+        left join tbl_progress ps on l.lesson_id = ps.lesson_id
+        left join tbl_student s on pm.student_id = s.student_id
+
+        <include refid="searchProgram"></include>
+    </select>
+
+    <update id="removeProgram">
+        update
+            tbl_program
+        set
+            deletedAt = now()
+        where
+            program_id = #{id}
+    </update>
+
+    <update id="removeLesson">
+        update
+            tbl_lesson
+        set
+            deleteAt = now()
+        where
+            lesson_id = #{id}
+    </update>
+
+    <update id="modifyProgram">
+        update
+            tbl_program
+        set
+            sub_category_id = #{subCategoryId}
+            title = {title},
+            content = #{content},
+            curriculum_json = #{curriculumJson},
+            times = #{times},
+            fee = #{fee},
+            updatedAt = now()
+        where
+            program_id = #{id}
+    </update>
 
 </mapper>

@@ -1,9 +1,12 @@
 package com.dreamtree.api.program;
 
+import com.dreamtree.api.common.dto.PageRequestDTO;
 import com.dreamtree.api.domain.program.dto.ProgramFormDTO;
 import com.dreamtree.api.domain.program.dto.ProgramSearchDTO;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
+import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramMapper;
+import com.dreamtree.api.domain.student.dto.StudentRequestDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class ProgramMapperTests {
 
     @Autowired(required = false)
     FileMapper fileMapper;
+
+    @Autowired(required = false)
+    ProgramManagerMapper programManagerMapper;
 
 
     @Test
@@ -75,6 +81,21 @@ public class ProgramMapperTests {
 //        programMapper.postProgramForm(programFormDTO);
 
         log.info(fileMapper.postFileForm(programFormDTO));
+    }
+
+    @Test
+    public void getAdminProgramList() {
+
+        StudentRequestDTO studentRequestDTO = new StudentRequestDTO();
+        StudentRequestDTO.builder()
+                .build();
+
+        studentRequestDTO.setPage(1);
+        studentRequestDTO.setSize(1);
+        studentRequestDTO.setKeyword("");
+        studentRequestDTO.setCondition("title,nickname");
+
+        log.info(programManagerMapper.getAdminProgramList(studentRequestDTO));
     }
 
 }
