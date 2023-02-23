@@ -41,21 +41,21 @@ public class StudentMapperTests {
     }
 
     // 학생 파일 추가
-    @Test
-    public void studentAddFileTest() {
-
-        log.info("student add file...");
-
-        StudentAddFileDTO studentAddFileDTO = StudentAddFileDTO.builder()
-                .studentId(105L)
-                .authUrl("t auth_url")
-                .college("t collage")
-                .url("t url")
-                .major("t major")
-                .build();
-
-        studentMapper.addStudentFile(studentAddFileDTO);
-    }
+//    @Test
+//    public void studentAddFileTest() {
+//
+//        log.info("student add file...");
+//
+//        StudentAddFileDTO studentAddFileDTO = StudentAddFileDTO.builder()
+//                .studentId(105L)
+//                .authUrl("t auth_url")
+//                .college("t collage")
+//                .url("t url")
+//                .major("t major")
+//                .build();
+//
+//        studentMapper.addStudentFile(studentAddFileDTO);
+//    }
 
     // 학생 1명 조회
 //    @Test

@@ -17,4 +17,10 @@ public interface ProgramService {
 
     public long postProgramForm(ProgramFormDTO programFormDTO);
 
+    // 내 프로그램 리스트
+    List<ProgramManagerListDTO> myProgramList(Long id);
+
+    // 내 레슨 리스트
+    List<ProgramLessonDTO> myLessonList(Long id);
+
 }

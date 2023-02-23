@@ -4,6 +4,7 @@ import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.common.enums.ErrorEnum;
 import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
+import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramMapper;
 import com.dreamtree.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,8 @@ import java.util.List;
 public class ProgramServiceImpl implements ProgramService{
     private final ProgramMapper programMapper;
     private final FileMapper fileMapper;
+
+    private final ProgramManagerMapper programManagerMapper;
 
     @Override
     public List<WordCloudDTO> getWordCloudInfo() {
@@ -86,6 +89,18 @@ public class ProgramServiceImpl implements ProgramService{
         }
 
         return programFormDTO.getProgramId();
+    }
+
+    @Override
+    public List<ProgramManagerListDTO> myProgramList(Long id) {
+
+        return programManagerMapper.getMyProgramList(id);
+    }
+
+    @Override
+    public List<ProgramLessonDTO> myLessonList(Long id) {
+
+        return programManagerMapper.getMyLessonList(id);
     }
 
 }

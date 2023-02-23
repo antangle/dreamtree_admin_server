@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.report.mapper.ReportMapper">
+
+    <!-- 임성현 ver.0.1 -->
+
+    <!-- 신고 조회 -->
+    <select id="getReport" resultType="reportDTO">
+        select
+            report_id,
+            reporter_email,
+            title,
+            content,
+            status,
+            updatedAt
+        from
+            tbl_report
+        where
+            report_id = #{id}
+    </select>
+
+    <!-- 내가 한 신고 리스트 -->
+    <select id="getMyReportList" resultType="reportListDTO">
+        select
+            report_id,
+            reporter_email,
+            title,
+            status,
+            updatedAt
+        from
+            tbl_report
+        where
+            deletedAt is null and
+            reporter_email = #{reporterEmail} and
+            status = #{sort}
+        order by
+            updatedAt desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 신고 리스트 전체 -->
+    <select id="getReportList" resultType="reportListDTO">
+        select
+            report_id,
+            reporterEmail,
+            title,
+            status,
+            updatedAt
+            from
+            tbl_report
+        where
+            deletedAt is null
+        order by
+            updatedAt desc
+        limit #{skip}, #{size}
+    </select>
+
+    <!-- 신고하기 -->
+    <insert id="writeReport">
+        insert into
+            tbl_report(reporter_email, title, content, status, createdAt, updatedAt)
+        values (
+            #{reporterEmail}, #{title}, #{content}, 'pending', now(), now()
+        )
+    </insert>
+
+    <!-- 신고 상태 업데이트 -->
+    <update id="updateStatus">
+        update
+            tbl_report
+        set
+            status = #{status},
+            updatedAt = now()
+        where
+            report_id = #{reportId}
+    </update>
+
+    <!-- 신고 삭제 -->
+    <update id="removeReport">
+        update
+            tbl_report
+        set
+            deletedAt = now()
+        where
+            report_id in
+        <if test="id != null and id.size > 0">
+            <foreach collection="id" item="item"  open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+    </update>
+
+    <!-- 내가 한 신고 카운트 -->
+    <select id="getMyReportCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_report
+        where
+            deletedAt is null and
+            reporter_email = #{email}
+    </select>
+
+    <!-- 전체 신고 카운트 -->
+    <select id="getReportCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_report
+        where
+            deletedAt is null
+    </select>
+
+</mapper>
