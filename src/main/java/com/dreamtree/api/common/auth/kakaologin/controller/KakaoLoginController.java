@@ -34,13 +34,13 @@ public class KakaoLoginController {
         log.info(reqDTO);
         KakaoResDTO result = new KakaoResDTO();
         // students 로그인 >> 학생 DB 조회...
-        if (reqDTO.getPathValue().equals("students")) {
+        if (reqDTO.getPathValue().equals("student")) {
 
             result = kakaoLoginService.StudentSignIn(reqDTO);
 
         }
         // parents 로그인 >> 학부모 DB 조회...
-        if (reqDTO.getPathValue().equals("parents")) {
+        if (reqDTO.getPathValue().equals("parent")) {
 
             result = kakaoLoginService.ParentSignIn(reqDTO);
 

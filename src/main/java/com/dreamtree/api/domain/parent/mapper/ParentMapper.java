@@ -35,7 +35,7 @@ public interface ParentMapper {
     int updateParentKakaoTokenInfo(KakaoTokenResDTO resDTO);
 
     // 이메일로 회원 ID 조회
-    Long getParentIdWithEmail(String email);
+    KakaoResDTO getParentInfoWithEmail(String email);
 
     // 카카오 로그인 정보로 회원가입
     int addParentWithKakao(ParentKakaoAddDTO addDTO);

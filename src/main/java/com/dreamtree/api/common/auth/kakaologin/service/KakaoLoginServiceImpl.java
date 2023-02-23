@@ -55,7 +55,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 
         String email = reqDTO.getUserInfoDTO().getAccount_email();
         KakaoTokenResDTO tokenResDTO = studentMapper.getStudentKakaoTokenInfo(email);
-        KakaoResDTO resDTO = studentMapper.getStudentIdAndRole(email);
+        KakaoResDTO resDTO = studentMapper.getStudentInfoWithEmail(email);
 
         // 확인된 유저
         if (tokenResDTO != null) {
@@ -91,7 +91,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
 
         String email = reqDTO.getUserInfoDTO().getAccount_email();
         KakaoTokenResDTO tokenResDTO = parentMapper.getParentKakaoTokenInfo(email);
-        KakaoResDTO resDTO = new KakaoResDTO("parents", parentMapper.getParentIdWithEmail(email));
+        KakaoResDTO resDTO = parentMapper.getParentInfoWithEmail(email);
 
         if (tokenResDTO != null) {
 
@@ -113,7 +113,6 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
                 }
 
                 return resDTO;
-//                return parentMapper.getOneParentInfoWithEmail(email);
 
             } catch (HttpClientErrorException e) {
 
@@ -129,12 +128,12 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
         KakaoUserInfoDTO infoDTO = reqDTO.getUserInfoDTO();
 
         // 학생 가입
-        if (role.equals("students")) {
+        if (role.equals("student")) {
 
             StudentKakaoAddDTO addDTO =  StudentKakaoAddDTO.builder()
                     .email(infoDTO.getAccount_email())
                     .nickname(infoDTO.getProfile_nickname())
-                    .profileImgUrl(infoDTO.getProfile_nickname())
+                    .profileImgUrl(infoDTO.getProfile_image())
                     .thumbnailImgUrl(infoDTO.getThumbnail_image())
                     .birthday(infoDTO.getBirthday())
                     .build();
@@ -144,12 +143,12 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
             return 1;
         }
         // 학부모 가입
-        if (role.equals("parents")) {
+        if (role.equals("parent")) {
 
             ParentKakaoAddDTO addDTO = ParentKakaoAddDTO.builder()
                     .email(infoDTO.getAccount_email())
                     .nickname(infoDTO.getProfile_nickname())
-                    .profileImgUrl(infoDTO.getProfile_nickname())
+                    .profileImgUrl(infoDTO.getProfile_image())
                     .thumbnailImgUrl(infoDTO.getThumbnail_image())
                     .birthday(infoDTO.getBirthday())
                     .build();

@@ -128,10 +128,14 @@
     </select>
 
     <!-- 이메일 정보로 학부모 ID값 조회 -->
-    <select id="getParentIdWithEmail" resultType="long">
+    <select id="getParentInfoWithEmail" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO">
 
         select
-            parent_id
+            role as member_value,
+            parent_id as id,
+            nickname,
+            profile_img_url,
+            thumbnail_img_url
         from
             tbl_parent
         where

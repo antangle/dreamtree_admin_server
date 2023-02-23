@@ -415,12 +415,15 @@
 
     </update>
 
-    <!-- 카카오 로그인 위한 학생 회원 ID & Role 조회 -->
-    <select id="getStudentIdAndRole" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO">
+    <!-- 카카오 이메일로 학생 정보 조회 -->
+    <select id="getStudentInfoWithEmail" resultType="com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO">
 
         select
             role as member_value,
-            student_id as id
+            student_id as id,
+            nickname,
+            profile_img_url,
+            thumbnail_img_url
         from
             tbl_student
         where
