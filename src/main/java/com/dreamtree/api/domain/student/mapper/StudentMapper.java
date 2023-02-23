@@ -62,7 +62,7 @@ public interface StudentMapper {
     int updateStudentKakaoTokenInfo(KakaoTokenResDTO resDTO);
 
     // 이메일로 회원 ID & 권한 정보 조회
-    KakaoResDTO getStudentIdAndRole(String email);
+    KakaoResDTO getStudentInfoWithEmail(String email);
 
     // 카카오 로그인 정보로 회원가입
     int addStudentWithKakao(StudentKakaoAddDTO addDTO);

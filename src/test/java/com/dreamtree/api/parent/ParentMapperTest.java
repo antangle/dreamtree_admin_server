@@ -1,5 +1,6 @@
 package com.dreamtree.api.parent;
 
+import com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
@@ -78,5 +79,17 @@ public class ParentMapperTest {
         Long id = 1L;
 
         parentMapper.softDeleteOneParent(id);
+    }
+
+    @Test
+    public void testGetParentInfoWithKakaoEmail() {
+
+        log.info("============Get Parent Info With Kakao==========");
+
+        String email = "gkdltjdus@naver.com";
+
+        KakaoResDTO dto = parentMapper.getParentInfoWithEmail(email);
+        log.info(dto);
+
     }
 }

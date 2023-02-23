@@ -10,8 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KakaoResDTO {
 
-    private String memberValue = "parents";
+    private String memberValue;
 
     private Long id = 0L;
+
+    private String nickname;
+
+    private String profileImgUrl;
+
+    private String thumbnailImgUrl;
 
 }
