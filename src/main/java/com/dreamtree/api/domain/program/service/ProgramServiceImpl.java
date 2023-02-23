@@ -6,6 +6,7 @@ import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramMapper;
+import com.dreamtree.api.domain.student.dto.StudentRequestDTO;
 import com.dreamtree.api.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -101,6 +102,60 @@ public class ProgramServiceImpl implements ProgramService{
     public List<ProgramLessonDTO> myLessonList(Long id) {
 
         return programManagerMapper.getMyLessonList(id);
+    }
+
+    @Override
+    public PageResponseDTO<AdminProgramListDTO> adminProgramList(StudentRequestDTO studentRequestDTO) {
+
+        List<AdminProgramListDTO> list = programManagerMapper.getAdminProgramList(studentRequestDTO);
+
+        log.info("list: " + list);
+
+        int count = programManagerMapper.getAdminProgramCount(studentRequestDTO);
+
+        PageResponseDTO<AdminProgramListDTO> pageResponseDTO = PageResponseDTO.<AdminProgramListDTO>withAll()
+                .pageRequestDTO(studentRequestDTO)
+                .dtoList(list)
+                .total(count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<AdminProgramLessonListDTO> adminProgramLessonList(StudentRequestDTO studentRequestDTO) {
+
+        List<AdminProgramLessonListDTO> list = programManagerMapper.getAdminLessonList(studentRequestDTO);
+
+        log.info("list: " + list);
+
+        int count = programManagerMapper.getAdminLessonCount(studentRequestDTO);
+
+        PageResponseDTO<AdminProgramLessonListDTO> pageResponseDTO = PageResponseDTO.<AdminProgramLessonListDTO>withAll()
+                .pageRequestDTO(studentRequestDTO)
+                .dtoList(list)
+                .total(count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public void removeProgram(Long id) {
+
+        programManagerMapper.removeProgram(id);
+    }
+
+    @Override
+    public void removeLesson(Long id) {
+
+        programManagerMapper.removeLesson(id);
+    }
+
+    @Override
+    public void modifyProgram(ModifyProgramDTO modifyProgramDTO) {
+
+        programManagerMapper.modifyProgram(modifyProgramDTO);
     }
 
 }

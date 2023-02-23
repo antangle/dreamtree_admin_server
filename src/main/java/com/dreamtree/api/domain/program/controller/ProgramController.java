@@ -4,6 +4,7 @@ import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
 import com.dreamtree.api.domain.program.service.ProgramService;
+import com.dreamtree.api.domain.student.dto.StudentRequestDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -59,4 +60,33 @@ public class ProgramController {
         return programService.myLessonList(id);
     }
 
+    @GetMapping("/adminProgram")
+    public PageResponseDTO<AdminProgramListDTO> getAdminProgramList(StudentRequestDTO studentRequestDTO) {
+
+        return programService.adminProgramList(studentRequestDTO);
+    }
+
+    @GetMapping("/adminLesson")
+    public PageResponseDTO<AdminProgramLessonListDTO> getAdminLessonList(StudentRequestDTO studentRequestDTO) {
+
+        return programService.adminProgramLessonList(studentRequestDTO);
+    }
+
+    @PutMapping("removeProgram/{id}")
+    public void removeProgram(@PathVariable("id") Long id) {
+
+        programService.removeProgram(id);
+    }
+
+    @PutMapping("removeLesson/{id}")
+    public void removeLesson(@PathVariable("id") Long id) {
+
+        programService.removeLesson(id);
+    }
+
+    @PutMapping("modifyProgram")
+    public void modifyProgram(@RequestBody ModifyProgramDTO modifyProgramDTO) {
+
+        programService.modifyProgram(modifyProgramDTO);
+    }
 }
