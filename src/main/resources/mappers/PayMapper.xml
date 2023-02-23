@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--최서연 ver.0.1-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.common.kakaopay.mapper.PayMapper">
+    <insert id="insertPay" useGeneratedKeys="true" keyProperty="payId">
+        insert into tbl_pay(
+            total_amount,
+            item_name,
+            member_role,
+            member_id,
+            state
+        ) values (
+            #{totalAmount},
+            #{itemName},
+            #{memberRole},
+            #{memberId},
+            'ready'
+        )
+    </insert>
+
+    <update id="updateTid" parameterType="string">
+        update tbl_pay
+        set tid = #{tid}
+    </update>
+
+    <select id="getPaymentInfo" parameterType="long" resultType="com.dreamtree.api.common.kakaopay.dto.PayDTO">
+        select
+            tid,
+            member_role,
+            member_id
+        from tbl_pay
+        where pay_id = #{payId}
+
+    </select>
+</mapper>

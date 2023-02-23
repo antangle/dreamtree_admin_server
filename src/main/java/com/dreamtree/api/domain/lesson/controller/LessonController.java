@@ -17,13 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LessonController {
 
-    private final AttendanceService attendanceService;
-
     private final LessonService lessonService;
 
-    @GetMapping("/student")
+    @GetMapping("/form")
     public void addLesson(@RequestBody LessonAddDTO lessonAddDTO){
-        
+        lessonService.addLesson(lessonAddDTO);
     }
 
 //    @GetMapping("/list/{id}")

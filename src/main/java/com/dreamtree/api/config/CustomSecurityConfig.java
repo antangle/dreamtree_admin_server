@@ -29,6 +29,7 @@ public class CustomSecurityConfig {
         http.authorizeRequests().antMatchers("api/minio/*").permitAll();
         http.authorizeRequests().antMatchers("api/attendance/*").permitAll();
         http.authorizeRequests().antMatchers("api/kakaoLogin/*").permitAll();
+        http.authorizeRequests().antMatchers("api/payment/*").permitAll();
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
