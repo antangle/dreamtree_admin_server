@@ -12,6 +12,4 @@ import java.util.List;
 @Builder
 public class LayoutInfoDTO {
     List<CategoryListDTO> categories;
-
-    MemberDTO memberDTO;
 }
