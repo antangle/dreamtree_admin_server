@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamtree.api.domain.program.mapper.ProgramManagerMapper">
+
+    <!-- 임성현 ver.0.1 -->
+
+    <!-- program(1) : lesson(N) -->
+    <resultMap id="myLessonList" type="programLessonDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id" />
+        <result property="title" column="title" />
+
+        <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
+    </resultMap>
+
+    <!-- lesson(1) : progress(N) -->
+    <resultMap id="myProgressList" type="lessonProgressDTO">
+        <id column="program_id" />
+        <result property="lessonId" column="lesson_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="expireStartDate" column="expire_start_date"/>
+        <result property="expireEndDate" column="expire_end_date"/>
+        <result property="day" column="day"/>
+        <result property="personnel" column="personnel"/>
+        <result property="lessonLength" column="lesson_length"/>
+        <result property="lessonTime" column="lesson_time"/>
+        <result property="fee" column="fee"/>
+        <result property="place" column="place"/>
+
+        <collection property="progressList" javaType="java.util.ArrayList" resultMap="progressList">  </collection>
+    </resultMap>
+
+    <!-- progress -->
+    <resultMap id="progressList" type="progressDTO">
+        <result property="progressId" column="progress_id"/>
+        <result property="state" column="state"/>
+        <result property="childName" column="child_name"/>
+    </resultMap>
+
+    <!-- program(1) : File(N) -->
+    <resultMap id="myProgramList" type="ProgramManagerListDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id"/>
+        <result property="subCategoryId" column="sub_category_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="curriculumJson" column="curriculum_json"/>
+        <result property="times" column="times"/>
+
+        <collection property="fileList" javaType="java.util.ArrayList" resultMap="fileList">  </collection>
+    </resultMap>
+
+    <!-- file -->
+    <resultMap id="fileList" type="fileDTO">
+        <result property="fileId" column="file_id"/>
+        <result property="programId" column="program_id"/>
+        <result property="url" column="url"/>
+    </resultMap>
+
+    <!-- 내가 쓴 프로그램 리스트 -->
+    <select id="getMyProgramList" resultMap="myProgramList" resultType="programManagerListDTO">
+        select
+            p.program_id,
+            p.sub_category_id,
+            p.title,
+            p.content,
+            p.curriculum_json,
+            p.times,
+            f.file_id,
+            f.url
+        from
+            tbl_program p
+        left join tbl_file f on p.program_id = f.program_id
+        where
+            p.student_id = #{id}
+    </select>
+
+    <select id="getMyLessonList" resultMap="myLessonList" resultType="ProgramLessonDTO">
+        select
+            pm.program_id,
+            pm.title,
+            l.lesson_id,
+            l.start_date,
+            l.end_date,
+            l.expire_start_date,
+            l.expire_end_date,
+            l.day,
+            l.personnel,
+            l.lesson_length,
+            l.lesson_time,
+            l.fee,
+            l.place,
+            ps.progress_id,
+            ps.state,
+            ps.child_name
+        from
+            tbl_program pm
+        left join tbl_lesson l on pm.program_id = l.program_id
+        left join tbl_progress ps on l.lesson_id = ps.lesson_id
+        where
+            pm.student_id = #{id}
+    </select>
+
+</mapper>

@@ -11,7 +11,7 @@
         insert into
             tbl_certificate(student_id, url, name, aquire_date, auth_state, createdAt, updatedAt)
         values
-            (#{studentId}, #{url}, #{name}, #{aquireDate}, 'no', now(), now())
+            (#{studentId}, #{url}, #{name}, #{aquireDate}, 'pending', now(), now())
     </insert>
 
     <!-- 자격증 조회 -->

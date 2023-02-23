@@ -35,4 +35,10 @@ public class LessonMapperTests {
         lessonMapper.addLesson(lessonAddDTO);
 
     }
+
+    @Test
+    public void getLessonListDTO() {
+
+        log.info(lessonMapper.getLessonList(21L));
+    }
 }

@@ -239,4 +239,5 @@
             #{fee}
         )
     </insert>
+
 </mapper>

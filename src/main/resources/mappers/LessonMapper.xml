@@ -4,6 +4,29 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.lesson.mapper.LessonMapper">
 
+    <resultMap id="myProgramList" type="lessonProgressDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="expireStartDate" column="expire_start_date"/>
+        <result property="expireEndDate" column="expire_end_date"/>
+        <result property="day" column="day"/>
+        <result property="personnel" column="personnel"/>
+        <result property="lessonLength" column="lesson_length"/>
+        <result property="lessonTime" column="lesson_time"/>
+        <result property="fee" column="fee"/>
+        <result property="place" column="place"/>
+
+        <collection property="progressList" javaType="java.util.ArrayList" resultMap="progressList">  </collection>
+    </resultMap>
+
+    <resultMap id="progressList" type="progressDTO">
+        <result property="progressId" column="progress_id"/>
+        <result property="state" column="state"/>
+        <result property="childName" column="child_name"/>
+    </resultMap>
+
     <insert id="addLesson" parameterType="lessonAddDTO">
         insert into tbl_lesson(
             program_id,
@@ -40,4 +63,28 @@
             'open'
         )
     </insert>
+
+    <select id="getLessonList" resultMap="myProgramList" resultType="lessonProgressDTO">
+        select
+            l.program_id,
+            l.start_date,
+            l.end_date,
+            l.expire_start_date,
+            l.expire_end_date,
+            l.day,
+            l.personnel,
+            l.lesson_length,
+            l.lesson_time,
+            l.fee,
+            l.place,
+            p.progress_id,
+            p.state,
+            p.child_name
+        from
+            tbl_lesson l
+        left join tbl_progress p on l.lesson_id = p.lesson_id
+        where
+            l.deletedAt is null and
+            l.program_id = #{id}
+    </select>
 </mapper>

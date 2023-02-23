@@ -1,12 +1,8 @@
 package com.dreamtree.api.domain.program.dto;
 
 import com.dreamtree.api.domain.lesson.dto.LessonListDTO;
-import com.dreamtree.api.domain.student.dto.StudentDTO;
-import com.dreamtree.api.domain.student.dto.StudentDetailDTO;
 import lombok.*;
-import org.springframework.cglib.core.Local;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter

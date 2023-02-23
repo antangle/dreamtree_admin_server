@@ -2,6 +2,7 @@ package com.dreamtree.api.domain.program.controller;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.domain.program.dto.*;
+import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
 import com.dreamtree.api.domain.program.service.ProgramService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -44,5 +45,18 @@ public class ProgramController {
         return programService.postProgramForm(programFormDTO);
     }
 
+    @GetMapping("/myProgram/{id}")
+    public List<ProgramManagerListDTO> getMyProgram(@PathVariable("id") Long id) {
+
+        log.info(id);
+
+        return programService.myProgramList(id);
+    }
+
+    @GetMapping("/myLesson/{id}")
+    public List<ProgramLessonDTO> getMyLesson(@PathVariable("id") Long id) {
+
+        return programService.myLessonList(id);
+    }
 
 }
