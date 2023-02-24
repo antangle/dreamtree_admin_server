@@ -2,6 +2,8 @@ package com.dreamtree.api.domain.lesson.service;
 
 import com.dreamtree.api.common.enums.ErrorEnum;
 import com.dreamtree.api.domain.lesson.dto.LessonAddDTO;
+import com.dreamtree.api.domain.lesson.dto.LessonApplyInfoDTO;
+import com.dreamtree.api.domain.lesson.dto.LessonApplyReqDTO;
 import com.dreamtree.api.domain.program.dto.LessonProgressDTO;
 import com.dreamtree.api.domain.lesson.mapper.LessonMapper;
 import com.dreamtree.api.exception.CustomException;
@@ -27,6 +29,12 @@ public class LessonServiceImpl implements LessonService{
         if(lessonAddCount == 0) throw new CustomException(ErrorEnum.POST_LESSON_FORM_FAIL);
 
         return true;
+    }
+
+    @Override
+    public LessonApplyInfoDTO getLessonApplyInfo(Long id) {
+        LessonApplyInfoDTO info = lessonMapper.getLessonApplyInfo(id);
+        return info;
     }
 
     @Override

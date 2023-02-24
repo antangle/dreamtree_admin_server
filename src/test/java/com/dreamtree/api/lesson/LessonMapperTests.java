@@ -41,4 +41,9 @@ public class LessonMapperTests {
 
         log.info(lessonMapper.getLessonList(21L));
     }
+    @Test
+    public void getLessonApplyInfo() {
+
+        log.info(lessonMapper.getLessonApplyInfo(21L));
+    }
 }

@@ -64,6 +64,19 @@
         )
     </insert>
 
+    <select id="">
+        select
+            l.program_id,
+            l.day,
+            p.title,
+
+        from tbl_lesson l
+        left join tbl_program p
+            on l.program_id = p.program_id
+
+
+    </select>
+
     <select id="getLessonList" resultMap="myProgramList" resultType="lessonProgressDTO">
         select
             l.program_id,
@@ -86,5 +99,19 @@
         where
             l.deletedAt is null and
             l.program_id = #{id}
+    </select>
+
+    <select id="getLessonApplyInfo" parameterType="long" resultType="lessonApplyInfoDTO">
+        select
+            s.email,
+            p.title,
+            p.sub_category_id,
+            p.program_id
+        from tbl_lesson l
+        left join tbl_program p
+            on l.program_id = p.program_id
+        left join tbl_student s
+            on p.student_id = s.student_id
+        where l.lesson_id = #{id}
     </select>
 </mapper>
