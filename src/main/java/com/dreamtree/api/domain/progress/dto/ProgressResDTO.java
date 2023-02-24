@@ -16,6 +16,8 @@ public class ProgressResDTO {
 
     private String childName;
 
+    private String payStatus;
+
     private String state;
 
     private String subCategory;

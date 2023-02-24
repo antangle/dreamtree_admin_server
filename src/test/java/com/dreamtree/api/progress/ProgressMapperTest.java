@@ -42,4 +42,14 @@ public class ProgressMapperTest {
 
     }
 
+    @Test
+    public void testSetState() {
+
+        log.info("===============TEST SET PROGRESS STATE=============");
+
+
+
+
+    }
+
 }

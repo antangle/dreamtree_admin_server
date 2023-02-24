@@ -10,6 +10,7 @@
     <select id="getProgressList" resultType="com.dreamtree.api.domain.progress.dto.ProgressResDTO">
         select
             ps.child_name,
+            ps.pay_status,
             l.state,
             s.name,
             pm.title,
@@ -62,7 +63,7 @@
             parent_id,
             lesson_id,
             child_name,
-            state
+            pay_status
         ) values (
             #{parentId},
             #{lessonId},
