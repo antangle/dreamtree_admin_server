@@ -1,6 +1,8 @@
 package com.dreamtree.api.domain.lesson.service;
 
 import com.dreamtree.api.domain.lesson.dto.LessonAddDTO;
+import com.dreamtree.api.domain.lesson.dto.LessonApplyInfoDTO;
+import com.dreamtree.api.domain.lesson.dto.LessonApplyReqDTO;
 import com.dreamtree.api.domain.program.dto.LessonProgressDTO;
 
 import java.util.List;
@@ -11,4 +13,7 @@ public interface LessonService {
 
     // 레슨 리스트
     List<LessonProgressDTO> getLessonList(Long id);
+
+    LessonApplyInfoDTO getLessonApplyInfo(Long id);
+
 }

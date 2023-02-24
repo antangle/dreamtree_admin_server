@@ -56,4 +56,18 @@
         where ps.parent_id = #{id}
 
     </select>
+
+    <insert id="postProgress" parameterType="postProgressReqDTO">
+        insert into tbl_progress(
+            parent_id,
+            lesson_id,
+            child_name,
+            state
+        ) values (
+            #{parentId},
+            #{lessonId},
+            #{childName},
+            'pending'
+        )
+    </insert>
 </mapper>

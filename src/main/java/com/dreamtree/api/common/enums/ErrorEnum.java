@@ -14,9 +14,11 @@ public enum ErrorEnum implements CustomExceptionEnum {
     POST_PROGRAM_FORM_FAIL(401, "post failed", 2031),
     POST_FILE_FORM_FAIL(401, "post failed", 2032),
     POST_LESSON_FORM_FAIL(401, "post failed", 2041),
+    POST_PROGRESS_FAILED(401, "progress post failed", 2042),
     STUDENT_NO_PROGRAM(401, "no program data exists", 2051),
 
     ATTENDANCE_UPDATE_FAIL(401, "attendance update fail", 4041),
+
 
     //카카오페이
     KAKAO_PAY_READY_FAIL(401, "kakao pay ready error", 5011),

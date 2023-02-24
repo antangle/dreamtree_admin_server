@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class LessonListDTO {
 
-
+    Long lessonId;
     LocalDate startDate;
 
     LocalDate endDate;
