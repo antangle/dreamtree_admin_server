@@ -24,5 +24,7 @@ public class ProgramManagerListDTO {
 
     String times;
 
+    int fee;
+
     List<FileDTO> fileList;
 }

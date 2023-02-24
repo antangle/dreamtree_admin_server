@@ -38,4 +38,6 @@ public interface ProgramService {
 
     // 프로그램 수정
     void modifyProgram(ModifyProgramDTO modifyProgramDTO);
+
+    int selectProgramLessonCount(Long id);
 }

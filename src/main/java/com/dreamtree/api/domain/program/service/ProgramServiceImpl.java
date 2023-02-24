@@ -158,4 +158,10 @@ public class ProgramServiceImpl implements ProgramService{
         programManagerMapper.modifyProgram(modifyProgramDTO);
     }
 
+    @Override
+    public int selectProgramLessonCount(Long id) {
+
+        return programManagerMapper.selectProgramLessonCount(id);
+    }
+
 }

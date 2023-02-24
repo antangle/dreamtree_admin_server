@@ -34,4 +34,7 @@ public interface ProgramManagerMapper {
 
     // 레슨 삭제
     int removeLesson(Long id);
+
+    // 프로그램에 레슨 있는지
+    int selectProgramLessonCount(Long id);
 }

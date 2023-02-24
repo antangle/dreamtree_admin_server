@@ -87,6 +87,14 @@ public class ProgramController {
     @PutMapping("modifyProgram")
     public void modifyProgram(@RequestBody ModifyProgramDTO modifyProgramDTO) {
 
+        log.info("modify: " + modifyProgramDTO);
+
         programService.modifyProgram(modifyProgramDTO);
+    }
+
+    @GetMapping("count/{id}")
+    public int getProgramLessonCount(@PathVariable("id") Long id) {
+
+        return programService.selectProgramLessonCount(id);
     }
 }

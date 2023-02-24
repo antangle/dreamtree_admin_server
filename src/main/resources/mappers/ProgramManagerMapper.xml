@@ -7,7 +7,7 @@
     <!-- 임성현 ver.0.1 -->
 
     <!-- program(1) : lesson(N) -->
-    <resultMap id="myLessonList" type="programLessonDTO">
+    <resultMap id="myLessonList" type="ProgramLessonDTO">
         <id column="program_id" />
         <result property="programId" column="program_id" />
         <result property="title" column="title" />
@@ -17,7 +17,7 @@
 
     <!-- lesson(1) : progress(N) -->
     <resultMap id="myProgressList" type="lessonProgressDTO">
-        <id column="program_id" />
+        <id column="lesson_id"/>
         <result property="lessonId" column="lesson_id"/>
         <result property="startDate" column="start_date"/>
         <result property="endDate" column="end_date"/>
@@ -63,6 +63,7 @@
         <result property="content" column="content"/>
         <result property="curriculumJson" column="curriculum_json"/>
         <result property="times" column="times"/>
+        <result property="fee" column="fee"/>
 
         <collection property="fileList" javaType="java.util.ArrayList" resultMap="fileList">  </collection>
     </resultMap>
@@ -130,6 +131,7 @@
             p.content,
             p.curriculum_json,
             p.times,
+            p.fee,
             f.file_id,
             f.url
         from
@@ -141,7 +143,7 @@
     </select>
 
     <!-- 내 레슨 리스트 -->
-    <select id="getMyLessonList" resultMap="myLessonList" resultType="ProgramLessonDTO">
+    <select id="getMyLessonList" resultMap="myLessonList">
         select
             pm.program_id,
             pm.title,
@@ -280,15 +282,25 @@
         update
             tbl_program
         set
-            sub_category_id = #{subCategoryId}
-            title = {title},
+            sub_category_id = #{subCategoryId},
+            title = #{title},
             content = #{content},
             curriculum_json = #{curriculumJson},
             times = #{times},
             fee = #{fee},
             updatedAt = now()
         where
-            program_id = #{id}
+            program_id = #{programId}
     </update>
+
+    <!-- 프로그램에 레슨 있는지 -->
+    <select id="selectProgramLessonCount" resultType="int">
+        select
+            count(*)
+        from
+            tbl_lesson
+        where
+            program_id = #{id}
+    </select>
 
 </mapper>

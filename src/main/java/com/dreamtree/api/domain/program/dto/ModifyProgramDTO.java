@@ -12,6 +12,8 @@ public class ModifyProgramDTO {
 
     Long subCategoryId;
 
+    Long programId;
+
     String title;
 
     String content;

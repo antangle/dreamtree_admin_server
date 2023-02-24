@@ -27,15 +27,18 @@
     <resultMap id="programDetails" type="programDetailsDTO">
         <id column="program_id" />
 
+        <result property="programId" column="program_id"/>
         <result property="studentId" column="student_id"/>
         <result property="curriculumJson" column="curriculum_json"/>
         <result property="title" column="title"/>
+        <result property="subCategoryId" column="sub_category_id"/>
         <result property="content" column="content"/>
         <result property="profileImgUrl" column="profile_img_url"/>
         <result property="nickname" column="nickname"/>
         <result property="email" column="email"/>
         <result property="college" column="college"/>
         <result property="major" column="major"/>
+        <result property="fee" column="fee"/>
 
         <collection property="lessonLists" javaType="java.util.ArrayList" resultMap="lessonList">  </collection>
         <collection property="fileUrls" javaType="java.util.ArrayList" resultMap="fileList" />
@@ -168,6 +171,8 @@
             p.title,
             p.content,
             p.curriculum_json,
+            p.fee,
+            p.sub_category_id,
             f.url as file_url,
             s.profile_img_url,
             s.nickname,

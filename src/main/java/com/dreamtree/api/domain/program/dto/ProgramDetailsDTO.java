@@ -16,6 +16,10 @@ public class ProgramDetailsDTO {
     //프로그램
     long studentId;
 
+    Long programId;
+
+    Long subCategoryId;
+
     String title;
 
     String content;
@@ -34,6 +38,8 @@ public class ProgramDetailsDTO {
     String college;
 
     String major;
+
+    Integer fee;
 
     List<String> certificateNames;
 
