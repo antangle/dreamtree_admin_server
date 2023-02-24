@@ -15,18 +15,6 @@
         <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
     </resultMap>
 
-    <!-- program(1) : lesson(N) -->
-    <resultMap id="adminLessonList" type="adminProgramLessonListDTO">
-        <id column="program_id" />
-        <result property="programId" column="program_id" />
-        <result property="title" column="title" />
-        <result property="studentId" column="student_id" />
-        <result property="nickname" column="nickname" />
-        <result property="email" column="email" />
-
-        <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
-    </resultMap>
-
     <!-- lesson(1) : progress(N) -->
     <resultMap id="myProgressList" type="lessonProgressDTO">
         <id column="program_id" />
@@ -51,6 +39,20 @@
         <result property="state" column="state"/>
         <result property="childName" column="child_name"/>
     </resultMap>
+
+    <!-- program(1) : lesson(N) -->
+    <resultMap id="adminLessonList" type="adminProgramLessonListDTO">
+        <id column="program_id" />
+        <result property="programId" column="program_id" />
+        <result property="title" column="title" />
+        <result property="studentId" column="student_id" />
+        <result property="nickname" column="nickname" />
+        <result property="email" column="email" />
+
+        <collection property="lessonProgressDTO" javaType="java.util.ArrayList" resultMap="myProgressList">  </collection>
+    </resultMap>
+
+
 
     <!-- program(1) : File(N) -->
     <resultMap id="myProgramList" type="ProgramManagerListDTO">
@@ -134,6 +136,7 @@
             tbl_program p
         left join tbl_file f on p.program_id = f.program_id
         where
+            p.deletedAt is null and
             p.student_id = #{id}
     </select>
 
@@ -158,10 +161,14 @@
             ps.child_name
         from
             tbl_program pm
-        left join tbl_lesson l on pm.program_id = l.program_id
+        left join tbl_lesson l on pm.program_id = l.program_id and l.deletedAt is null
         left join tbl_progress ps on l.lesson_id = ps.lesson_id
+
         where
+            pm.deletedAt is null and
             pm.student_id = #{id}
+
+
     </select>
 
     <!-- Admin 프로그램 관리 리스트 -->
@@ -215,7 +222,7 @@
             s.email
         from
             tbl_program pm
-        left join tbl_lesson l on pm.program_id = l.program_id
+        left join tbl_lesson l on pm.program_id = l.program_id and l.deletedAt is null
         left join tbl_progress ps on l.lesson_id = ps.lesson_id
         left join tbl_student s on pm.student_id = s.student_id
 
@@ -264,7 +271,7 @@
         update
             tbl_lesson
         set
-            deleteAt = now()
+            deletedAt = now()
         where
             lesson_id = #{id}
     </update>

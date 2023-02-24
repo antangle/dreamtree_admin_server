@@ -98,4 +98,9 @@ public class ProgramMapperTests {
         log.info(programManagerMapper.getAdminProgramList(studentRequestDTO));
     }
 
+    @Test
+    public void getMyLessonList() {
+
+        log.info(programManagerMapper.getMyLessonList(1L));
+    }
 }
