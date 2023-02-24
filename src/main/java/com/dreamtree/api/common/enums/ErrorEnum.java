@@ -24,7 +24,7 @@ public enum ErrorEnum implements CustomExceptionEnum {
     KAKAO_PAY_READY_FAIL(401, "kakao pay ready error", 5011),
     KAKAO_PAY_CANCEL(401, "kakao pay cancel", 5012),
     KAKAO_PAY_FAIL(401, "kakao pay fail", 5013),
-    ;
+    UPDATE_PAYSTATUS_FAILED(401, "progress update paystatus fail", 3000);
 
     int code;
 

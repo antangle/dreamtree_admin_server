@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.progress.mapper;
 
 import com.dreamtree.api.domain.program.dto.ProgressDTO;
+import com.dreamtree.api.domain.progress.dto.PayStatusReqDTO;
 import com.dreamtree.api.domain.progress.dto.PostProgressReqDTO;
 import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 
@@ -14,5 +15,7 @@ public interface ProgressMapper {
     int getProgressListCount(Long id);
 
     int postProgress(PostProgressReqDTO progressDTO);
+
+    int updatePayStatus(PayStatusReqDTO reqDTO);
 
 }

@@ -1,13 +1,11 @@
 package com.dreamtree.api.domain.progress.controller;
 
+import com.dreamtree.api.domain.progress.dto.PayStatusReqDTO;
 import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 import com.dreamtree.api.domain.progress.service.ProgressService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,16 @@ public class ProgressController {
 
         List<ProgressResDTO> result = progressService.getProgressList(id);
         log.info(result);
+
+        return result;
+    }
+
+    @PutMapping("updatePayStatus")
+    public int updatePayStatus(@RequestBody PayStatusReqDTO reqDTO) {
+
+        log.info("================UPDATE PAY STATUS================");
+
+        int result = progressService.updatePayStatus(reqDTO);
 
         return result;
     }

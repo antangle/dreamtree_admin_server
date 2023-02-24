@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.progress.service;
 
 import com.dreamtree.api.common.enums.ErrorEnum;
+import com.dreamtree.api.domain.progress.dto.PayStatusReqDTO;
 import com.dreamtree.api.domain.progress.dto.PostProgressReqDTO;
 import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 import com.dreamtree.api.domain.progress.mapper.ProgressMapper;
@@ -26,6 +27,16 @@ public class ProgressServiceImpl implements ProgressService {
         int count = progressMapper.postProgress(postProgressReqDTO);
         if(count != 1) throw new CustomException(ErrorEnum.POST_PROGRESS_FAILED);
         return count;
+    }
+
+    @Override
+    public int updatePayStatus(PayStatusReqDTO reqDTO) {
+
+        int res = progressMapper.updatePayStatus(reqDTO);
+        if(res != 1) throw new CustomException(ErrorEnum.UPDATE_PAYSTATUS_FAILED);
+
+        return res;
+
     }
 
     @Override

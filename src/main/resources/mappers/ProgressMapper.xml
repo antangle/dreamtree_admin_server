@@ -71,4 +71,15 @@
             'pending'
         )
     </insert>
+
+    <update id="updatePayStatus" parameterType="com.dreamtree.api.domain.progress.dto.PayStatusReqDTO">
+
+        update
+            tbl_progress
+        set
+            pay_status = #{status}
+        where
+            progress_id = #{id}
+
+    </update>
 </mapper>
