@@ -160,6 +160,7 @@
     <insert id="addParentWithKakao">
 
         insert into tbl_parent (
+            role,
             email,
             nickname,
             profile_img_url,
@@ -169,6 +170,7 @@
             updatedAt
         )
         values (
+            'parent',
             #{email},
             #{nickname},
             #{profileImgUrl},
