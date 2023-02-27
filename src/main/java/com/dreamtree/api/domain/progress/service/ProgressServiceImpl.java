@@ -38,6 +38,7 @@ public class ProgressServiceImpl implements ProgressService {
 
     @Override
     public int postProgress(PostProgressReqDTO postProgressReqDTO) {
+        log.info(postProgressReqDTO);
         int count = progressMapper.postProgress(postProgressReqDTO);
         if(count != 1) throw new CustomException(ErrorEnum.POST_PROGRESS_FAILED);
         return count;

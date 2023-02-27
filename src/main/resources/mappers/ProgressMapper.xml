@@ -64,12 +64,16 @@
             parent_id,
             lesson_id,
             child_name,
-            pay_status
+            pay_status,
+            child_gender,
+            child_grade
         ) values (
             #{parentId},
             #{lessonId},
             #{childName},
-            'pending'
+            'pending',
+            #{childGender},
+            #{childGrade}
         )
     </insert>
 
