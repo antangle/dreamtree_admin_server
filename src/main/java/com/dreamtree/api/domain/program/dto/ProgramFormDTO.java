@@ -28,5 +28,5 @@ public class ProgramFormDTO {
 
     int fee;
 
-    List<String> fileForms;
+    List<FileTypeDTO> fileForms;
 }

@@ -44,7 +44,7 @@ public class RequestMapperTest {
 
         log.info("=================TEST GET ALL REQUESTS===============");
 
-        RequestReqDTO reqDTO = new RequestReqDTO("", "title,description,nickname,sub_category_name,category_name");
+        RequestReqDTO reqDTO = new RequestReqDTO("", "title,description,nickname,sub_category_name,category_name", "");
 
         List<RequestResDTO> res = requestMapper.getAllRequests(reqDTO);
         log.info(res.size());
@@ -56,7 +56,7 @@ public class RequestMapperTest {
 
         log.info("=================TEST GET ALL REQUESTS WITH SEARCH CONDITIONS===============");
 
-        RequestReqDTO reqDTO = new RequestReqDTO("태권도", "title");
+        RequestReqDTO reqDTO = new RequestReqDTO("태권도", "title", "");
 
         List<RequestResDTO> res = requestMapper.getAllRequests(reqDTO);
         log.info(res.size());
@@ -69,7 +69,7 @@ public class RequestMapperTest {
 
         log.info("=================TEST GET REQUESTS COUNT===============");
 
-        RequestReqDTO reqDTO = new RequestReqDTO("태권도", "title");
+        RequestReqDTO reqDTO = new RequestReqDTO("태권도", "title", "");
 
         log.info(requestMapper.getAllRequestsCount(reqDTO));
     }

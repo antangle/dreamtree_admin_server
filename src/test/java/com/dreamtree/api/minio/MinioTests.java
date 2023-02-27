@@ -1,6 +1,7 @@
 package com.dreamtree.api.minio;
 
 import com.dreamtree.api.common.minio.service.MinioService;
+import io.minio.GetObjectResponse;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.errors.*;
@@ -69,6 +70,26 @@ public class MinioTests {
         String fileName = "fileName";
         log.info(minioService.uploadFile(mockMultipartFile, fileName));
         minioService.saveThumbnail(mockMultipartFile, "t_" + mockMultipartFile.getOriginalFilename());
+    }
+
+    @Test
+    public void uploadVideoTest() throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        MockMultipartFile mockMultipartFile = new MockMultipartFile(
+                "sampleVid.mp4",
+                "sampleVid.mp4",
+                "video/mp4",
+                new FileInputStream("/D:/sample/file_example_MP4_480_1_5MG.mp4")
+        );
+
+
+        String fileName = "file_example_MP4_480_1_5MG";
+        log.info(minioService.uploadFile(mockMultipartFile, fileName));
+    }
+
+    @Test
+    public void getVideoTest() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
+        GetObjectResponse getObjectResponse = minioService.getObjectResponse("2023-02-27T14:11:54.139306600sampleVid.mp4");
+        log.info(getObjectResponse);
     }
     @Test
     public void deleteImages() throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {

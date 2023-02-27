@@ -28,7 +28,7 @@ public class LessonController {
 
     private final ProgressService progressService;
 
-    @GetMapping("/form")
+    @PostMapping("/form")
     public void addLesson(@RequestBody LessonAddDTO lessonAddDTO){
         lessonService.addLesson(lessonAddDTO);
     }

@@ -7,12 +7,14 @@
     <insert id="postFileForm" parameterType="programFormDTO">
         insert into tbl_file(
             program_id,
-            url
+            url,
+            type
         ) values
-        <foreach collection="fileForms" item="url" separator=",">
+        <foreach collection="fileForms" item="item" separator=",">
         (
             #{programId},
-            #{url}
+            #{item.filename},
+            #{item.contentType}
         )
         </foreach>
     </insert>

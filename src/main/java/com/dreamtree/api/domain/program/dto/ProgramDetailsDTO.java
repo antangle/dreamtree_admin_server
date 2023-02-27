@@ -26,7 +26,7 @@ public class ProgramDetailsDTO {
 
     String curriculumJson;
 
-    List<String> fileUrls;
+    List<FileTypeDTO> fileUrls;
 
     //학생
     String profileImgUrl;

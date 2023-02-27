@@ -45,8 +45,9 @@
         <collection property="certificateNames" javaType="java.util.ArrayList" resultMap="certificateList" />
     </resultMap>
 
-    <resultMap id="fileList" type="string">
-        <result column="file_url" />
+    <resultMap id="fileList" type="fileTypeDTO">
+        <result column="file_url" property="filename"/>
+        <result column="file_type" property="contentType"/>
     </resultMap>
 
     <resultMap id="certificateList" type="string">
@@ -175,6 +176,7 @@
             p.fee,
             p.sub_category_id,
             f.url as file_url,
+            f.type as file_type,
             s.profile_img_url,
             s.nickname,
             s.email,
