@@ -36,5 +36,7 @@ public class LessonProgressDTO {
 
     String place;
 
+    String state;
+
     List<ProgressDTO> progressList;
 }

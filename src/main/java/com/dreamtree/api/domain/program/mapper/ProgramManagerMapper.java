@@ -14,6 +14,8 @@ public interface ProgramManagerMapper {
     // 프로그램 and 레슨 리스트
     List<ProgramLessonDTO> getMyLessonList(Long id);
 
+    List<ProgramLessonDTO> getMyAppliedLessonList(Long id);
+
     // 관리자 프러그램 and 상세 리스트
     List<AdminProgramListDTO> getAdminProgramList(StudentRequestDTO studentRequestDTO);
 
@@ -34,6 +36,8 @@ public interface ProgramManagerMapper {
 
     // 레슨 삭제
     int removeLesson(Long id);
+
+    int closeLesson(Long id);
 
     // 프로그램에 레슨 있는지
     int selectProgramLessonCount(Long id);

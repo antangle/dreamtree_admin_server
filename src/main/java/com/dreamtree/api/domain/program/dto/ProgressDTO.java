@@ -15,4 +15,8 @@ public class ProgressDTO {
     String state;
 
     String childName;
+
+    String childGender;
+
+    String childGrade;
 }

@@ -14,5 +14,6 @@ public interface ProgressService {
     int postProgress(PostProgressReqDTO postProgressReqDTO);
 
     int updatePayStatus(PayStatusReqDTO reqDTO);
+
     int updateProgressStatus(Long payId);
 }

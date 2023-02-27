@@ -6,6 +6,7 @@
 <mapper namespace="com.dreamtree.api.domain.progress.mapper.ProgressMapper">
 
 
+
     <!--학부모 수강 중인 레슨 정보 조회-->
     <select id="getProgressList" resultType="com.dreamtree.api.domain.progress.dto.ProgressResDTO">
         select
@@ -83,7 +84,17 @@
         set
             pay_status = 'success'
         where
-            progress_id = ${progressId}
+            progress_id = #{progressId}
+
+    </update>
+
+    <update id="updatePayStatus">
+        update
+            tbl_progress
+        set
+            pay_status = #{status}
+        where
+            progress_id = #{id}
 
     </update>
 </mapper>

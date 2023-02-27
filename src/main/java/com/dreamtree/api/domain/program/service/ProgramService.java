@@ -24,6 +24,8 @@ public interface ProgramService {
     // 내 레슨 리스트
     List<ProgramLessonDTO> myLessonList(Long id);
 
+    List<ProgramLessonDTO> getMyAppliedLessonList(Long id);
+
     // 관리자 프로그램 리스트
     PageResponseDTO<AdminProgramListDTO> adminProgramList(StudentRequestDTO studentRequestDTO);
 
@@ -35,6 +37,8 @@ public interface ProgramService {
 
     // 레슨 삭제
     void removeLesson(Long id);
+
+    void closeLesson(Long id);
 
     // 프로그램 수정
     void modifyProgram(ModifyProgramDTO modifyProgramDTO);

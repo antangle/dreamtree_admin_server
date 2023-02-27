@@ -7,23 +7,19 @@
 
     <!-- 출석 레코드 DB 삽입 -->
     <insert id="addAttendance" parameterType="long">
-        <selectKey >
-            select
-        </selectKey>
-
         insert into tbl_attendance(
             progress_id,
             status,
             times,
             createdAt
         )
-        select g.progress_id, REPEAT('0',times) , p.times, now()
+        select g.progress_id, REPEAT('0',times), p.times, now()
         from tbl_lesson l
         inner join tbl_progress g
             on l.lesson_id = g.lesson_id
         left join tbl_program p
             on l.program_id = p.program_id
-        where l.lesson_id = #{lessonId};
+        where l.lesson_id = #{lessonId}
             and g.deletedAt is null
 
     </insert>

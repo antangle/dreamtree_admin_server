@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 //이승윤 ver0.1
 @RestController
@@ -60,6 +61,12 @@ public class ProgramController {
         return programService.myLessonList(id);
     }
 
+    @GetMapping("/myAppliedLesson/{id}")
+    public List<ProgramLessonDTO> getMyAppliedLessonList(@PathVariable("id") Long id) {
+
+        return programService.getMyAppliedLessonList(id);
+    }
+
     @GetMapping("/adminProgram")
     public PageResponseDTO<AdminProgramListDTO> getAdminProgramList(StudentRequestDTO studentRequestDTO) {
 
@@ -82,6 +89,11 @@ public class ProgramController {
     public void removeLesson(@PathVariable("id") Long id) {
 
         programService.removeLesson(id);
+    }
+
+    @PutMapping("/closeLesson")
+    public void closeLesson(@RequestBody Map<String, String> map) {
+        programService.closeLesson(Long.valueOf(map.get("id")));
     }
 
     @PutMapping("modifyProgram")

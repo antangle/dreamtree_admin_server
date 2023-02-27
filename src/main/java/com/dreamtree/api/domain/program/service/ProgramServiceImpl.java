@@ -2,6 +2,7 @@ package com.dreamtree.api.domain.program.service;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
 import com.dreamtree.api.common.enums.ErrorEnum;
+import com.dreamtree.api.domain.attendance.mapper.AttendanceMapper;
 import com.dreamtree.api.domain.program.dto.*;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
 import com.dreamtree.api.domain.program.mapper.ProgramManagerMapper;
@@ -22,8 +23,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Log4j2
 public class ProgramServiceImpl implements ProgramService{
+
     private final ProgramMapper programMapper;
+
     private final FileMapper fileMapper;
+
+    private final AttendanceMapper attendanceMapper;
 
     private final ProgramManagerMapper programManagerMapper;
 
@@ -100,6 +105,12 @@ public class ProgramServiceImpl implements ProgramService{
     }
 
     @Override
+    public List<ProgramLessonDTO> getMyAppliedLessonList(Long id) {
+
+        return programManagerMapper.getMyAppliedLessonList(id);
+    }
+
+    @Override
     public List<ProgramLessonDTO> myLessonList(Long id) {
 
         return programManagerMapper.getMyLessonList(id);
@@ -151,6 +162,14 @@ public class ProgramServiceImpl implements ProgramService{
     public void removeLesson(Long id) {
 
         programManagerMapper.removeLesson(id);
+    }
+
+    @Override
+    public void closeLesson(Long id) {
+
+        programManagerMapper.closeLesson(id);
+
+        attendanceMapper.addAttendance(id);
     }
 
     @Override
