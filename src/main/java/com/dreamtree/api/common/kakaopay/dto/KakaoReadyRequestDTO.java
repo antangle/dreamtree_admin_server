@@ -13,6 +13,8 @@ public class KakaoReadyRequestDTO {
 
     Long id;
 
+    Long progressId;
+
     String role;
 
     Integer quantity;

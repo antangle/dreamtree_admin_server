@@ -15,4 +15,5 @@ public interface ProgressMapper {
 
     int postProgress(PostProgressReqDTO progressDTO);
 
+    int updateProgressStatus(Long progressId);
 }

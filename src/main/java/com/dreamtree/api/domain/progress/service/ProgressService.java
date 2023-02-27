@@ -11,4 +11,6 @@ public interface ProgressService {
     List<ProgressResDTO> getProgressList(Long id);
 
     int postProgress(PostProgressReqDTO postProgressReqDTO);
+
+    int updateProgressStatus(Long payId);
 }
