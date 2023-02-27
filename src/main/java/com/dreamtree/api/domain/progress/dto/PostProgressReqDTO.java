@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class PostProgressReqDTO {
-
     private Long parentId;
     private Long lessonId;
     private String childName;
-
+    private String childGender;
+    private String childGrade;
 }

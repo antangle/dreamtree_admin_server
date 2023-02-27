@@ -49,7 +49,6 @@ public class LessonController {
     public void postLessonApply(@RequestBody LessonApplyReqDTO lessonApplyReqDTO){
         log.info(lessonApplyReqDTO);
         mailService.writeMail(lessonApplyReqDTO.getMail());
-
         progressService.postProgress(lessonApplyReqDTO.getProgress());
 
     }
