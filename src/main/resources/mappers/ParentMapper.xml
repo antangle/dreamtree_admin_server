@@ -196,4 +196,16 @@
 
     </insert>
 
+    <select id="getEmailParent" resultType="emailParentDTO">
+        select
+            parent_id,
+            role,
+            nickname,
+            profile_img_url
+        from
+            tbl_parent
+        where
+            email = #{email}
+    </select>
+
 </mapper>

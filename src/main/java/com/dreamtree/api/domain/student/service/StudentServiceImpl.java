@@ -174,4 +174,10 @@ public class StudentServiceImpl implements StudentService  {
 
         return studentMapper.getCollegeAuthCount();
     }
+
+    @Override
+    public EmailStudentDTO getEmailStudent(String email) {
+
+        return studentMapper.getEmailStudent(email);
+    }
 }

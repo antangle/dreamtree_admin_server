@@ -45,4 +45,7 @@ public interface StudentService {
 
     // 대학 인증 요청 카운트
     int getCollegeAuthCount();
+
+    // 이메일로 회원조회
+    EmailStudentDTO getEmailStudent(String email);
 }
