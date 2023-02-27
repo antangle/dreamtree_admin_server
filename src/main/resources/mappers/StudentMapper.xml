@@ -423,7 +423,8 @@
             student_id as id,
             nickname,
             profile_img_url,
-            thumbnail_img_url
+            thumbnail_img_url,
+            auth_state
         from
             tbl_student
         where

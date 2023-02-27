@@ -20,4 +20,6 @@ public class KakaoResDTO {
 
     private String thumbnailImgUrl;
 
+    private String authState;
+
 }
