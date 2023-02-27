@@ -20,11 +20,13 @@ public class ParentInfoReqDTO extends PageRequestDTO {
     // 학부모 회원 조회 검색 조건 ex) nickname, email...
     String condition;
 
-    public String[] getKeyword() {
+    String order;
+
+    public String[] getCondition() {
         return condition.trim().length() == 0 ? null : condition.split(",");
     }
 
-    public String getCondition() {
+    public String getKeyword() {
         return keyword.trim().length() == 0 ? null : keyword;
     }
 }

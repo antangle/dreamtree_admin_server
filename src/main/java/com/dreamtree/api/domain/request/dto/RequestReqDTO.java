@@ -19,6 +19,8 @@ public class RequestReqDTO extends PageRequestDTO {
 
     String condition;
 
+    String order;
+
     public String[] getCondition() {
         return condition.trim().length() == 0 ? null : condition.split(",");
     }
