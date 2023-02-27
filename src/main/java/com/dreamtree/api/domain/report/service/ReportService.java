@@ -17,7 +17,7 @@ public interface ReportService {
     PageResponseDTO<ReportListDTO> getMyReportList(ReportRequestDTO reportRequestDTO);
 
     // 신고 리스트 전체
-    PageResponseDTO<ReportListDTO> getReportList(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<ReportListDTO> getReportList(ReportAdminRequestDTO reportRequestDTO);
 
     // 신고 상태 업데이트
     void updateStatus(ReportStatusDTO reportStatusDTO);

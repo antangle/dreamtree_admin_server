@@ -159,7 +159,7 @@
             l.fee,
             l.place,
             ps.progress_id,
-            ps.state,
+            ps.pay_status as state,
             ps.child_name
         from
             tbl_program pm
@@ -217,7 +217,7 @@
             l.fee,
             l.place,
             ps.progress_id,
-            ps.state,
+            ps.pay_status as state,
             ps.child_name,
             s.student_id,
             s.nickname,
