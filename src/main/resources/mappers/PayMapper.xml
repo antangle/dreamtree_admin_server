@@ -10,13 +10,15 @@
             item_name,
             member_role,
             member_id,
-            state
+            state,
+            progress_id
         ) values (
             #{totalAmount},
             #{itemName},
             #{memberRole},
             #{memberId},
-            'ready'
+            'ready',
+            #{progressId}
         )
     </insert>
 
@@ -28,6 +30,7 @@
     <select id="getPaymentInfo" parameterType="long" resultType="com.dreamtree.api.common.kakaopay.dto.PayDTO">
         select
             tid,
+            progress_id,
             member_role,
             member_id
         from tbl_pay

@@ -9,6 +9,7 @@
     <!--학부모 수강 중인 레슨 정보 조회-->
     <select id="getProgressList" resultType="com.dreamtree.api.domain.progress.dto.ProgressResDTO">
         select
+            ps.progress_id,
             ps.child_name,
             ps.pay_status,
             l.state,
@@ -72,14 +73,13 @@
         )
     </insert>
 
-    <update id="updatePayStatus" parameterType="com.dreamtree.api.domain.progress.dto.PayStatusReqDTO">
-
+    <update id="updateProgressStatus">
         update
             tbl_progress
         set
-            pay_status = #{status}
+            pay_status = 'success'
         where
-            progress_id = #{id}
+            progress_id = ${progressId}
 
     </update>
 </mapper>

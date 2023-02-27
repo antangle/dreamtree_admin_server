@@ -18,4 +18,5 @@ public interface ProgressMapper {
 
     int updatePayStatus(PayStatusReqDTO reqDTO);
 
+    int updateProgressStatus(Long progressId);
 }

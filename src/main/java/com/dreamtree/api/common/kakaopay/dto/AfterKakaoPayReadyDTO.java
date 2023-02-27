@@ -11,6 +11,8 @@ import lombok.*;
 public class AfterKakaoPayReadyDTO {
     Long payId;
 
+    Long progressId;
+
     Long memberId;
 
     String memberRole;

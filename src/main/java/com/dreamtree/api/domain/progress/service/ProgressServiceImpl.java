@@ -2,6 +2,8 @@ package com.dreamtree.api.domain.progress.service;
 
 import com.dreamtree.api.common.enums.ErrorEnum;
 import com.dreamtree.api.domain.progress.dto.PayStatusReqDTO;
+import com.dreamtree.api.common.kakaopay.dto.PayDTO;
+import com.dreamtree.api.common.kakaopay.mapper.PayMapper;
 import com.dreamtree.api.domain.progress.dto.PostProgressReqDTO;
 import com.dreamtree.api.domain.progress.dto.ProgressResDTO;
 import com.dreamtree.api.domain.progress.mapper.ProgressMapper;
@@ -21,6 +23,18 @@ import java.util.List;
 public class ProgressServiceImpl implements ProgressService {
 
     private final ProgressMapper progressMapper;
+
+    private final PayMapper payMapper;
+
+    @Override
+    public int updateProgressStatus(Long payId) {
+        PayDTO payDTO = payMapper.getPaymentInfo(payId);
+
+        int count = progressMapper.updateProgressStatus(payDTO.getProgressId());
+        if(count != 1) throw new CustomException(ErrorEnum.UPDATE_PROGRESS_FAILED);
+
+        return 0;
+    }
 
     @Override
     public int postProgress(PostProgressReqDTO postProgressReqDTO) {

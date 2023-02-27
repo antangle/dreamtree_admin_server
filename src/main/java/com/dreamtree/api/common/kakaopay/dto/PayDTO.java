@@ -11,6 +11,8 @@ import lombok.*;
 public class PayDTO {
     String tid;
 
+    Long progressId;
+
     String memberRole;
 
     Long memberId;

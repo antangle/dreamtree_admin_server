@@ -31,6 +31,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 
         log.info("================1================");
         AfterKakaoPayReadyDTO kakaoPayReadyDTO = AfterKakaoPayReadyDTO.builder()
+                .progressId(kakaoReadyRequestDTO.getProgressId())
                 .memberRole(kakaoReadyRequestDTO.getRole())
                 .memberId(kakaoReadyRequestDTO.getId())
                 .totalAmount(kakaoReadyRequestDTO.getTotalAmount())
@@ -101,9 +102,6 @@ public class KakaoPayServiceImpl implements KakaoPayService{
                 "https://kapi.kakao.com/v1/payment/approve",
                 body,
                 KakaoApproveResponseDTO.class);
-
-        /*todo: 결제 완료된 후 db state 저장*/
-
 
         return approveResponse;
     }

@@ -38,4 +38,6 @@ public class ProgressResDTO {
 
     private int lesson_time;
 
+    private Long progressId;
+
 }
