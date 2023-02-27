@@ -42,9 +42,9 @@ public class ReportController {
     }
 
     @GetMapping("/list")
-    public PageResponseDTO<ReportListDTO> getReportList(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<ReportListDTO> getReportList(ReportAdminRequestDTO reportRequestDTO) {
 
-        return reportService.getReportList(pageRequestDTO);
+        return reportService.getReportList(reportRequestDTO);
     }
 
     @PutMapping("/update")

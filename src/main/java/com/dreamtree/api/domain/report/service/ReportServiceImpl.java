@@ -47,7 +47,7 @@ public class ReportServiceImpl implements ReportService {
 
         log.info("list: " + list);
 
-        int count = reportMapper.getMyReportCount(reportRequestDTO.getReporterEmail());
+        int count = reportMapper.getMyReportCount(reportRequestDTO.getReporterEmail(), reportRequestDTO.getSort());
 
         PageResponseDTO<ReportListDTO> pageResponseDTO = PageResponseDTO.<ReportListDTO>withAll()
                 .pageRequestDTO(reportRequestDTO)
@@ -59,13 +59,13 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public PageResponseDTO<ReportListDTO> getReportList(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO<ReportListDTO> getReportList(ReportAdminRequestDTO pageRequestDTO) {
 
         List<ReportListDTO> list = reportMapper.getReportList(pageRequestDTO);
 
         log.info("list: " + list);
 
-        int count = reportMapper.getReportCount();
+        int count = reportMapper.getReportCount(pageRequestDTO.getSort());
 
         PageResponseDTO<ReportListDTO> pageResponseDTO = PageResponseDTO.<ReportListDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)

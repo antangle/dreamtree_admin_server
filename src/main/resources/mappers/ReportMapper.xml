@@ -44,14 +44,15 @@
     <select id="getReportList" resultType="reportListDTO">
         select
             report_id,
-            reporterEmail,
+            reporter_email,
             title,
             status,
             updatedAt
             from
             tbl_report
         where
-            deletedAt is null
+            deletedAt is null and
+            status = #{sort}
         order by
             updatedAt desc
         limit #{skip}, #{size}
@@ -100,7 +101,8 @@
             tbl_report
         where
             deletedAt is null and
-            reporter_email = #{email}
+            reporter_email = #{email} and
+            status = #{sort}
     </select>
 
     <!-- 전체 신고 카운트 -->
@@ -110,7 +112,8 @@
         from
             tbl_report
         where
-            deletedAt is null
+            deletedAt is null and
+            status = #{sort}
     </select>
 
 </mapper>

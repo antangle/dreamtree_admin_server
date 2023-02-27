@@ -15,7 +15,7 @@ public interface ReportMapper {
     List<ReportListDTO> getMyReportList(ReportRequestDTO reportRequestDTO);
 
     // 신고 리스트 전체
-    List<ReportListDTO> getReportList(PageRequestDTO pageRequestDTO);
+    List<ReportListDTO> getReportList(ReportAdminRequestDTO pageRequestDTO);
 
     // 신고 상태 업데이트
     int updateStatus(ReportStatusDTO reportStatusDTO);
@@ -27,9 +27,9 @@ public interface ReportMapper {
     int removeReport(List<Long> id);
 
     // 내가 한 신고 카운트
-    int getMyReportCount(String email);
+    int getMyReportCount(String email, String sort);
 
     // 전체 신고 카운트
-    int getReportCount();
+    int getReportCount(String sort);
 
 }
