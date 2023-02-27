@@ -52,7 +52,8 @@
                 content,
                 student_grade,
                 student_gender,
-                createdAt
+                createdAt,
+                updatedAt
             )
         values (
             #{title},
@@ -62,13 +63,14 @@
             #{content},
             #{student_grade},
             #{student_gender},
+            now(),
             now()
         )
 
     </insert>
 
     <!--학부모 요청글 전체 조회-->
-    <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO">
+    <select id="getAllRequests" resultType="com.dreamtree.api.domain.request.dto.RequestResDTO" parameterType="RequestReqDTO">
 
         select
             r.request_id,
@@ -95,15 +97,22 @@
         left join tbl_category as c
         on s.category_id = c.category_id
 
+        where r.deletedAt is null
+
         <include refid="searchRequest"></include>
 
         group by r.request_id
 
-<!--        order by-->
-<!--        <choose>-->
-<!--            <when test="order == 'newest'"> p.createdAt desc</when>-->
-<!--            <when test="order == 'times'"> p.times desc</when>-->
-<!--        </choose>-->
+        <!--정렬조건: 최신순, 제목 이름순-->
+        <choose>
+            <when test="order != null and order == 'title'">
+                order by r.title asc
+            </when>
+
+            <otherwise>
+                order by r.createdAt desc
+            </otherwise>
+        </choose>
 
         limit #{skip}, #{size}
 

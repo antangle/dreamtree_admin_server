@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--최서연 ver.0.1-->
+<!--최서연 ver.0.2-->
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dreamtree.api.domain.parent.mapper.ParentMapper">
 
-    <sql id="search">
+    <sql id="searchParent">
 
         <where>
             <if test="keyword != null and condition != null">
                 <foreach collection="condition" item="item" index="index" open="(" close=")" separator="or">
 
                     <if test="item == 'email'">
-                        title like concat('%', #{keyword}, '%')
+                        email like concat('%', #{keyword}, '%')
                     </if>
 
                     <if test="item == 'nickname'">
@@ -26,7 +26,7 @@
     </sql>
 
     <!--전체 학부모 조회-->
-    <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
+    <select id="getParentList" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO" parameterType="ParentInfoReqDTO">
         select
             parent_id as id,
             email,
@@ -37,6 +37,19 @@
 
         from
             tbl_parent
+
+        <include refid="searchParent"></include>
+
+        <!--정렬조건: 등록순, 이메일순-->
+        <choose>
+            <when test="order != null and order == 'email'">
+                order by email asc
+            </when>
+
+            <otherwise>
+                order by createdAt desc
+            </otherwise>
+        </choose>
 
         limit #{skip}, #{size}
 
@@ -96,7 +109,8 @@
         set
             nickname = #{nickname},
             password = #{password},
-            profile_img_url = #{profile_img_url}
+            profile_img_url = #{profile_img_url},
+            updatedAt = now()
         where
             parent_id=#{id}
 
