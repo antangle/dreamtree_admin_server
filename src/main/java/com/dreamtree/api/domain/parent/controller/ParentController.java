@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.parent.controller;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
+import com.dreamtree.api.domain.parent.dto.EmailParentDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
@@ -53,6 +54,12 @@ public class ParentController {
         int result = parentService.softDeleteOneParent(id);
         return result;
 
+    }
+
+    @GetMapping("emailParent/{email}")
+    public EmailParentDTO getEmailParent(@PathVariable("email") String email) {
+
+        return parentService.getEmailParent(email);
     }
 
 }

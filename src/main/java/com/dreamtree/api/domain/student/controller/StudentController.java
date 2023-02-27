@@ -93,4 +93,10 @@ public class StudentController {
         return studentService.getSearchCertificateAuthRequestList(studentRequestDTO);
     }
 
+    @GetMapping("/emailStudent/{email}")
+    public EmailStudentDTO getEmailStudent(@PathVariable("email") String email) {
+
+        return studentService.getEmailStudent(email);
+    }
+
 }

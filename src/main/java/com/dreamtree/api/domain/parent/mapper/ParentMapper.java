@@ -2,10 +2,7 @@ package com.dreamtree.api.domain.parent.mapper;
 
 import com.dreamtree.api.common.auth.kakaologin.dto.KakaoResDTO;
 import com.dreamtree.api.common.auth.kakaologin.dto.KakaoTokenResDTO;
-import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
-import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
-import com.dreamtree.api.domain.parent.dto.ParentKakaoAddDTO;
-import com.dreamtree.api.domain.parent.dto.ParentModDTO;
+import com.dreamtree.api.domain.parent.dto.*;
 import com.dreamtree.api.domain.student.dto.StudentKakaoAddDTO;
 
 import java.util.List;
@@ -39,5 +36,8 @@ public interface ParentMapper {
 
     // 카카오 로그인 정보로 회원가입
     int addParentWithKakao(ParentKakaoAddDTO addDTO);
+
+    // 이메일로 학부모 조회
+    EmailParentDTO getEmailParent(String email);
 
 }

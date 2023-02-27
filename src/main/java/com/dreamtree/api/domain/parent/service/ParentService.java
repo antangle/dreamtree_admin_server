@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.parent.service;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
+import com.dreamtree.api.domain.parent.dto.EmailParentDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
@@ -15,4 +16,6 @@ public interface ParentService {
     int updateParentInfo(ParentModDTO modDTO);
 
     int softDeleteOneParent(Long id);
+
+    EmailParentDTO getEmailParent(String email);
 }

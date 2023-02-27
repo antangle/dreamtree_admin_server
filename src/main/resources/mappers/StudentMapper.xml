@@ -314,6 +314,7 @@
             student_id as id,
             nickname,
             email,
+            profile_img_url,
             auth_state
         from
             tbl_student
@@ -329,6 +330,7 @@
         select
             c.certificate_id as id,
             s.nickname,
+            s.profile_img_url,
             s.email,
             c.auth_state
         from
@@ -430,5 +432,17 @@
         where
             email = #{email}
 
+    </select>
+
+    <select id="getEmailStudent" resultType="emailStudentDTO">
+        select
+            student_id,
+            profile_img_url,
+            nickname,
+            role
+        from
+            tbl_student
+        where
+            email = #{email}
     </select>
 </mapper>

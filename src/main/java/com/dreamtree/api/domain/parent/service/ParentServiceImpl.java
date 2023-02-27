@@ -1,6 +1,7 @@
 package com.dreamtree.api.domain.parent.service;
 
 import com.dreamtree.api.common.dto.PageResponseDTO;
+import com.dreamtree.api.domain.parent.dto.EmailParentDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
@@ -56,5 +57,11 @@ public class ParentServiceImpl implements ParentService{
 
         return parentMapper.softDeleteOneParent(id);
 
+    }
+
+    @Override
+    public EmailParentDTO getEmailParent(String email) {
+
+        return parentMapper.getEmailParent(email);
     }
 }

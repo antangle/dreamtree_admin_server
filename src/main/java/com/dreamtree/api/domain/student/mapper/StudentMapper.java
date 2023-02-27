@@ -66,4 +66,7 @@ public interface StudentMapper {
 
     // 카카오 로그인 정보로 회원가입
     int addStudentWithKakao(StudentKakaoAddDTO addDTO);
+
+    // 이메일로 회원 조회
+    EmailStudentDTO getEmailStudent(String email);
 }
