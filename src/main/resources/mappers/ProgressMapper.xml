@@ -13,11 +13,11 @@
             ps.child_name,
             ps.pay_status,
             l.state,
-            s.name,
+            s.name as sub_category,
             pm.title,
             l.start_date,
             l.end_date,
-            l.expire_end_date,
+            l.expire_end_date as expiration_date,
             l.place,
             l.fee,
             l.lesson_length,
@@ -43,7 +43,7 @@
     </select>
 
 
-    <!--학부모 수강 중인 레슨 정보 조회-->
+    <!--학부모 수강 중인 레슨 정보 총 갯수 조회-->
     <select id="getProgressListCount" resultType="int">
 
         select
