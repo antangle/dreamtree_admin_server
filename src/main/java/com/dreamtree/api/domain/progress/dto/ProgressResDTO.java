@@ -14,6 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class ProgressResDTO {
 
+    private Long progressId;
+
     private String childName;
 
     private String payStatus;
@@ -34,10 +36,9 @@ public class ProgressResDTO {
 
     private int fee;
 
-    private int lesson_length;
+    private int lessonLength;
 
-    private int lesson_time;
+    private int lessonTime;
 
-    private Long progressId;
 
 }
