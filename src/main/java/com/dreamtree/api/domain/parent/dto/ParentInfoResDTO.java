@@ -23,7 +23,7 @@ public class ParentInfoResDTO {
 
     private String password;
 
-    private Date birth;
+    private String birthday;
 
     private String profileImgUrl;
 

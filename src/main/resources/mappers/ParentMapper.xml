@@ -32,7 +32,7 @@
             email,
             nickname,
             password,
-            birth,
+            birthday,
             profile_img_url
 
         from
@@ -69,10 +69,11 @@
     <select id="getOneParentInfo" resultType="com.dreamtree.api.domain.parent.dto.ParentInfoResDTO">
 
         select
+            parent_id as id,
             email,
             nickname,
             password,
-            birth,
+            birthday,
             profile_img_url
 
         from
