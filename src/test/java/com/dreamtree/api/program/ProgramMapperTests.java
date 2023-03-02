@@ -1,6 +1,7 @@
 package com.dreamtree.api.program;
 
 import com.dreamtree.api.common.dto.PageRequestDTO;
+import com.dreamtree.api.domain.program.dto.FileTypeDTO;
 import com.dreamtree.api.domain.program.dto.ProgramFormDTO;
 import com.dreamtree.api.domain.program.dto.ProgramSearchDTO;
 import com.dreamtree.api.domain.program.mapper.FileMapper;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 @Log4j2
@@ -67,20 +69,25 @@ public class ProgramMapperTests {
     @Test
     public void postProgramFormTests(){
 
-        ProgramFormDTO programFormDTO = ProgramFormDTO.builder()
-                .title("this is title")
-                .content("jfeioawjfoejfio")
-                .curriculumJson("{'hi': 'test'}")
-                .times(5)
-                .fee(10000)
-                .fileForms(List.of("url", "url2", "url3"))
-                .build();
+        IntStream.range(1, 150).forEach((i) -> {
+            ProgramFormDTO programFormDTO = ProgramFormDTO.builder()
+                    .studentId(i % 5)
+                    .subCategoryId(1 + i%28)
+                    .title("좋은 강의입니다")
+                    .content("2년차 경력의 과외 선생님입니다.")
+                    .curriculumJson("[[], [], []]")
+                    .times(3)
+                    .fee(110000)
+                    .fileForms(List.of(FileTypeDTO.builder()
+                                    .contentType("")
+                                    .filename("")
+                            .build()))
+                    .build();
+            programMapper.postProgramForm(programFormDTO);
+        });
 
 
-
-//        programMapper.postProgramForm(programFormDTO);
-
-        log.info(fileMapper.postFileForm(programFormDTO));
+//        log.info(fileMapper.postFileForm(programFormDTO));
     }
 
     @Test
