@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/** 이승윤 ver.0.1 **/
+
 @Getter
 @Setter
 @ToString

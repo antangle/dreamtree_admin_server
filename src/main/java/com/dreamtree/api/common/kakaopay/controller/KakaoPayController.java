@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+
+/** 이승윤 ver.0.1 **/
 @RestController
 @Log4j2
 @RequestMapping("api/payment")
