@@ -7,6 +7,8 @@ import com.dreamtree.api.common.auth.kakaologin.dto.KakaoUserInfoDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.student.dto.StudentDetailDTO;
 
+/** 최서연 ver.0.1 **/
+
 public interface KakaoLoginService {
 
     KakaoResDTO ParentSignIn(KakaoReqDTO reqDTO);
@@ -14,8 +16,6 @@ public interface KakaoLoginService {
     KakaoResDTO StudentSignIn(KakaoReqDTO reqDTO);
 
     int signUp(KakaoReqDTO reqDTO);
-
-    KakaoUserInfoDTO getKakaoUserInfo(String accessToken);
 
     KakaoReqTokenDTO generateToken(String code);
 

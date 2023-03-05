@@ -1,28 +1,24 @@
 package com.dreamtree.api.common.auth.kakaologin.service;
 
 import com.dreamtree.api.common.auth.kakaologin.dto.*;
-import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentKakaoAddDTO;
 import com.dreamtree.api.domain.parent.mapper.ParentMapper;
-import com.dreamtree.api.domain.student.dto.StudentDetailDTO;
 import com.dreamtree.api.domain.student.dto.StudentKakaoAddDTO;
 import com.dreamtree.api.domain.student.mapper.StudentMapper;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.xerial.snappy.pool.BufferPool;
 
 import java.util.Collections;
 
+/** 최서연 ver.0.1 **/
 @Log4j2
 @Service
 @Transactional
@@ -160,31 +156,6 @@ public class KakaoLoginServiceImpl implements KakaoLoginService {
         return 0;
     }
 
-    @Override
-    public KakaoUserInfoDTO getKakaoUserInfo(String accessToken) throws HttpClientErrorException {
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("Authorization", "Bearer " + accessToken);
-
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity(map, headers);
-
-        try {
-            ResponseEntity<KakaoUserInfoDTO> response = restTemplate.exchange(kakaoUserMeUri,
-                    HttpMethod.GET, request, KakaoUserInfoDTO.class);
-
-            log.info("===========GET K-USER INFO....GET BODY=============");
-            log.info(response.getBody());
-            return response.getBody();
-
-        } catch (HttpClientErrorException e) {
-            log.error(e.getMessage());
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
-        }
-
-    }
 
     @Override
     public KakaoReqTokenDTO generateToken(String code) {
