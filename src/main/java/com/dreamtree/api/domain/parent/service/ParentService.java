@@ -6,7 +6,7 @@ import com.dreamtree.api.domain.parent.dto.ParentInfoReqDTO;
 import com.dreamtree.api.domain.parent.dto.ParentInfoResDTO;
 import com.dreamtree.api.domain.parent.dto.ParentModDTO;
 
-/** 최서연 ver.0.1 **/
+/** 최서연 ver.0.2 **/
 public interface ParentService {
 
     PageResponseDTO<ParentInfoResDTO> getAllParentsList(ParentInfoReqDTO reqDTO);

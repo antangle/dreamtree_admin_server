@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+//최서연 ver.0.2
 @SpringBootTest
 @Log4j2
 public class ProgressMapperTest {
