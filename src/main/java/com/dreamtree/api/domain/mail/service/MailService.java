@@ -7,6 +7,8 @@ import com.dreamtree.api.domain.mail.dto.MailRequestDTO;
 
 import java.util.List;
 
+/*** 임성현 ver.0.1 ***/
+
 public interface MailService {
 
     // 메일 조회
