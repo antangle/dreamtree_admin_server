@@ -4,6 +4,7 @@ import com.dreamtree.api.common.kakaopay.dto.AfterKakaoPayReadyDTO;
 import com.dreamtree.api.common.kakaopay.dto.KakaoReadyResponseDTO;
 import com.dreamtree.api.common.kakaopay.dto.PayDTO;
 
+/** 이승윤 ver.0.1 **/
 public interface PayMapper {
 
     int insertPay(AfterKakaoPayReadyDTO afterKakaoPayReadyDTO);
