@@ -15,6 +15,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/* 이승윤 v0.1*/
 @WebMvcTest(MinioController.class)
 public class MinioUploadTest {
 

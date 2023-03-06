@@ -18,6 +18,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+/* 이승윤 v0.1*/
 @SpringBootTest
 @Log4j2
 public class MinioTests {
